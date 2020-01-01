@@ -321,7 +321,7 @@ body .h1 {
   display: block;
   margin-top: 3rem;
   margin-bottom: 1rem;
-  color: #cc2a41;
+  color: #4c6794;
   letter-spacing: 0.01em;
   font-weight: 700;
   font-style: normal;
@@ -459,7 +459,7 @@ body {
   color: #22272a;
   font-display: swap;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 17.5px;
   font-family: "Menlo", "Meslo LG", monospace;
   line-height: 1.725;
   text-rendering: geometricPrecision;
@@ -603,7 +603,7 @@ body {
   -webkit-filter: grayscale(100%);
 }
 #header #nav {
-  color: #cc2a41;
+  color: #4c6794;
   letter-spacing: 0.01em;
   font-weight: 200;
   font-style: normal;
@@ -617,10 +617,10 @@ body {
 }
 #header #nav ul a {
   margin-right: 15px;
-  color: #cc2a41;
+  color: #4c6794;
 }
 #header #nav ul a:hover {
-  background-image: linear-gradient(transparent, transparent 5px, #cc2a41 5px, #cc2a41);
+  background-image: linear-gradient(transparent, transparent 5px, #4c6794 5px, #4c6794);
   background-position: bottom;
   background-size: 100% 6px;
   background-repeat: repeat-x;
@@ -629,7 +629,7 @@ body {
   display: inline-block;
   margin-right: 15px;
   border-right: 1px dotted;
-  border-color: #cc2a41;
+  border-color: #4c6794;
   vertical-align: middle;
 }
 #header #nav ul .icon {
@@ -720,7 +720,7 @@ body {
   margin-left: 15px;
 }
 #header-post #menu-icon:hover {
-  color: #cc2a41;
+  color: #4c6794;
 }
 #header-post #menu-icon-tablet {
   float: right;
@@ -728,7 +728,7 @@ body {
   margin-left: 15px;
 }
 #header-post #menu-icon-tablet:hover {
-  color: #cc2a41;
+  color: #4c6794;
 }
 #header-post #top-icon-tablet {
   position: fixed;
@@ -738,17 +738,17 @@ body {
   margin-left: 15px;
 }
 #header-post #top-icon-tablet:hover {
-  color: #cc2a41;
+  color: #4c6794;
 }
 #header-post .active {
-  color: #cc2a41;
+  color: #4c6794;
 }
 #header-post #menu {
   visibility: hidden;
   margin-right: 2rem;
 }
 #header-post #nav {
-  color: #cc2a41;
+  color: #4c6794;
   letter-spacing: 0.01em;
   font-weight: 200;
   font-style: normal;
@@ -759,16 +759,16 @@ body {
 }
 #header-post #nav ul a {
   margin-right: 15px;
-  color: #cc2a41;
+  color: #4c6794;
 }
 #header-post #nav ul a:hover {
-  background-image: linear-gradient(transparent, transparent 5px, #cc2a41 5px, #cc2a41);
+  background-image: linear-gradient(transparent, transparent 5px, #4c6794 5px, #4c6794);
   background-position: bottom;
   background-size: 100% 6px;
   background-repeat: repeat-x;
 }
 #header-post #nav ul li {
-  border-right: 1px dotted #cc2a41;
+  border-right: 1px dotted #4c6794;
 }
 #header-post #nav ul li:last-child {
   margin-right: 0;
@@ -822,7 +822,7 @@ body {
   font-size: 0.8rem;
 }
 #header-post #toc .toc-level-2:before {
-  color: #cc2a41;
+  color: #4c6794;
   content: "#";
 }
 #header-post #toc .toc-level-3 {
@@ -912,11 +912,11 @@ body {
   text-align: center;
 }
 #footer-post #nav-footer a {
-  color: #cc2a41;
+  color: #4c6794;
   font-size: 1em;
 }
 #footer-post #nav-footer a:hover {
-  background-image: linear-gradient(transparent, transparent 5px, #cc2a41 5px, #cc2a41);
+  background-image: linear-gradient(transparent, transparent 5px, #4c6794 5px, #4c6794);
   background-position: bottom;
   background-size: 100% 6px;
   background-repeat: repeat-x;
@@ -947,7 +947,7 @@ body {
 #footer-post #actions-footer a {
   display: inline-block;
   padding-left: 1rem;
-  color: #cc2a41;
+  color: #4c6794;
 }
 #footer-post #share-footer {
   padding-right: 1rem;
@@ -994,7 +994,7 @@ body {
   font-size: 0.8rem;
 }
 #footer-post #toc-footer .toc-level-2:before {
-  color: #cc2a41;
+  color: #4c6794;
   content: "#";
 }
 #footer-post #toc-footer .toc-level-3 {
@@ -1032,7 +1032,7 @@ body {
   margin-right: 16px;
   min-width: 100px;
   color: #666;
-  font-size: 14px;
+  font-size: 16px;
 }
 @media (min-width: 480px) {
   .post-list .post-item {
@@ -1057,7 +1057,7 @@ article header .posttitle {
   margin-top: 0;
   margin-bottom: 0;
   text-transform: none;
-  font-size: 1.5em;
+  font-size: 1.8em;
   line-height: 1.25;
 }
 article header .meta {
@@ -1066,7 +1066,7 @@ article header .meta {
 }
 article header .meta * {
   color: #666;
-  font-size: 0.85rem;
+  font-size: 1rem;
 }
 article header .author {
   text-transform: uppercase;
@@ -1080,10 +1080,10 @@ article .content h2:before {
   position: absolute;
   top: -4px;
   left: -1rem;
-  color: #cc2a41;
+  color: #4c6794;
   content: "#";
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 article .content img,
 article .content video {
@@ -1112,7 +1112,7 @@ article .content blockquote {
   margin: 1rem 10px;
   padding: 0.5em 10px;
   background: inherit;
-  color: #cc2a41;
+  color: #4c6794;
   quotes: "\201C" "\201D" "\2018" "\2019";
   font-weight: bold;
 }
@@ -1121,7 +1121,7 @@ article .content blockquote p {
 }
 article .content blockquote:before {
   margin-right: 0.25em;
-  color: #cc2a41;
+  color: #4c6794;
   content: "\201C";
   vertical-align: -0.4em;
   font-size: 2em;
@@ -1167,7 +1167,7 @@ article .content .caption {
 }
 .posttitle {
   text-transform: none;
-  font-size: 1.5em;
+  font-size: 1.7em;
   line-height: 1.25;
 }
 .article-tag .tag-link {
@@ -1321,7 +1321,7 @@ article .content .caption {
   -moz-border-radius: 5px;
 }
 .search-input:focus {
-  border: solid 1px #cc2a41;
+  border: solid 1px #4c6794;
 }
 #search-result ul.search-result-list {
   padding: 0;
@@ -1620,7 +1620,7 @@ code {
   transition: opacity 0.2s ease-in;
 }
 .highlight .btn-copy:hover {
-  color: #cc2a41;
+  color: #4c6794;
 }
 .highlight pre {
   margin: 0;
