@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="有件事一直困扰了我好久：Bear里的笔记在导出为HTML和Markdown时会丢失所有的图片。看看隔壁的Ulyssses，只要选择导出为富文本就会得到一个文件结构完整的zip压缩包，只需解压出来就可以得到可以直接预览的Markdown。这件事情导致我写文章时极力克制使用图片——如果导出到别处后还要再次手动添加图片，那可真是让人头疼。不过好在这件事情终究是有解决方案的。如果想得到包含所有图片与文本信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拯救Bear里的Markdown笔记">
+<meta property="og:url" content="https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html">
+<meta property="og:site_name" content="Enoch2090">
+<meta property="og:description" content="有件事一直困扰了我好久：Bear里的笔记在导出为HTML和Markdown时会丢失所有的图片。看看隔壁的Ulyssses，只要选择导出为富文本就会得到一个文件结构完整的zip压缩包，只需解压出来就可以得到可以直接预览的Markdown。这件事情导致我写文章时极力克制使用图片——如果导出到别处后还要再次手动添加图片，那可真是让人头疼。不过好在这件事情终究是有解决方案的。如果想得到包含所有图片与文本信">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-02-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-03T02:39:40.832Z">
+<meta property="article:author" content="Phillip Gu">
+<meta property="article:tag" content="Bear">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>拯救Bear里的Markdown笔记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Enoch2090" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/09/%E5%BA%94%E7%94%A8/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A%E6%88%91%E7%9A%84%20Bear%20%E6%8D%A2%E6%88%90%E4%BA%86%20Ulysses.html"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/02/09/%E5%BA%94%E7%94%A8/Workflow%E6%A8%A1%E5%9D%97%E5%8C%96(%E4%BA%8C)%EF%BC%9A%E8%BD%AC%E6%8D%A2%E6%96%87%E6%9C%AC%E4%B8%BA%E5%9B%BE%E7%89%87.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&text=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&is_video=false&description=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=拯救Bear里的Markdown笔记&body=Check out this article: https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&name=拯救Bear里的Markdown笔记&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&t=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用Workflow处理Rich-Text-Format-富文本"><span class="toc-number">1.</span> <span class="toc-text">用Workflow处理Rich Text Format(富文本)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#整理错误的链接"><span class="toc-number">2.</span> <span class="toc-text">整理错误的链接</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        拯救Bear里的Markdown笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Enoch2090</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-02-13T16:00:00.000Z" itemprop="datePublished">2018-02-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Bear/" rel="tag">Bear</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>有件事一直困扰了我好久：Bear里的笔记在导出为HTML和Markdown时会丢失所有的图片。看看隔壁的Ulyssses，只要选择导出为富文本就会得到一个文件结构完整的zip压缩包，只需解压出来就可以得到可以直接预览的Markdown。这件事情导致我写文章时极力克制使用图片——如果导出到别处后还要再次手动添加图片，那可真是让人头疼。<br>不过好在这件事情终究是有解决方案的。如果想得到包含所有图片与文本信息的文件，导出.RTF或是.PDF格式就可以解决，所以真正的问题就是：如何转换RTF或PDF变为Markdown？</p>
+<h1 id="用Workflow处理Rich-Text-Format-富文本"><a href="#用Workflow处理Rich-Text-Format-富文本" class="headerlink" title="用Workflow处理Rich Text Format(富文本)"></a>用Workflow处理Rich Text Format(富文本)</h1><p>Workflow是可以将富文本转化为Markdown的，所以这件事情乍一看还是很简单的。我们的大致思路是这样：用Sharesheet调出Workflow，首先用Workflow内置的「Make Markdown from Rich Text」动作把富文本转化为Markdown；然后用「Get Images from Input」从富文本里提取图片；最后把Markdown文本文件和图片保存到一个文件夹下，这样这个Markdown打开就可以预览到图片。如果要把它发送给别人，我们只需要保持Markdown和图片的相对位置不变，把它们打个压缩包就可以了。而如果要注意细节的话，我们还会记得要提取这个文件的首行，也就是Bear里显示的标题，去掉Markdown的标题语法「#」，用来作为文件名。此外iCloud和Workflow配合一直有点问题，也许应该选择用Dropbox来暂存文件。</p>
+<h1 id="整理错误的链接"><a href="#整理错误的链接" class="headerlink" title="整理错误的链接"></a>整理错误的链接</h1><p>一切是不是都很美好？<br>只有一个问题：如果这样导出的文件，图片仍然加载不出来。<br>如果仔细观察导出的文件，我们就很容易发现问题了。我们预计图片的代码仍旧是诸如<code>![abcd](abcd.jpg)</code>的样式，然而实际上转换出来却成了：<code>![abcd](file:///abcd.jpg)</code>，这大概是由于Workflow在转换的时候引用了在它缓存中的图片地址导致的。既然我们的图片是独立保存的，只需要把Markdown文本中的图片链接替换掉就好了。<br>替换这件事情，还是交给正则表达式做比较方便。通过正则表达式，我们可以将图片的名称(例如abc.jpg)提取出来并组合成正确的图片地址，然后用它把错误的图片地址换掉，这样总算可以显示图片了。</p>
+<p>在这个Workflow中，所有内容最终会被保存在<code>Dropbox/RTF Savior/文件名/</code>这个目录下。这个Workflow存在一个小问题：如果文件中只有一张图片<code>abc.jpg</code>，这张图片不会被保存为<code>/media/abc.jpg</code>，而会变成<code>media.jpg</code>。不过既然只有一张图片了，也许手动处理一下比用Workflow要来得快些。另外，偶尔转换出的Markdown会有格式问题，这是Workflow的锅。如果遇到这种问题，可以再用Bear导出一次Markdown文件来代替转换的Markdown文件——只是相比用Workflow一次性解决问题，这样不够优雅。<br>你可以<a href="https://workflow.is/workflows/653d64fc84f340d98616f598854f6d98" target="_blank" rel="noopener">点击此处</a>下载这个Workflow。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用Workflow处理Rich-Text-Format-富文本"><span class="toc-number">1.</span> <span class="toc-text">用Workflow处理Rich Text Format(富文本)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#整理错误的链接"><span class="toc-number">2.</span> <span class="toc-text">整理错误的链接</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&text=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&is_video=false&description=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=拯救Bear里的Markdown笔记&body=Check out this article: https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&title=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&name=拯救Bear里的Markdown笔记&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2018/02/14/%E5%BA%94%E7%94%A8/%E6%8B%AF%E6%95%91Bear%E9%87%8C%E7%9A%84Markdown%E7%AC%94%E8%AE%B0.html&t=拯救Bear里的Markdown笔记" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Phillip Gu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'enoch2090';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
