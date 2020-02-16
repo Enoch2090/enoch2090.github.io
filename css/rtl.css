@@ -1,24 +1,18 @@
 @font-face {
-  font-family: Vazir;
-  src: url("../lib/vazir-font/Vazir.eot");
-  src: url("../lib/vazir-font/Vazir.eot?#iefix") format('embedded-opentype'), url("../lib/vazir-font/Vazir.woff2") format('woff2'), url("../lib/vazir-font/Vazir.woff") format('woff'), url("../lib/vazir-font/Vazir.ttf") format('truetype');
+  font-family: JetBrains Mono;
+  src: url("../JetBrainsMono-1.0.3/web/eot/JetBrainsMono-Regular.eot");
+  src: url("../JetBrainsMono-1.0.3/web/eot/JetBrainsMono-Regular.eot#iefix") format('embedded-opentype'), url("../lib/JetBrainsMono-1.0.3/web/woff2/JetBrainsMono-Regular.woff2") format('woff2'), url("../lib/JetBrainsMono-1.0.3/web/woff/JetBrainsMono-Regular.woff") format('woff'), url("../lib/JetBrainsMono-1.0.3/ttf/JetBrainsMono-Regular.ttf") format('truetype');
   font-weight: normal;
 }
 @font-face {
-  font-family: Vazir;
-  src: url("../lib/vazir-font/Vazir-Bold.eot");
-  src: url("../lib/vazir-font/Vazir-Bold.eot?#iefix") format('embedded-opentype'), url("../lib/vazir-font/Vazir-Bold.woff2") format('woff2'), url("../lib/vazir-font/Vazir-Bold.woff") format('woff'), url("../lib/vazir-font/Vazir-Bold.ttf") format('truetype');
+  font-family: JetBrains Mono;
+  src: url("../lib/JetBrainsMono-1.0.3/web/eot/JetBrainsMono-Bold.eot");
+  src: url("../lib/JetBrainsMono-1.0.3/web/eot/JetBrainsMono-Bold.eot?#iefix") format('embedded-opentype'), url("../lib/JetBrainsMono-1.0.3/web/woff2/JetBrainsMono-Bold.woff2") format('woff2'), url("../lib/JetBrainsMono-1.0.3/web/woff/JetBrainsMono-Bold.woff") format('woff'), url("../lib/JetBrainsMono-1.0.3/ttf/JetBrainsMono-Bold.ttf") format('truetype');
   font-weight: bold;
 }
-@font-face {
-  font-family: Vazir;
-  src: url("../lib/vazir-font/Vazir-Light.eot");
-  src: url("../lib/vazir-font/Vazir-Light.eot?#iefix") format('embedded-opentype'), url("../lib/vazir-font/Vazir-Light.woff2") format('woff2'), url("../lib/vazir-font/Vazir-Light.woff") format('woff'), url("../lib/vazir-font/Vazir-Light.ttf") format('truetype');
-  font-weight: 300;
-}
 .rtl {
-  font-family: Vazir, sans-serif;
-  direction: rtl;
+  font-family: JetBrains Mono, Mono;
+  direction: ltr;
 }
 .rtl #nav li {
   margin-right: 0px !important;
