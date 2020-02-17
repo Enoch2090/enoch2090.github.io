@@ -325,7 +325,7 @@ body .h1 {
   letter-spacing: 0.01em;
   font-weight: 700;
   font-style: normal;
-  font-size: 1.5em;
+  font-size: 1.6em;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
@@ -339,13 +339,13 @@ body .h2 {
   text-transform: none;
   letter-spacing: normal;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 body h3 {
   color: rgba(86,124,119,0.8);
   text-decoration: underline;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
 }
 body h4,
 body h5,
@@ -354,14 +354,14 @@ body h6 {
   text-decoration: none;
   color: #666;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 body h3,
 body h4,
 body h5,
 body h6 {
   margin-top: 0.9rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 body hr {
   border: 0.5px dashed #666;
@@ -459,7 +459,7 @@ body {
   color: #22272a;
   font-display: swap;
   font-weight: 400;
-  font-size: 17.5px;
+  font-size: 16.8px;
   font-family: "Menlo", "Meslo LG", monospace;
   line-height: 1.725;
   text-rendering: geometricPrecision;
@@ -1057,7 +1057,7 @@ article header .posttitle {
   margin-top: 0;
   margin-bottom: 0;
   text-transform: none;
-  font-size: 1.8em;
+  font-size: 1.5em;
   line-height: 1.25;
 }
 article header .meta {
@@ -1079,11 +1079,11 @@ article header .postdate {
 article .content h2:before {
   position: absolute;
   top: -4px;
-  left: -1rem;
+  left: -1.5rem;
   color: #4c6794;
   content: "#";
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 article .content img,
 article .content video {
@@ -1167,7 +1167,7 @@ article .content .caption {
 }
 .posttitle {
   text-transform: none;
-  font-size: 1.7em;
+  font-size: 1.5em;
   line-height: 1.25;
 }
 .article-tag .tag-link {
