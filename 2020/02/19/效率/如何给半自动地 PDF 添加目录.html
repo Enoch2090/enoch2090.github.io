@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="什么东西比一个 PDF 文档更惹人烦？一个没有目录的 PDF 文档。 没有目录的原因很多。可能是在文档传播的过程中被导出丢失了，也可能就是那个作者，明明知晓那么多 LaTeX 的技巧，但就是懒得多动一下手指方便读者。 我们只能自己给文档加目录了。 要做到这件事，我们需要一个免费的小工具：PdgCntEditor。然后，为了省事，我们还需要一小段脚本来快速修整格式。我把这两样东西打包准备好了，你可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何半自动地给 PDF 添加目录">
+<meta property="og:url" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html">
+<meta property="og:site_name" content="Enoch2090">
+<meta property="og:description" content="什么东西比一个 PDF 文档更惹人烦？一个没有目录的 PDF 文档。 没有目录的原因很多。可能是在文档传播的过程中被导出丢失了，也可能就是那个作者，明明知晓那么多 LaTeX 的技巧，但就是懒得多动一下手指方便读者。 我们只能自己给文档加目录了。 要做到这件事，我们需要一个免费的小工具：PdgCntEditor。然后，为了省事，我们还需要一小段脚本来快速修整格式。我把这两样东西打包准备好了，你可以">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E7%B2%98%E8%B4%B4%E5%88%B0%20Drafts.png">
+<meta property="og:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E9%94%99%E8%AF%AF-2102938.png">
+<meta property="og:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E4%BD%BF%E7%94%A8PdgCntEditor.png">
+<meta property="og:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E5%AF%BB%E6%89%BE%E5%9F%BA%E5%87%86%E9%A1%B5.png">
+<meta property="og:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/Done.png">
+<meta property="article:published_time" content="2020-02-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-19T09:20:12.236Z">
+<meta property="article:author" content="Phillip Gu">
+<meta property="article:tag" content="Drafts">
+<meta property="article:tag" content="效率">
+<meta property="article:tag" content="macOS">
+<meta property="article:tag" content="自动化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E7%B2%98%E8%B4%B4%E5%88%B0%20Drafts.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>如何半自动地给 PDF 添加目录</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Enoch2090" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/02/17/%E6%96%87%E5%8C%96/%E7%A1%AC%E5%B8%81%20%7C%20%E6%9F%8F%E6%9E%97%E6%95%85%E4%BA%8B.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&text=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&is_video=false&description=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何半自动地给 PDF 添加目录&body=Check out this article: https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&name=如何半自动地给 PDF 添加目录&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&t=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        如何半自动地给 PDF 添加目录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Enoch2090</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-02-18T16:00:00.000Z" itemprop="datePublished">2020-02-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/drafts/" rel="tag">Drafts</a>, <a class="tag-link" href="/tags/macOS/" rel="tag">macOS</a>, <a class="tag-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a>, <a class="tag-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>什么东西比一个 PDF 文档更惹人烦？一个没有目录的 PDF 文档。</p>
+<p>没有目录的原因很多。可能是在文档传播的过程中被导出丢失了，也可能就是那个作者，明明知晓那么多 LaTeX 的技巧，但就是懒得多动一下手指方便读者。</p>
+<p>我们只能自己给文档加目录了。</p>
+<p>要做到这件事，我们需要一个免费的小工具：PdgCntEditor。然后，为了省事，我们还需要一小段脚本来快速修整格式。我把这两样东西打包准备好了，你可以<a href="https://enoch2090.github.io/downloads/tools/PDF-Menu.zip">点击下载</a>。| <a href="https://d.pr/f/9hG5B2" target="_blank" rel="noopener">备用地址</a></p>
+<p>这个工具只有 Windows 下有，macOS下我暂时还没找到替代品。因此，你还需要一个虚拟机/双系统。</p>
+<p>首先，打开你要添加目录的 PDF，找到它正文里的目录。如果连这个也没有，或者你看的 PDF 是扫描版，那还是放弃吧。把正文里的目录复制下来，粘贴到 Drafts 里。</p>
+<p>PdgCntEditor 对于批量添加目录的格式要求是：</p>
+<ol>
+<li>目录的标题和对应的页码之间用制表符（Tab）隔开。</li>
+<li>多个标题之间换行隔开。</li>
+<li>有多层级的标题时，在标题前面加额外的制表符表示层级的缩进。</li>
+</ol>
+<p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E7%B2%98%E8%B4%B4%E5%88%B0%20Drafts.png" alt="粘贴到 Drafts"></p>
+<p>可以看到，从 PDF 里复制出来的内容可以说惨不忍睹，完全不符合 PdgCntEditor 的格式要求。我手动修改了其中的前几行。我们需要把整个目录八百多行全改成这个样子，才能批量添加成功。</p>
+<p>这时候，我们需要一小段脚本来帮助我们完成这项工作。安装压缩包里附的 Drafts 动作，然后对这个草稿运行。我们会得到：</p>
+<p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果"></p>
+<p>可以看到，现在的格式都正确了。图中有些页码看起来被换行了，但实际上那是一个制表符。确认这一点的方法是把光标移到有问题的地方，按方向键向前移动一次光标。如果光标回到了上一行最后一个字母的右边，那就表明这里是一个换行。但如果光标移动到了上一行最后一个字母的左边，则说明这里没有换行，只是显示问题。</p>
+<p>当然，你得到的很可能和我的结果不一样——因为这个动作只是我针对我面前的这份文档复制出来的目录所写的。如果你懂正则表达式，你可以自己根据问题改写一下。否则……也许我以后会写一个更通用的动作也说不定。</p>
+<p>运行完动作之后，你还是需要手工修整一下。有些地方是复制出来时就有的错误，光靠正则表达式不能去除。</p>
+<p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E9%94%99%E8%AF%AF-2102938.png" alt="错误"></p>
+<p>完成以后，让我们在 PdgCntEditor 中打开待添加目录的文档。首先把修整好的目录文本粘贴进主界面，然后点击右上角的 PDF 文档图标：</p>
+<p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E4%BD%BF%E7%94%A8PdgCntEditor.png" alt="使用PdgCntEditor"></p>
+<p>在这里，我们需要为这个目录设定基准页。基准页很好确定：用预览（或者其它 PDF 阅读器）打开该文档，找到待生成的目录中第一章的第一页，它所在的页码就是基准页。</p>
+<p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/%E5%AF%BB%E6%89%BE%E5%9F%BA%E5%87%86%E9%A1%B5.png" alt="寻找基准页"></p>
+<p>填入基准页，确认，然后按保存即可。</p>
+<p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.htm/Done.png" alt="Done"></p>
+<p>这时再打开文档，就可以看到目录了。</p>
+<p>你可以在<a href="https://enoch2090.github.io/downloads/docs/ProbabilityandStatisticsTheScienceofUncertainty.pdf">这里</a>下载到我用的示例文档。</p>
+<p>最后提醒一句：在目录文本的标题里不要用制表符，否则生成出来的目录会出错。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&text=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&is_video=false&description=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何半自动地给 PDF 添加目录&body=Check out this article: https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&title=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&name=如何半自动地给 PDF 添加目录&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95.html&t=如何半自动地给 PDF 添加目录" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Phillip Gu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'enoch2090';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
