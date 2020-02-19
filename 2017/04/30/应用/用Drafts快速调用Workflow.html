@@ -13,14 +13,14 @@
 <meta property="og:site_name" content="Enoch2090">
 <meta property="og:description" content="一开始有这个需求是在安排复习计划时感到每次打开2Do添加任务时，点来点去特别麻烦，因此想通过Drafts的快速输入来代替手动点击添加任务。由于Drafts的JavaScript语法我不是很熟悉，就随手做了一个Workflow，通过Drafts调用来增强2Do的添加(我不喜欢在Workflow里面输入，那个输入框让人很不舒服)。后来我发现用Drafts启动Workflow比原来打开Workflow去">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://enoch2090.github.io/2017/04/30/%E5%BA%94%E7%94%A8/%E7%94%A8Drafts%E5%BF%AB%E9%80%9F%E8%B0%83%E7%94%A8Workflow/IMG_4653.GIF">
+<meta property="og:image" content="https://enoch2090.github.io/2017/04/30/%E5%BA%94%E7%94%A8/%E7%94%A8Drafts%E5%BF%AB%E9%80%9F%E8%B0%83%E7%94%A8Workflow.htm/IMG_4653.GIF">
 <meta property="article:published_time" content="2017-04-29T16:00:00.000Z">
 <meta property="article:modified_time" content="2020-01-03T02:41:37.588Z">
 <meta property="article:author" content="Phillip Gu">
 <meta property="article:tag" content="Drafts">
 <meta property="article:tag" content="Workflow">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://enoch2090.github.io/2017/04/30/%E5%BA%94%E7%94%A8/%E7%94%A8Drafts%E5%BF%AB%E9%80%9F%E8%B0%83%E7%94%A8Workflow/IMG_4653.GIF">
+<meta name="twitter:image" content="https://enoch2090.github.io/2017/04/30/%E5%BA%94%E7%94%A8/%E7%94%A8Drafts%E5%BF%AB%E9%80%9F%E8%B0%83%E7%94%A8Workflow.htm/IMG_4653.GIF">
     
     
         
@@ -159,7 +159,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>一开始有这个需求是在安排复习计划时感到每次打开2Do添加任务时，点来点去特别麻烦，因此想通过Drafts的快速输入来代替手动点击添加任务。由于Drafts的JavaScript语法我不是很熟悉，就随手做了一个Workflow，通过Drafts调用来增强2Do的添加(我不喜欢在Workflow里面输入，那个输入框让人很不舒服)。后来我发现用Drafts启动Workflow比原来打开Workflow去找一条特定的wf然后运行要快得多，因此就有了用Drafts调用Workflow的想法。<br>这个想法建立于一个基础之上：Workflow在1.71的版本以后可以在一个Workflow中引用另一个Workflow，这样每个Workflow都可以做成模块的形式，像Python中调用函数那样来使用。这样只需要写一个总的Workflow来识别Drafts传过来的命令，然后启动对应的Workflow就好了。<br><strong>更正</strong>：v1.71只是支持了直接调用Wf，1.71以前的版本可以用urlschemes进行调用的。感谢@mr_dot指正。<br>对于Drafts的Action的设置很简单，只需要把当前Drafts的主体传送给Workflow就行；Workflow需要设置为Action Extension，只接收Text。这样一来整个流程就完成了我的需求。<br>不过Workflow的命名一般不会很简短，但对于我这个流程所追求的效率，输入那么长的名字显然不合理。所以在这个Wf中，我增加了一个Dictionary，Key为应该输入的指令，Value存放对应Workflow的名字。运行后将<strong>输入的命令与存放的命令集比对</strong>，如果找到符合的，就运行该指令对应的Workflow，使用者就只要按需求自定义好命令集，就可以使用。<br>目前我只做了<strong>快速添加2Do</strong>这一个Wf作为子命令。<br>命令格式为：<br>td<br>可选参数：<br>-tit <em>标题</em><br>-tag <em>标签(多个使用半角逗号隔开)</em><br>-list <em>添加的列表</em><br>使用者也可以自行添加参数。另外这个动作也支持直接被Drafts调用，如果传入的内容不包含_td_命令，就会逐行添加任务。我之所以没有把逐行添加直接写到指令里是因为那样写起来太麻烦了，有兴趣的人可以自己改写我的Workflow。<br><img src="/2017/04/30/%E5%BA%94%E7%94%A8/%E7%94%A8Drafts%E5%BF%AB%E9%80%9F%E8%B0%83%E7%94%A8Workflow/IMG_4653.GIF" alt="使用效果"></p>
+    <p>一开始有这个需求是在安排复习计划时感到每次打开2Do添加任务时，点来点去特别麻烦，因此想通过Drafts的快速输入来代替手动点击添加任务。由于Drafts的JavaScript语法我不是很熟悉，就随手做了一个Workflow，通过Drafts调用来增强2Do的添加(我不喜欢在Workflow里面输入，那个输入框让人很不舒服)。后来我发现用Drafts启动Workflow比原来打开Workflow去找一条特定的wf然后运行要快得多，因此就有了用Drafts调用Workflow的想法。<br>这个想法建立于一个基础之上：Workflow在1.71的版本以后可以在一个Workflow中引用另一个Workflow，这样每个Workflow都可以做成模块的形式，像Python中调用函数那样来使用。这样只需要写一个总的Workflow来识别Drafts传过来的命令，然后启动对应的Workflow就好了。<br><strong>更正</strong>：v1.71只是支持了直接调用Wf，1.71以前的版本可以用urlschemes进行调用的。感谢@mr_dot指正。<br>对于Drafts的Action的设置很简单，只需要把当前Drafts的主体传送给Workflow就行；Workflow需要设置为Action Extension，只接收Text。这样一来整个流程就完成了我的需求。<br>不过Workflow的命名一般不会很简短，但对于我这个流程所追求的效率，输入那么长的名字显然不合理。所以在这个Wf中，我增加了一个Dictionary，Key为应该输入的指令，Value存放对应Workflow的名字。运行后将<strong>输入的命令与存放的命令集比对</strong>，如果找到符合的，就运行该指令对应的Workflow，使用者就只要按需求自定义好命令集，就可以使用。<br>目前我只做了<strong>快速添加2Do</strong>这一个Wf作为子命令。<br>命令格式为：<br>td<br>可选参数：<br>-tit <em>标题</em><br>-tag <em>标签(多个使用半角逗号隔开)</em><br>-list <em>添加的列表</em><br>使用者也可以自行添加参数。另外这个动作也支持直接被Drafts调用，如果传入的内容不包含_td_命令，就会逐行添加任务。我之所以没有把逐行添加直接写到指令里是因为那样写起来太麻烦了，有兴趣的人可以自己改写我的Workflow。<br><img src="/2017/04/30/%E5%BA%94%E7%94%A8/%E7%94%A8Drafts%E5%BF%AB%E9%80%9F%E8%B0%83%E7%94%A8Workflow.htm/IMG_4653.GIF" alt="使用效果"></p>
 <p><a href="https://drafts4-actions.agiletortoise.com/a/2BQ" target="_blank" rel="noopener">点击安装Drafts Action</a><br><a href="https://workflow.is/workflows/184172692f174ec8917ae331e6d9d8f7" target="_blank" rel="noopener">点击安装<em>Command</em> Workflow</a><br><a href="https://workflow.is/workflows/24810fb1e76b419cbc3e63940daefa30" target="_blank" rel="noopener">点击安装<em>2Do</em> Workflow</a></p>
 
   </div>
