@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang=zh>
 <head>
-    <!-- so meta -->
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95/%E5%AF%BB%E6%89%BE%E5%9F%BA%E5%87%86%E9%A1%B5.png">
 <meta property="og:image" content="https://enoch2090.github.io/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95/Done.png">
 <meta property="article:published_time" content="2020-02-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-19T09:20:12.236Z">
+<meta property="article:modified_time" content="2020-02-20T08:30:47.895Z">
 <meta property="article:author" content="Phillip Gu">
 <meta property="article:tag" content="Drafts">
 <meta property="article:tag" content="效率">
@@ -63,11 +63,10 @@
     
       <link rel="alternate" href="/atom.xml" title="Enoch2090" type="application/atom+xml" />
     
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
+<body class="max-width mx-auto px3 ltr">    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
@@ -181,7 +180,14 @@
 <p>这时候，我们需要一小段脚本来帮助我们完成这项工作。安装压缩包里附的 Drafts 动作，然后对这个草稿运行。我们会得到：</p>
 <p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果"></p>
 <p>可以看到，现在的格式都正确了。图中有些页码看起来被换行了，但实际上那是一个制表符。确认这一点的方法是把光标移到有问题的地方，按方向键向前移动一次光标。如果光标回到了上一行最后一个字母的右边，那就表明这里是一个换行。但如果光标移动到了上一行最后一个字母的左边，则说明这里没有换行，只是显示问题。</p>
-<p>当然，你得到的很可能和我的结果不一样——因为这个动作只是我针对我面前的这份文档复制出来的目录所写的。如果你懂正则表达式，你可以自己根据问题改写一下。否则……也许我以后会写一个更通用的动作也说不定。</p>
+<p>当然，你得到的很可能和我的结果不一样——因为这个动作只是我针对我面前的这份文档复制出来的目录所写的。它使用 JavaScript 运行正则表达式来匹配并替换文本，大致做了以下几件事：</p>
+<ol>
+<li>把页码和标题之间的「……………」和「. . . . . . . . . . . . 」等内容删除，替换成单个制表符。</li>
+<li>对于所有「1.1」、「10.2」之类的小节号，换行并缩进一次。</li>
+<li>对于所有「1.1.2」、「10.2.5」之类的小节号，换行并缩进两次。</li>
+<li>给大部分单词之间加上空格。</li>
+</ol>
+<p>大部分 PDF 拷出来的文本都是类似的格式，所以这个动作应该能帮到你。如果情况不一样，你也可以根据实际情况改写一下我的正则表达式。否则……也许我以后会写一个更通用的动作也说不定。</p>
 <p>运行完动作之后，你还是需要手工修整一下。有些地方是复制出来时就有的错误，光靠正则表达式不能去除。</p>
 <p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95/%E9%94%99%E8%AF%AF-2102938.png" alt="错误"></p>
 <p>完成以后，让我们在 PdgCntEditor 中打开待添加目录的文档。首先把修整好的目录文本粘贴进主界面，然后点击右上角的 PDF 文档图标：</p>
@@ -191,8 +197,7 @@
 <p>填入基准页，确认，然后按保存即可。</p>
 <p><img src="/2020/02/19/%E6%95%88%E7%8E%87/%E5%A6%82%E4%BD%95%E7%BB%99%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%9C%B0%20PDF%20%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95/Done.png" alt="Done"></p>
 <p>这时再打开文档，就可以看到目录了。</p>
-<p>你可以在<a href="https://enoch2090.github.io/downloads/docs/ProbabilityandStatisticsTheScienceofUncertainty.pdf">这里</a>下载到我用的示例文档。</p>
-<p>最后提醒一句：在目录文本的标题里不要用制表符，否则生成出来的目录会出错。</p>
+<p>你可以在<a href="https://enoch2090.github.io/downloads/docs/ProbabilityandStatisticsTheScienceofUncertainty.pdf">这里</a>下载到我用的示例文档。最后提醒一句：在目录文本的标题里不要用制表符，否则生成出来的目录会出错。</p>
 
   </div>
 </article>
@@ -345,5 +350,20 @@
     </script>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
