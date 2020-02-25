@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2020-02-20T08:30:47.895Z</updated>
+  <updated>2020-02-25T05:46:17.312Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在 macOS 上使用 Vivado</title>
+    <link href="https://enoch2090.github.io/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/"/>
+    <id>https://enoch2090.github.io/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/</id>
+    <published>2020-02-24T16:00:00.000Z</published>
+    <updated>2020-02-25T05:46:17.312Z</updated>
+    
+    <content type="html"><![CDATA[<p>当然，macOS 用不了 Vivado，你需要先安装一个虚拟机。这一点是逃不开的，因为 Vivado 在 macOS 上实在没有特别合适的替代品。</p><hr><p>我推荐使用 Parallel Desktop，它自带的「融合模式（Coherence Mode）」可以让虚拟机的界面直接和 macOS 融为一体：</p><p><img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E8%9E%8D%E5%90%88%E6%A8%A1%E5%BC%8F.png" alt="融合模式"></p><p>这时，你就可以把 Vivado 作为一个 macOS 应用打开，像使用一个正常应用一样用 Vivado。</p><p>为了获得更原生的体验，我们还需要摆脱 Vivado 自带的那个极度难用的编辑器。推荐使用 VS Code 代替，配置方法如下。</p><p>首先，我们要让 Vivado能自动调用 VS Code。这个步骤跨了一个系统：在 Windows 虚拟机里运行的 Vivado，调起安装在 macOS 里的 VS Code，并把文件路径传过去。但其实配置方法很简单。还是 Parallel Desktop 的自带功能：它可以把 macOS 上的应用映射到 Windows，并在 Windows 系统里提供指向 .exe 可执行文件的快捷方式。运行这个快捷方式，会在 macOS 打开对应的应用。</p><p>因此我们要做的是：找到 VS Code 的快捷方式指向的可执行文件路径，把这个路径提供给 Vivado。具体操作是：</p><ol><li>打开小娜（或者 Everything），搜索 VS Code。右键搜索结果 - 打开文件所在路径，找到 VS Code 在 Windows 上的快捷方式。</li><li>右键 - 属性，复制下这个快捷方式指向的路径。<img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E5%BA%94%E7%94%A8%E6%98%A0%E5%B0%84.png" alt="应用映射"></li></ol><ol><li>打开 Vivado。找到 Settings - Text Editor，改成 <code>Custom</code>。填入刚才复制的路径，再加上 <code>[filename] -[linenumber]</code>即可，注意空格。<img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/Vivado%E8%AE%BE%E7%BD%AE.png" alt="Vivado设置"></li><li>保存。现在在 Vivado 里双击某个 <code>.v</code> w文件的时候，应该会在 macOS 中调起 VS Code 来打开。</li></ol><p>这一步完成以后，我们还需要稍微配置一下 VS Code。通常来说用 VS Code 作为 Vivado 的编辑器，都是设置 Vivado 自带的 xvlog 作为 lint 工具的。但我们这里跨了一个系统，这一步实在是做不到了。解决办法是：另外安装 Verilator 作为 lint 工具。<a href="https://www.veripool.org/" target="_blank" rel="noopener">Verilator</a> 是一个命令行的 Verilog 编译器，软件本身只有十来兆，使用 HomeBrew 就能安装。原则上，代码检查工具基本上都能给你正确的结果。不过我并不保证 Verilator 对于有些代码的检查一定能过 Vivado 的编译器，具体情况还得看具体板子决定。</p><p>打开命令行键入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install verilator</span><br></pre></td></tr></table></figure><p>完成后记得检查一下。键入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">verilator --version</span><br></pre></td></tr></table></figure><p><img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E5%AE%89%E8%A3%85%20Verilator.png" alt="安装 Verilator"></p><p>提示 Verilator 的版本就表示没有问题了。安装好 Verilator，我们再打开 VS Code，依次搜索安装以下三个插件：<code>Verilog HDL/SystemVerilog</code>、<code>SystemVerilog</code>、<code>SystemVerilog - Language Support</code>。记得到设置里，分别设置它们的代码检查工具为 Verilator。</p><p>重启 VS Code，现在你可以愉快地在 macOS 上使用 Vivado了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;当然，macOS 用不了 Vivado，你需要先安装一个虚拟机。这一点是逃不开的，因为 Vivado 在 macOS 上实在没有特别合适的替代品。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;我推荐使用 Parallel Desktop，它自带的「融合模式（Coherence Mode）」可以
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Vivado" scheme="https://enoch2090.github.io/tags/Vivado/"/>
+    
+      <category term="Verilog" scheme="https://enoch2090.github.io/tags/Verilog/"/>
+    
+      <category term="FPGA" scheme="https://enoch2090.github.io/tags/FPGA/"/>
+    
+  </entry>
   
   <entry>
     <title>如何半自动地给 PDF 添加目录</title>
@@ -500,30 +530,6 @@
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>记一次精力记录的尝试</title>
-    <link href="https://enoch2090.github.io/2018/05/13/%E6%95%88%E7%8E%87/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%B2%BE%E5%8A%9B%E8%AE%B0%E5%BD%95%E7%9A%84%E5%B0%9D%E8%AF%95/"/>
-    <id>https://enoch2090.github.io/2018/05/13/%E6%95%88%E7%8E%87/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%B2%BE%E5%8A%9B%E8%AE%B0%E5%BD%95%E7%9A%84%E5%B0%9D%E8%AF%95/</id>
-    <published>2018-05-12T16:00:00.000Z</published>
-    <updated>2019-12-30T16:44:52.918Z</updated>
-    
-    <content type="html"><![CDATA[<p>在 <a href="https://sspai.com/article/44392?series_id=9" target="_blank" rel="noopener">5 月 1 日的 Power+</a> 中，Hum 分享了一种用纸笔记录精力的方法。恰好我时常觉得自己的精力分配总是不均衡，于是就尝试了一下这种方法。<br>我建议在阅读本文之前先阅读这篇 <a href="https://sspai.com/article/44392?series_id=9" target="_blank" rel="noopener">Power+</a>。</p><h2 id="记录的方法"><a href="#记录的方法" class="headerlink" title="记录的方法"></a>记录的方法</h2><p><img src="/2018/05/13/%E6%95%88%E7%8E%87/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%B2%BE%E5%8A%9B%E8%AE%B0%E5%BD%95%E7%9A%84%E5%B0%9D%E8%AF%95/Image%202018-5-6%20%E4%B8%8B%E5%8D%884-43.png" alt="Image 2018-5-6 下午4-43"><br>这张图片就是用来记录的模版。概括来说，这种方法是这样操作的：把这张模板打印出来，每隔一段时间，使用不同颜色的笔来代表不同身份做的事，填涂扇形图的格子来为自己上一个时间段的表现打分。举例来说，这是我其中一天的记录：<br><img src="/2018/05/13/%E6%95%88%E7%8E%87/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%B2%BE%E5%8A%9B%E8%AE%B0%E5%BD%95%E7%9A%84%E5%B0%9D%E8%AF%95/Image%202018-5-13%20%E4%B8%8A%E5%8D%8812-24.png" alt="Image 2018-5-13 上午12-24"><br>我采用了和 Hum 相同的颜色标记：<br><strong>蓝色</strong>代表个人<br><strong>红色</strong>代表工作<br><strong>黑色</strong>代表学业<br>这天我正好在复习之后一天的一场考试，可以看到这一天的大部分格子都是涂成黑色的，也就是我几乎一整天都在忙复习的事情。</p><h2 id="一些我个人作出的调整"><a href="#一些我个人作出的调整" class="headerlink" title="一些我个人作出的调整"></a>一些我个人作出的调整</h2><p>Hum 原文给出的建议是使用纸笔作记录，这里部分摘录他的理由：</p><blockquote><ol><li>智能设备的干扰强。只要边上有手机，它就能吸收着你的注意力。</li><li>用智能设备记录时间其实不快捷。</li><li>智能设备上记录时间的工具多是以任务为单位。以任务为单位，就要求我们对一个任务的开始和结束有个明显的意识。但正常情况下我们是没这个意识的，需要另外培养。<br>因此，如果一个人刚刚对记录时间感兴趣，但是却用智能设备里的软件入门，他多半会感到阻力重重。如果有兴趣做时间管理，最开始用纸笔，每一个小时记一下之前一小时大概做了什么，在这之中找规律，上手会快很多。好在，精力管理这个领域还不算热，软件还没跟上，所以可以让我们有用纸笔记录的机会。<br>权衡一番之后，我决定把模板导入 Goodnotes 并使用 Pencil 来做记录。这样做的理由如下：</li></ol></blockquote><ol><li>使用 Goodnotes + Pencil 的实质就和使用纸笔一样，不会有太高的学习成本，记录起来同样方便，体验甚至优于普通纸笔。这就能涵盖所有「使用纸笔来代替智能设备上的软件进行记录」这一方法的优点；</li><li>我希望最终的记录结果能保存一份电子存档方便以后查看，而Goodnotes 能将记录导出为一个 PDF 文档，可以直接保存到印象笔记或 DEVONthink 并存档，免去了扫描这一步骤；</li><li>我的 iPad 上安装的应用，通知几乎都是关闭的，不存在吸收注意力的情况。这就规避了「使用智能设备进行记录」最关键的「注意力不集中」问题。<br>此外，我还希望通过一些关键数据的统计来得出更为有效的精力结论。从记录的第三天起，我决定开始关注一些数据，包括：</li></ol><ul><li><strong>当天的平均分数</strong>。这一数据用当天的精力总分除以工作的总小时数得到。这个数据看起来没什么用，但是它实际上能帮我掌握自己一周中的精力变化。</li><li><strong>某一天的平均分数与前一晚睡眠时长的比值。</strong>上高中以后我就一直觉得睡眠不足，加之我的睡眠时长也不是很规律（一般在 5 小时-8 小时之间，根据当天的安排而定），恰好有了条件来研究睡眠时长对第二天的精力究竟有着怎样的影响。</li><li><strong>喝过咖啡之后 3 小时的精力变化。</strong>我想研究一下咖啡因究竟对我的效率有着怎样的影响。</li></ul><h2 id="记录的结论"><a href="#记录的结论" class="headerlink" title="记录的结论"></a>记录的结论</h2><p>这里我打算以这一周较为典型的一天为例谈一谈我在这十天的记录中得到的结论。<br><img src="/2018/05/13/%E6%95%88%E7%8E%87/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%B2%BE%E5%8A%9B%E8%AE%B0%E5%BD%95%E7%9A%84%E5%B0%9D%E8%AF%95/Image%202018-5-13%20%E4%B8%8A%E5%8D%8812-38.png" alt="Image 2018-5-13 上午12-38"><br>这是一个寻常的日子，因为在学校上课所以几乎一整天都是涂成黑色的「学业」。我之所以选取这一天，是因为这一天具有很多在这周的记录中出现的典型特征，就我的分析，这些特征包括：</p><ol><li>早上刚起床时精力不佳。这主要是由于学校规定早上要在 6 点 45 之前离开寝室，睡眠略不足造成的。</li><li>在喝过一杯咖啡之后，会有两到三个小时到精力旺盛期。这段时间基本上能保持专注地听课或者是做手头的事情而不分心。</li><li>在一段时间的专注之后，我必然会有一段时间精力不足，出现分心的现象。对我来说，这个时间大约在 40 分钟至 2 小时之间，视专注的思维强度而变。</li><li>下午 1 点至 2 点之间我一般会有些困，进而导致专注程度降低。<br>另外，就这一周记录的数据来看，我的精力还有如下的变化：</li><li>在周三达到最低，周一和周五最高。</li><li>可以观察到睡眠时间的增加有助于提高当天的精力。这当然是个显然的结论，不过比较有趣的是我发现当睡眠时间在 7 个小时左右（就我个人而言）时当天的平均分数与睡眠时间的比值达到最大，这也就意味着 7 小时的睡眠对我来说效益最高。这一数据还有待进一步观察。</li></ol><h2 id="关于记录的一些感想"><a href="#关于记录的一些感想" class="headerlink" title="关于记录的一些感想"></a>关于记录的一些感想</h2><p>首先要说的是，这的确是一个很不错的自我量化的方法。虽然记录的评分是带有主观色彩的，但是「效率」这件事本身就有其主观性，因此我觉得自己的主观性给分数带来的影响并不会对我评估精力变化带来太大的影响。<br>其次，我觉得我确实在这十天的记录里收获了几个结论。就我而言，我打算：</p><ol><li>每天吃完饭趴在桌子上睡一刻钟，尽量不让自己在下午犯困。</li><li>根据上午的安排，合理调整喝咖啡的时间，来达成效率最大化。</li><li>在长时间专注后，不必逼自己强行保持看似「认真」的状态，可以出去走走，活动一会。</li><li>周一和周二可以抽时间把周三的任务提前完成掉一些，周三可以去打打球放松一下。<br>以上是我的感想。很高兴能在 Power+ 里看见这些切实可行的直接或间接提高效率的方法，也希望这类培养效率思维的内容能经常出现。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在 &lt;a href=&quot;https://sspai.com/article/44392?series_id=9&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;5 月 1 日的 Power+&lt;/a&gt; 中，Hum 分享了一种用纸笔记录精力的方法。恰好我时常觉得自
-      
-    
-    </summary>
-    
-    
-    
-      <category term="π" scheme="https://enoch2090.github.io/tags/%CF%80/"/>
     
   </entry>
   
