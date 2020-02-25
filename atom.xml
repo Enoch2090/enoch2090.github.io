@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2020-02-25T05:46:17.312Z</updated>
+  <updated>2020-02-25T05:50:55.621Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://enoch2090.github.io/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/"/>
     <id>https://enoch2090.github.io/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/</id>
     <published>2020-02-24T16:00:00.000Z</published>
-    <updated>2020-02-25T05:46:17.312Z</updated>
+    <updated>2020-02-25T05:50:55.621Z</updated>
     
     <content type="html"><![CDATA[<p>当然，macOS 用不了 Vivado，你需要先安装一个虚拟机。这一点是逃不开的，因为 Vivado 在 macOS 上实在没有特别合适的替代品。</p><hr><p>我推荐使用 Parallel Desktop，它自带的「融合模式（Coherence Mode）」可以让虚拟机的界面直接和 macOS 融为一体：</p><p><img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E8%9E%8D%E5%90%88%E6%A8%A1%E5%BC%8F.png" alt="融合模式"></p><p>这时，你就可以把 Vivado 作为一个 macOS 应用打开，像使用一个正常应用一样用 Vivado。</p><p>为了获得更原生的体验，我们还需要摆脱 Vivado 自带的那个极度难用的编辑器。推荐使用 VS Code 代替，配置方法如下。</p><p>首先，我们要让 Vivado能自动调用 VS Code。这个步骤跨了一个系统：在 Windows 虚拟机里运行的 Vivado，调起安装在 macOS 里的 VS Code，并把文件路径传过去。但其实配置方法很简单。还是 Parallel Desktop 的自带功能：它可以把 macOS 上的应用映射到 Windows，并在 Windows 系统里提供指向 .exe 可执行文件的快捷方式。运行这个快捷方式，会在 macOS 打开对应的应用。</p><p>因此我们要做的是：找到 VS Code 的快捷方式指向的可执行文件路径，把这个路径提供给 Vivado。具体操作是：</p><ol><li>打开小娜（或者 Everything），搜索 VS Code。右键搜索结果 - 打开文件所在路径，找到 VS Code 在 Windows 上的快捷方式。</li><li>右键 - 属性，复制下这个快捷方式指向的路径。<img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E5%BA%94%E7%94%A8%E6%98%A0%E5%B0%84.png" alt="应用映射"></li></ol><ol><li>打开 Vivado。找到 Settings - Text Editor，改成 <code>Custom</code>。填入刚才复制的路径，再加上 <code>[filename] -[linenumber]</code>即可，注意空格。<img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/Vivado%E8%AE%BE%E7%BD%AE.png" alt="Vivado设置"></li><li>保存。现在在 Vivado 里双击某个 <code>.v</code> w文件的时候，应该会在 macOS 中调起 VS Code 来打开。</li></ol><p>这一步完成以后，我们还需要稍微配置一下 VS Code。通常来说用 VS Code 作为 Vivado 的编辑器，都是设置 Vivado 自带的 xvlog 作为 lint 工具的。但我们这里跨了一个系统，这一步实在是做不到了。解决办法是：另外安装 Verilator 作为 lint 工具。<a href="https://www.veripool.org/" target="_blank" rel="noopener">Verilator</a> 是一个命令行的 Verilog 编译器，软件本身只有十来兆，使用 HomeBrew 就能安装。原则上，代码检查工具基本上都能给你正确的结果。不过我并不保证 Verilator 对于有些代码的检查一定能过 Vivado 的编译器，具体情况还得看具体板子决定。</p><p>打开命令行键入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install verilator</span><br></pre></td></tr></table></figure><p>完成后记得检查一下。键入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">verilator --version</span><br></pre></td></tr></table></figure><p><img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E5%AE%89%E8%A3%85%20Verilator.png" alt="安装 Verilator"></p><p>提示 Verilator 的版本就表示没有问题了。安装好 Verilator，我们再打开 VS Code，依次搜索安装以下三个插件：<code>Verilog HDL/SystemVerilog</code>、<code>SystemVerilog</code>、<code>SystemVerilog - Language Support</code>。记得到设置里，分别设置它们的代码检查工具为 Verilator。</p><p>重启 VS Code，现在你可以愉快地在 macOS 上使用 Vivado了。</p>]]></content>
     
@@ -37,6 +37,8 @@
     </summary>
     
     
+    
+      <category term="macOS" scheme="https://enoch2090.github.io/tags/macOS/"/>
     
       <category term="Vivado" scheme="https://enoch2090.github.io/tags/Vivado/"/>
     
