@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://enoch2090.github.io/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/Vivado%E8%AE%BE%E7%BD%AE.png">
 <meta property="og:image" content="https://enoch2090.github.io/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E5%AE%89%E8%A3%85%20Verilator.png">
 <meta property="article:published_time" content="2020-02-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-25T05:50:55.621Z">
+<meta property="article:modified_time" content="2020-02-25T06:13:57.703Z">
 <meta property="article:author" content="Phillip Gu">
 <meta property="article:tag" content="macOS">
 <meta property="article:tag" content="Vivado">
@@ -63,7 +63,8 @@
     
 <meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
-<body class="max-width mx-auto px3 ltr">    
+<body class="max-width mx-auto px3 ltr">
+    
       <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
@@ -167,7 +168,7 @@
 <p><img src="/2020/02/25/%E6%8A%80%E6%9C%AF/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E8%9E%8D%E5%90%88%E6%A8%A1%E5%BC%8F.png" alt="融合模式"></p>
 <p>这时，你就可以把 Vivado 作为一个 macOS 应用打开，像使用一个正常应用一样用 Vivado。</p>
 <p>为了获得更原生的体验，我们还需要摆脱 Vivado 自带的那个极度难用的编辑器。推荐使用 VS Code 代替，配置方法如下。</p>
-<p>首先，我们要让 Vivado能自动调用 VS Code。这个步骤跨了一个系统：在 Windows 虚拟机里运行的 Vivado，调起安装在 macOS 里的 VS Code，并把文件路径传过去。但其实配置方法很简单。还是 Parallel Desktop 的自带功能：它可以把 macOS 上的应用映射到 Windows，并在 Windows 系统里提供指向 .exe 可执行文件的快捷方式。运行这个快捷方式，会在 macOS 打开对应的应用。</p>
+<p>首先，我们要让 Vivado 能自动调用 VS Code。这个步骤跨了一个系统：在 Windows 虚拟机里运行的 Vivado，调起安装在 macOS 里的 VS Code，并把文件路径传过去。但其实配置方法很简单。还是 Parallel Desktop 的自带功能：它可以把 macOS 上的应用映射到 Windows，并在 Windows 系统里提供指向 .exe 可执行文件的快捷方式。运行这个快捷方式，会在 macOS 打开对应的应用。</p>
 <p>因此我们要做的是：找到 VS Code 的快捷方式指向的可执行文件路径，把这个路径提供给 Vivado。具体操作是：</p>
 <ol>
 <li>打开小娜（或者 Everything），搜索 VS Code。右键搜索结果 - 打开文件所在路径，找到 VS Code 在 Windows 上的快捷方式。</li>
@@ -334,23 +335,8 @@
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         }());
-    </script>
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
