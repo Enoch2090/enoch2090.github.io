@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="自 Drafts 更新到大版本 5.0 以来，「发送到印象笔记」的动作，各类问题就层出不穷。最早的问题是：由于 API 问题，国内版的印象笔记无法完成授权。后来这一问题似乎被修复了，但在 macOS 上 Drafts 仍然无法发送文本到印象笔记。运行「印象笔记」这一步骤时，我自己使用的 Drafts 18.2.1测试版会报错：  而根据朋友的反映，即使使用的不是测试版，仍存在动作运行后文本没有被发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决 Drafts 无法发送到印象笔记的问题">
+<meta property="og:url" content="https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Enoch2090">
+<meta property="og:description" content="自 Drafts 更新到大版本 5.0 以来，「发送到印象笔记」的动作，各类问题就层出不穷。最早的问题是：由于 API 问题，国内版的印象笔记无法完成授权。后来这一问题似乎被修复了，但在 macOS 上 Drafts 仍然无法发送文本到印象笔记。运行「印象笔记」这一步骤时，我自己使用的 Drafts 18.2.1测试版会报错：  而根据朋友的反映，即使使用的不是测试版，仍存在动作运行后文本没有被发">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-23%20%E4%B8%8B%E5%8D%881.48.28.png">
+<meta property="og:image" content="https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E5%B8%90%E6%88%B7%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E5%8A%A8%E4%BD%9C%E8%AE%BE%E7%BD%AE-4983232.png">
+<meta property="article:published_time" content="2020-03-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-23T17:09:49.141Z">
+<meta property="article:author" content="Phillip Gu">
+<meta property="article:tag" content="Drafts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-23%20%E4%B8%8B%E5%8D%881.48.28.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>解决 Drafts 无法发送到印象笔记的问题</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Enoch2090" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/03/12/%E6%96%87%E5%8C%96/%E6%9F%8F%E6%9E%97%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&text=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&is_video=false&description=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=解决 Drafts 无法发送到印象笔记的问题&body=Check out this article: https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&name=解决 Drafts 无法发送到印象笔记的问题&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&t=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        解决 Drafts 无法发送到印象笔记的问题
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Enoch2090</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-03-23T16:00:00.000Z" itemprop="datePublished">2020-03-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/drafts/" rel="tag">Drafts</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>自 Drafts 更新到大版本 5.0 以来，「发送到印象笔记」的动作，各类问题就层出不穷。最早的问题是：由于 API 问题，国内版的印象笔记无法完成授权。后来这一问题似乎被修复了，但在 macOS 上 Drafts 仍然无法发送文本到印象笔记。运行「印象笔记」这一步骤时，我自己使用的 Drafts 18.2.1测试版会报错：</p>
+<p><img src="/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-23%20%E4%B8%8B%E5%8D%881.48.28.png" alt="动作不支持"></p>
+<p>而根据朋友的反映，即使使用的不是测试版，仍存在动作运行后文本没有被发送到印象笔记的情况。如果你也遇到此类问题，本文提供一种快速简便的解决方案，让你在macOS 上可以用 Drafts 发送文本到印象笔记。</p>
+<p>首先你要有印象笔记的标准账户，也就是 ￥98  一年的那个订阅。这是这个方法的最大缺陷，因为我们需要标准账户的邮件特性来实现我们的需求。不过，有经常发送笔记到印象笔记这个需求的，想必应该都有标准账户吧。</p>
+<p>让我们打开 Mac 上的印象笔记，找到帮助-帐户设置，或者你也可以直接打开：<a href="https://app.yinxiang.com/Settings.action" target="_blank" rel="noopener">app.yinxiang.com/Settings.action</a>，在页面里找「发送电邮到」，复制那个邮箱地址。 </p>
+<p> <img src="/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E5%B8%90%E6%88%B7%E8%AE%BE%E7%BD%AE.png" alt="帐户设置页面"></p>
+<p>接下来，在Drafts里面新建一条动作，步骤添加「Mail」，「Recipents」里面「To」填刚才复制的邮箱地址，其它留空。邮件内容按默认设置就好，但最好在正文的外面加上一对双百分号，这样能保证强制使用 Markdown 引擎渲染。「Options」里「Send as HTML」建议勾上（不勾也行），「Send in background」也建议勾上，这样会用Drafts的服务器在后台帮你发送，效果更好。不勾就是你本地自己的邮箱app发送。 新建好的动作如下图：</p>
+<p><img src="/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E5%8A%A8%E4%BD%9C%E8%AE%BE%E7%BD%AE-4983232.png" alt="动作设置"></p>
+<p>保存退出，运行动作就行了。你的笔记会被保存到印象笔记的默认文件夹。这个方法有一个其他方法都没有的优点，在抄送里面填个别的邮箱，你可以简单地一次发送到多个印象笔记账户，甚至可以同步到坚果云/Pocket/Instapaper 等。此外，这个动作也可以在 iOS 上流畅运行，双平台通用。</p>
+<p>对比以前我给出的用 URL-Schemes 的解决方案，这个方案是完全后台运行的，不需要在应用之间跳转，基本上还原了正常的发送体验。</p>
+<p>如果你在使用 Drafts 的时候碰到什么别的问题，你也可以把问题发给我。我不保证一定能解决，但是问问我肯定不亏。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&text=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&is_video=false&description=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=解决 Drafts 无法发送到印象笔记的问题&body=Check out this article: https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&title=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&name=解决 Drafts 无法发送到印象笔记的问题&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/&t=解决 Drafts 无法发送到印象笔记的问题" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Phillip Gu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'enoch2090';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
