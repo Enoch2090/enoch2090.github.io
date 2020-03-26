@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>模板标签</title>
+	</head>
+<body>
+<h1>模板标签</h1>
+
+<p>Drafts 有一个轻量级的标签引擎，它允许用户用模板标签控制在动作步骤里输出的文本。模板标签可以作为动作步骤里的大多数值来使用。在运行动作时，用户不仅可以用模板标签来创建输出文件的内容、信息的正文，还可以用它们动态地创建文件名或是文件夹名、为草稿指定标签、插入时间，等等。</p>
+
+<p><strong>注意：官网称呼这类模板标签为 tag，但为了与给草稿指定的标签（同样称为 tag）区分，我将这里的 tag（有时也叫 template tag）全部译作模板标签</strong>。</p>
+
+<h2>内容类模板标签</h2>
+
+<ul>
+	<li><code>[[draft]]</code> 草稿的全文。</li>
+	<li><code>[[title]]</code> 当前草稿的标题。Drafts 会自动把草稿的第一行作为标题。</li>
+	<li><code>[[safe_title]]</code> 安全标题。有时草稿标题里包含一些敏感字符（<code>\/:*?&lt;&gt;|#</code>），直接使用标题作为模板生成文件名可能会出错。「安全标题」这个标签会输出草稿的第一行，但是会把其中的敏感字符全部移除。</li>
+	<li><code>[[body]]</code> 草稿正文，即除了第一行以外的所有内容。</li>
+	<li><code>[[selection]]</code> 如果草稿中存在被选中的文字，这个模板标签会返回被选中的内容。如果没有被选中的文字，则返回草稿全文。</li>
+	<li><code>[[selection_only]]</code> 同样返回被选中的文字。但不同于 <code>[[selection]]</code>，如果草稿中没有被选中的文字，只会返回空字符串。</li>
+	<li><code>[[tags]]</code> 草稿标题。返回用半角逗号分隔的标签列表。</li>
+	<li><code>[[line|n]]</code> 返回草稿中指定行号的内容。例如 <code>[[line|2]]</code> 会返回第二行。这个模板标签也支持接受负数，例如使用 <code>[[line|-2]]</code> 会返回草稿的倒数第二行。</li>
+	<li><code>[[line|n..n]]</code> 除了接受特定的行号，<code>[[line]]</code> 还可以接受范围作为输入，例如 <code>[[line|2..5]]</code> 会返回第 2 至 5 行的内容。表示范围的两个数字中可以有一个被忽略来表示草稿的开头或结尾，例如 <code>[[line|2..]]</code> 表示从草稿第二行到结尾；<code>[[line|..5]]</code> 表示从开头到草稿第五行。</li>
+	<li><code>[[selection_start]]</code> 返回上次草稿中选中区域开头的位置。</li>
+	<li><code>[[selection_length]]</code> 返回上次草稿中选中区域的长度。</li>
+</ul>
+
+<h2>识别符号类模板标签</h2>
+
+<ul>
+	<li><code>[[uuid]]</code> 返回当前草稿的 uuid。uuid 是每条草稿唯一且独特的识别符，你可以通过 uuid 来定位这条草稿。</li>
+	<li><code>[[draft_open_url]]</code> 返回当前草稿的链接。这个链接可以被用来唤起这条草稿。</li>
+</ul>
+
+<h2>日期与地址类模板标签</h2>
+
+<ul>
+	<li><code>[[date]]</code> 以 <code>YYYY-MM-DD</code> 格式返回当前时间戳。</li>
+	<li><code>[[date|format]]</code> 以自定义的格式返回时间戳，可以通过 <code>format</code> 来调整格式。例如 <code>[[date|%m-%d-%Y]]</code> 会返回「01–02–2013」。</li>
+	<li><code>[[created|format]]</code> 与 <code>[[date]]</code> 类似，但返回的是当前草稿创建时间的时间戳。</li>
+	<li><code>[[modified|format]]</code> 与 <code>[[date]]</code> 类似，但返回的是当前草稿最后修改时间的时间戳。</li>
+	<li><code>[[longitude]]</code> 设备目前位置的经度。</li>
+	<li><code>[[latitude]]</code> 设备目前位置的纬度。 </li>
+	<li><code>[[created_longitude]]</code> 当前草稿创建的经度。</li>
+	<li><code>[[created_latitude]]</code> 当前草稿创建的纬度。</li>
+	<li><code>[[modified_longitude]]</code> 当前草稿最后修改的经度。</li>
+	<li><code>[[modified_latitude]]</code> 当前草稿最后修改的经度。 </li>
+	<li><code>[[time]]</code> 以 <code>YYYY-MM-DD-HH-MM-SS</code> 的格式返回当前的时间戳。</li>
+</ul>
+
+<h2>功能类模板标签</h2>
+
+<ul>
+	<li><code>[[template|path]]</code> 在当前草稿插入模板，模板内容应该保存在<code>iCloud Drive/Drafts/Library/Templates</code> 下，<code>path</code> 指向对应的文件。例如： <code>[[template|my-site-template.txt]]</code>。 </li>
+	<li><code>[[clipboard]]</code> iOS 系统剪切板当前的内容。</li>
+</ul>
+
+<h2>自定义模板标签</h2>
+
+<p>除了预定义的这些模板标签之外，JavaScript 脚本也可以创建自定义的模板标签，并在同一个动作下之后的步骤中可用。这一特性在某些情况下很实用，例如用 JavaScript 脚本处理文字并传递给下一个步骤来分享它们。以下的例子展示了一段简单的创建模板标签的脚本：</p>
+
+<pre><code class="code-highlighted code-js"><span class="syntax-all syntax-keyword">let</span> <span class="syntax-all syntax-parameter">s</span> <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-string">&quot;My String Value&quot;</span>;
+<span class="syntax-all syntax-parameter">draft</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">setTemplateTag</span>(<span class="syntax-all syntax-string">&quot;mytag&quot;</span>, <span class="syntax-all syntax-parameter">s</span>);
+<span class="syntax-all syntax-comment">// 运行这段代码之后，你可以在动作步骤里调用 [[mytag]] 这一模板标签。
+</span></code></pre>
+
+<p>你可以阅读 <a href="https://reference.getdrafts.com/objects/Draft.html">Drafts</a> 这一 JavaScript 对象的文档来了解更多相关内容。</p>
+
+<h2>其他特殊标记</h2>
+
+<ul>
+	<li><code>{{ }}</code> 使用双层花括号包起的内容会被编码。在使用 URL-Schemes 而需要在链接中出现中文的时候，编码是必需的。</li>
+	<li><code>%% %%</code> 使用双层百分号包起的内容会被传递到 Markdown 引擎并被转换为 HTML 格式，这个操作在「HTML 预览」步骤中很常用。</li>
+	<li><code>&lt;&lt;片段简写&gt;&gt;</code> <a href="templateTag.html">iOS only</a> 用双层尖括号包起来的有效的 TextExpander 简写会在动作运行时被展开。</li>
+	<li><code>\[[title]]</code> 用反斜杠可以避免之后的内容被模板引擎读取，反斜杠本身会在渲染时被删除。</li>
+</ul>
+
+</body>
+</html>
+

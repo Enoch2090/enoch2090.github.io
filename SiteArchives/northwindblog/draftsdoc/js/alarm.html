@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>Alarm</title>
+	</head>
+<body>
+<h1>Alarm</h1>
+
+<p><code>Alarm</code> 可以将提醒附加到系统自带的「提醒事项」，或添加到日历中的事件上。需要搭配 <code>ReminderList</code> 或 <code>Calender</code> 对象来使用。</p>
+
+<h2>可调用的类函数</h2>
+
+<ul>
+	<li><code>alarmWithDate(日期)</code> -&gt; <em>输出一个提醒</em>
+
+		<ul>
+			<li>将提醒设置为指定的日期。</li>
+		</ul></li>
+	<li><code>alarmWithOffset(秒数)</code> -&gt; <em>输出一个提醒</em>
+
+		<ul>
+			<li>将提醒设置在事件开始日期过指定秒数之后。<strong>注意：这种方式创建的提醒只支持日历的事件，不支持提醒事项。</strong></li>
+		</ul></li>
+</ul>
+
+<h2>示例</h2>
+
+<pre><code class="code-highlighted code-js"><span class="syntax-all syntax-keyword">var</span> <span class="syntax-all syntax-parameter">list</span> <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-parameter">ReminderList</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">findOrCreate</span>(<span class="syntax-all syntax-string">&quot;Errands&quot;</span>);
+<span class="syntax-all syntax-keyword">var</span> <span class="syntax-all syntax-parameter">reminder</span> <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-parameter">list</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">createReminder</span>();
+<span class="syntax-all syntax-parameter">reminder</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-parameter">title</span> <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-string">&quot;Get more paper towels&quot;</span>;
+
+<span class="syntax-all syntax-keyword">var</span> <span class="syntax-all syntax-parameter">alarm</span> <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-parameter">Alarm</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">alarmWithDate</span>((<span class="syntax-all syntax-constant">3</span>)<span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">days</span>()<span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">fromNow</span>());
+<span class="syntax-all syntax-parameter">reminder</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">addAlarm</span>(<span class="syntax-all syntax-parameter">alarm</span>);
+
+<span class="syntax-all syntax-parameter">reminder</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">update</span>();</code></pre>
+
+</body>
+</html>
+

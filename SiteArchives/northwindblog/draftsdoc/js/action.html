@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>Action</title>
+	</head>
+<body>
+<h1>Action</h1>
+
+<p>除了使用 <code>find</code> 方法来查询一个动作，还可以创建一个全局对象 <code>action</code>，以便在脚本中获取当前动作的名字和控制流。</p>
+
+<h2>可调用的实例属性</h2>
+
+<ul>
+	<li><code>name</code><em> [动作名字，只读]</em>
+
+		<ul>
+			<li>返回动作的名字。</li>
+		</ul></li>
+</ul>
+
+<h2>可调用的类函数</h2>
+
+<ul>
+	<li><code>find(name)</code> -&gt; <em>动作</em>
+
+		<ul>
+			<li>搜索指定名字的动作。如果找到则返回动作，如果未找到则返回「未定义」。</li>
+		</ul></li>
+</ul>
+
+<h2>示例</h2>
+
+<pre><code class="code-highlighted code-js"><span class="syntax-all syntax-comment">// 搜索动作
+</span><span class="syntax-all syntax-keyword">var</span> <span class="syntax-all syntax-parameter">action</span> <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-parameter">Action</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">find</span>(<span class="syntax-all syntax-string">&quot;Copy&quot;</span>);
+<span class="syntax-all syntax-parameter">app</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">queueAction</span>(<span class="syntax-all syntax-parameter">action</span>, <span class="syntax-all syntax-parameter">draft</span>);</code></pre>
+
+</body>
+</html>
+

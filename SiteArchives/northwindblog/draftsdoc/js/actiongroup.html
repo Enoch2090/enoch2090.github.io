@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>ActionGroup</title>
+	</head>
+<body>
+<h1>ActionGroup</h1>
+
+<p>代表一个动作组。这个对象可以用来搜索动作组，并在之后使用 <code>App</code> 这个对象中的方法来加载找到的动作组。</p>
+
+<h2>可调用的实例属性</h2>
+
+<ul>
+	<li><code>name</code> <em>[动作组名字，只读]</em>
+
+		<ul>
+			<li>返回动作组的名字。</li>
+		</ul></li>
+</ul>
+
+<h2>可调用的类函数</h2>
+
+<ul>
+	<li><code>getAll()</code> -&gt; <em>以列表形式返回动作组对象</em>
+
+		<ul>
+			<li>获取所有可用的动作组。</li>
+		</ul></li>
+	<li><code>find(name)</code> -&gt; <em>动作组</em>
+
+		<ul>
+			<li>搜索指定名字的动作。如果找到则返回动作，如果未找到则返回「未定义」。</li>
+		</ul></li>
+</ul>
+
+<h2>示例</h2>
+
+<pre><code class="code-highlighted code-js"><span class="syntax-all syntax-comment">// 搜索动作组
+</span><span class="syntax-all syntax-keyword">var</span> <span class="syntax-all syntax-parameter">group</span> <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-parameter">ActionGroup</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">find</span>(<span class="syntax-all syntax-string">&quot;Basic&quot;</span>); <span class="syntax-all syntax-comment">//搜索「Basic」这个动作组，并赋值给变量「group」
+</span><span class="syntax-all syntax-parameter">app</span><span class="syntax-all syntax-keyword">.</span><span class="syntax-all syntax-variable">loadActionGroup</span>(<span class="syntax-all syntax-parameter">group</span>);</code></pre>
+
+</body>
+</html>
+

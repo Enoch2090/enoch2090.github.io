@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>App</title>
+	</head>
+<body>
+<h1>App</h1>
+
+<p>Drafts 提供了 <code>App</code> 这个对象，它可以让用户访问应用级别的功能。</p>
+
+<h2>可调用的实例属性</h2>
+
+<ul>
+	<li><code>version</code><em>[字符串，只读]</em>
+
+		<ul>
+			<li>返回当前草稿的版本号。</li>
+		</ul></li>
+	<li><code>themeMode</code><em>[字符串]</em>
+
+		<ul>
+			<li>获取/设置当前的主题模式。可选的模式有：
+
+				<ul>
+					<li>light（明亮模式）</li>
+					<li>dark（黑暗模式）</li>
+					<li>automatic（自动设置）</li>
+				</ul></li>
+		</ul></li>
+	<li><code>currentThemeMode</code><em>[字符串，只读]</em>
+
+		<ul>
+			<li>返回当前激活的主题模式。这一实例会同时参考当前是否开启了「自动设置」功能。如果想要让脚本根据当前的主题模式运行分支，这是最适合使用的实例。 </li>
+		</ul></li>
+</ul>
+
+<p>isDraftListVisible <a href="app.html">boolean, readonly</a></p>
+
+<p>Is the draft list side panel is visible.</p>
+
+<p>isActionListVisible <a href="app.html">boolean, readonly</a></p>
+
+<p>Is the action list side panel is visible.</p>
+
+<p>isIdleDisabled <a href="app.html">boolean</a></p>
+
+<p>Is system sleep timer disabled preventing screen dimming/sleep.</p>
+
+</body>
+</html>
+
