@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script type="text/javascript" src="../../fb_static/lib/jquery.js%3Fversion=0.0811"></script>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit">
+  <meta name="keywords" content="效率 文化 科技 Drafts Workflow Geek">
+
+
+
+
+  <title>用Drafts快速调用Workflow</title>
+
+
+  <link href="../../fb_static/lib/fontawesome/css/font-awesome.min.css%3Fversion=0.0811.css" type="text/css"
+    rel="stylesheet" />
+  <link href="../../fb_static/lib/markdown/basic.css%3Fversion=0.0811.css" type="text/css" rel="stylesheet" />
+  <link href="../../fb_static/lib/animate.3.5.2.min.css%3Fversion=0.0811.css" type="text/css" rel="stylesheet" />
+  <link href="../../template/css/style.scss.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="main animated">
+    <div class="header animated fadeInDown">
+      <div class="site_title_container">
+        <div class="site_title">
+
+          <style type="text/css">
+            @font-face {
+              font-family: "f27435ee509d7c859124c63330e06accd";
+              src: url('../../_cache/fonts/cb40b0f7844e87b0c257ba66033dd9c5.woff');
+            }
+          </style>
+          <div style="font-family:'f27435ee509d7c859124c63330e06accd'" class="with_font">
+
+
+
+
+
+            <h1><a href="../../index.html" class="long_long">Northwind</a>
+
+            </h1>
+          </div>
+
+        </div>
+
+        <div class="description">
+          <p class="sub_title">Welcome to Nowhere's Land.</p>
+          <div class="my_socials">
+            <a href="https://www.instagram.com/northwind2018/" title="instagram"><i class="fa fa-instagram"></i></a>
+            <a href="https://t.me/NorthWind2018" title="telegram"><i class="fa fa-send-o"></i></a>
+            <a href="https://twitter.com/gyc0926" title="twitter"><i class="fa fa-twitter"></i></a>
+            <a href="https://weibo.com/u/6514395690" title="weibo"><i class="fa fa-weibo"></i></a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="autopagerize_page_element">
+      <div class="content">
+        <div class="post_page">
+          <div class="post animated fadeInDown">
+            <div class="post_title post_detail_title">
+              <h2><a>用Drafts快速调用Workflow</a>
+
+              </h2><span class="date">2017.04.30</span>
+
+            </div>
+
+            <div class="post_content markdown">
+              <p class="md_block">
+                <span
+                  class="md_line md_line_start">一开始有这个需求是在安排复习计划时感到每次打开2Do添加任务时，点来点去特别麻烦，因此想通过Drafts的快速输入来代替手动点击添加任务。由于Drafts的JavaScript语法我不是很熟悉，就随手做了一个Workflow，通过Drafts调用来增强2Do的添加(我不喜欢在Workflow里面输入，那个输入框让人很不舒服)。后来我发现用Drafts启动Workflow比原来打开Workflow去找一条特定的wf然后运行要快得多，因此就有了用Drafts调用Workflow的想法。<br /></span>
+                <span
+                  class="md_line">这个想法建立于一个基础之上：Workflow在1.71的版本以后可以在一个Workflow中引用另一个Workflow，这样每个Workflow都可以做成模块的形式，像Python中调用函数那样来使用。这样只需要写一个总的Workflow来识别Drafts传过来的命令，然后启动对应的Workflow就好了。<br /></span>
+                <span
+                  class="md_line"><strong>更正</strong>：v1.71只是支持了直接调用Wf，1.71以前的版本可以用urlschemes进行调用的。感谢@mr_dot指正。<br /></span>
+                <span class="md_line">对于Drafts的Action的设置很简单，只需要把当前Drafts的主体传送给Workflow就行；Workflow需要设置为Action
+                  Extension，只接收Text。这样一来整个流程就完成了我的需求。<br /></span>
+                <span
+                  class="md_line">不过Workflow的命名一般不会很简短，但对于我这个流程所追求的效率，输入那么长的名字显然不合理。所以在这个Wf中，我增加了一个Dictionary，Key为应该输入的指令，Value存放对应Workflow的名字。运行后将<strong>输入的命令与存放的命令集比对</strong>，如果找到符合的，就运行该指令对应的Workflow，使用者就只要按需求自定义好命令集，就可以使用。<br /></span>
+                <span class="md_line">目前我只做了<strong>快速添加2Do</strong>这一个Wf作为子命令。<br /></span>
+                <span class="md_line">命令格式为：<br /></span>
+                <span class="md_line">td<br /></span>
+                <span class="md_line">可选参数：<br /></span>
+                <span class="md_line">-tit _标题_<br /></span>
+                <span class="md_line">-tag _标签(多个使用半角逗号隔开)_<br /></span>
+                <span class="md_line">-list _添加的列表_<br /></span>
+                <span
+                  class="md_line">使用者也可以自行添加参数。另外这个动作也支持直接被Drafts调用，如果传入的内容不包含_td_命令，就会逐行添加任务。我之所以没有把逐行添加直接写到指令里是因为那样写起来太麻烦了，有兴趣的人可以自己改写我的Workflow。<br /></span>
+                <span class="md_line md_line_dom_embed md_line_with_image md_line_end"><img class="md_compiled "
+                    src="../../应用/用Drafts快速调用Workflow/IMG_4653.GIF" alt="使用效果" title=""></span>
+              </p>
+
+
+              <p class="md_block">
+                <span class="md_line md_line_dom_embed md_line_start"><a class="md_compiled"
+                    href="https://drafts4-actions.agiletortoise.com/a/2BQ">点击安装Drafts Action</a><br /></span>
+                <span class="md_line md_line_dom_embed"><a class="md_compiled"
+                    href="https://workflow.is/workflows/184172692f174ec8917ae331e6d9d8f7">点击安装_Command_
+                    Workflow</a><br /></span>
+                <span class="md_line md_line_dom_embed md_line_end"><a class="md_compiled"
+                    href="https://workflow.is/workflows/24810fb1e76b419cbc3e63940daefa30">点击安装_2Do_ Workflow</a></span>
+              </p>
+            </div>
+
+            <div class="post_footer">
+              <div class="meta">
+                <div class="info"><span class="field tags"><i class="fa fa-flask"></i>
+                    <a href="../../tag/Drafts.html" class="tag">Drafts</a>
+
+                    <a href="../../tag/Workflow.html" class="tag">Workflow</a>
+
+                  </span>
+
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <link href="../../fb_static/api/comment/style.css%3Fversion=0.0811.css" type="text/css" rel="stylesheet" />
+
+          <div class="doc_comments">
+            <div class="doc_comments_wrapper">
+              <div class="comments_block_title">Comments</div>
+
+              <div class="new_comment_form_container">
+                <form id="new_comment_form" method="post" action="http://northwindblog.com/service/comment/new">
+                  <input name="path" type="hidden" value="应用/用drafts快速调用workflow.md" />
+
+                  <input id="reply_to_id" name="reply" type="hidden" value="" />
+                  <div class="comment_trigger">
+                    <div class="avatar"><img
+                        src="../../_cache/thumbnails/a/8124d3e1ed3119f0c70ae65230e1677_80_80_true_86.png" />
+
+                    </div>
+
+                    <div class="trigger_title">Write a Comment</div>
+
+                  </div>
+
+                  <div class="new_comment"><textarea name="content" rows="2" class="textarea_box"></textarea>
+                    <span class="comment_error"></span>
+
+                  </div>
+
+                  <div class="comment_triggered">
+                    <div class="input_body">
+                      <ul class="ident">
+                        <li>
+                          <input type="text" name="author" placeholder="Name" />
+
+                        </li>
+
+                        <li>
+                          <input type="text" name="email" placeholder="Email" />
+
+                        </li>
+
+                        <li>
+                          <input type="text" name="site" placeholder="Website" />
+
+                        </li>
+
+                      </ul>
+
+
+                      <input type="submit" value="Submit!" class="comment_submit_button c_button" />
+
+                    </div>
+
+                  </div>
+
+                </form>
+
+              </div>
+
+              <ul class="comments">
+              </ul>
+
+              <script type="text/javascript" src="../../fb_static/lib/js.cookie.js%3Fversion=0.0811"></script>
+              <script type="text/javascript"
+                src="../../fb_static/lib/textcomplete/jquery.textcomplete.min.js%3Fversion=0.0811"></script>
+              <script type="text/javascript" src="../../fb_static/api/comment/script.js%3Fversion=0.0811"></script>
+
+              <script>var people = [
+                  "gyc0926"
+                ]</script>
+
+              <script>$(".new_comment textarea").textcomplete([{
+                  match: /@(\S*)$/,
+                  search: function (term, callback) {
+                    callback($.map(people, function (person) {
+                      return person.indexOf(term) == 0 ? person : null
+                    }))
+                  },
+                  replace: function (value) {
+                    if (value.indexOf(' ') != '-1') {
+                      return '@' + value + ', ';
+                    }
+                    else {
+                      return '@' + value + ' ';
+                    }
+                  },
+                  index: 1
+                }]);
+              </script>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <style type="text/css">
+      a.back_to_top {
+        text-decoration: none;
+        position: fixed;
+        bottom: 40px;
+        right: 30px;
+        background: #f0f0f0;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        line-height: 36px;
+        font-size: 18px;
+        text-align: center;
+        transition-duration: .5s;
+        transition-propety: background-color;
+        display: none;
+      }
+
+      a.back_to_top span {
+        color: #888;
+      }
+
+      a.back_to_top:hover {
+        cursor: pointer;
+        background: #dfdfdf;
+      }
+
+      a.back_to_top:hover span {
+        color: #555;
+      }
+
+      @media print,
+      screen and (max-width: 580px) {
+        .back_to_top {
+          display: none !important;
+        }
+      }
+    </style><a id="back_to_top" href="yong-draftskuai-su-diao-yong-workflow.html#" class="back_to_top"><span>△</span>
+    </a>
+
+
+    <script>$(document).ready((function (_this) {
+        return function () {
+          var bt;
+          bt = $('#back_to_top');
+          if ($(document).width() > 480) {
+            $(window).scroll(function () {
+              var st;
+              st = $(window).scrollTop();
+              if (st > 30) {
+                return bt.css('display', 'block');
+              } else {
+                return bt.css('display', 'none');
+              }
+            });
+            return bt.click(function () {
+              $('body,html').animate({
+                scrollTop: 0
+              }, 800);
+              return false;
+            });
+          }
+        };
+      })(this));
+    </script>
+
+
+
+  </div>
+
+  <div class="footer">
+
+    <script type="text/javascript"
+      src="../../fb_static/lib/menu/smartmenu/jquery.smartmenus.js%3Fversion=0.0811"></script>
+    <link href="../../fb_static/lib/menu/smartmenu/css/sm-core-css.css%3Fversion=0.0811.css" type="text/css"
+      rel="stylesheet" />
+    <link href="../../fb_static/lib/menu/smartmenu/css/sm-base.css%3Fversion=0.0811.css" type="text/css"
+      rel="stylesheet" />
+    <script type="text/javascript" src="../../fb_static/system/site/menu/run.js%3Fversion=0.0811"></script>
+    <link href="../../fb_static/api/html/nav.css%3Fversion=0.0811.css" type="text/css" rel="stylesheet" />
+
+
+
+
+    <div class="bitcron_nav_container">
+      <div class="menu_toggle">
+
+
+        <input type="checkbox" id="d_12527a3d46e7498d8b1b1e42c9c17c6b_nav" class="menu_state" />
+
+        <label for="d_12527a3d46e7498d8b1b1e42c9c17c6b_nav" class="menu_btn"><span class="menu_btn_icon">Toggle main
+            menu visibility</span>
+
+        </label>
+
+        <style type="text/css">
+          @media (max-width: 767px) {
+            .bitcron_nav {
+              display: none;
+            }
+          }
+        </style>
+      </div>
+
+
+
+
+      <div class="mixed_site_nav_wrap site_nav_wrap">
+        <ul class="mixed_site_nav site_nav sm sm-base">
+
+          <li><a id="de15a6cc06f4a11ea84b90242ac110003" href="http://enoch2090.me" class=" nav__item"
+              target=_blank>主页</a>
+
+          </li>
+
+
+          <li><a id="d0cfd99b26f4411ea84b90242ac110003"
+              href="https://enoch2090.me/SiteArchives/northwindblog/index.html" class=" nav__item" target=_blank>首页</a>
+
+          </li>
+
+
+
+
+
+
+          <li><a id="d0cfdaa1a6f4411ea84b90242ac110003"
+              href="https://enoch2090.me/SiteArchives/northwindblog/post/qi-ta/projects.html" class=" nav__item"
+              target=_blank>项目</a>
+
+          </li>
+
+
+
+
+
+
+          <li><a id="d0cfdb85c6f4411ea84b90242ac110003"
+              href="https://enoch2090.me/SiteArchives/northwindblog/archive.html" class=" nav__item"
+              target=_blank>归档</a>
+
+          </li>
+
+
+
+
+
+
+          <li><a id="d0cfdc6946f4411ea84b90242ac110003"
+              href="https://enoch2090.me/SiteArchives/northwindblog/about.html" class=" nav__item" target=_blank>关于</a>
+
+          </li>
+
+
+
+
+
+        </ul>
+
+        <div class="clear clear_nav_inline_end"></div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="clear clear_nav_end"></div>
+
+  </div>
+
+  <section class="search">
+
+
+    <div id="search_bar">
+
+
+      <input id="search_posts_keywords" placeholder="Search" type="text" value="" />
+
+    </div>
+
+
+
+    <script>var search_base_url = "/search";
+      var search_under = "";
+      $(document).ready(function () {
+        var search_posts_dom = $('#search_posts_keywords');
+        search_posts_dom.val("");
+
+        if (location.search.indexOf('?s=') === 0 && search_posts_dom.length) {
+          var old_keywords = search_posts_dom.val();
+          search_posts_dom.focus().val(old_keywords);
+        }
+        var search_posts = function () {
+          var keywords = search_posts_dom.val();
+          var url_to_jump = location.protocol + '//' + location.host + search_base_url + '?s=' + keywords;
+          if (search_under) { url_to_jump += "&under=" + search_under }
+          location.href = url_to_jump;
+          return false
+        };
+
+        search_posts_dom.keyup(function (event) {
+          if (event.which === 13) {
+            search_posts()
+          }
+          return false;
+        });
+
+        $('.search_in_html_button').click(search_posts);
+      })
+    </script>
+
+  </section>
+
+  <div class="powered_by"><a href="../../about.html">An eternal copy right,</a>
+    <a href="https://northwind2018.com" target="_blank">Powered by narcissism.</a>
+
+  </div>
+
+  <div class="footer_slogan">
+
+    <style type="text/css">
+      @font-face {
+        font-family: "f525bd86a3700eb46cec26b1dde4de3f8";
+        src: url('../../_cache/fonts/867ae3e822bb8086b7b8448fe508b49e.woff');
+      }
+    </style>
+
+
+  </div>
+
+  </div>
+
+
+  <style>
+    @font-face {
+      font-family: FZSSJW;
+      /*自定义的字体名*/
+      src: url('https://northwind.bitcron.com/FZSSJW.TTF'), url('https://northwind.bitcron.com/FZSSJW.woff');
+      /*引入字体包*/
+    }
+
+    h1 {
+      font-family: FZSSJW;
+      font-size: 2.2em;
+      font-weight: 700;
+      line-height: 1.1;
+      padding-top: 16px;
+      margin-bottom: 4px;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      line-height: 1.5em;
+      margin-top: 2.2em;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-family: FZSSJW;
+      font-size: 1.4em;
+      margin: 40px 10px 20px 0;
+      padding-left: 9px;
+      border-left: 6px;
+      font-weight: 700;
+      line-height: 1.4;
+
+    }
+
+    h3 {
+      font-family: FZSSJW;
+      font-weight: 700;
+      font-size: 1.2em;
+      line-height: 1.4;
+      margin: 10px 0 5px;
+      padding-top: 10px;
+    }
+
+    h4 {
+      font-family: FZSSJW;
+      font-weight: 700;
+      font-size: 1.1em;
+      line-height: 1.4;
+      margin: 10px 0 5px;
+      padding-top: 10px
+    }
+
+    h5,
+    h6 {
+      font-size: .9em;
+    }
+
+    h5 {
+      font-family: FZSSJW;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    h6 {
+      font-family: FZSSJW;
+      font-weight: normal;
+    }
+
+    dl,
+    ol,
+    ul {
+      font-family: FZSSJW;
+    }
+
+    .toc {
+      font-family: FZSSJW;
+    }
+
+    p {
+      font-family: FZSSJW;
+      /*使用引入的外部字体*/
+    }
+  </style>
+</body>
+
+</html>
