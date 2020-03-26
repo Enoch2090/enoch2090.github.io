@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+	<ShortName>大贰无疆 索托论坛</ShortName>
+	<Description>大贰无疆 索托论坛 - 搜索</Description>
+	<InputEncoding>utf-8</InputEncoding>
+	<Contact>http://stbbs.longluntan.com</Contact>
+	<Image height="16" width="16" type="image/x-icon">http://https://teldl-nj.kanbox.com/gcid2?gcid=38E5727ABBC25197AF7A41955F2471C935F2A144&amp</Image>
+	<Url type="text/html" method="get" template="http://stbbs.longluntan.com/search.php?search_keywords={searchTerms}&amp;src={referrer:source?}" />
+	<UpdateInterval>7</UpdateInterval>
+	<UpdateUrl>http://stbbs.longluntan.com/improvedsearch.xml</UpdateUrl>
+	<IconUpdateUrl>http://https://teldl-nj.kanbox.com/gcid2?gcid=38E5727ABBC25197AF7A41955F2471C935F2A144&amp</IconUpdateUrl>
+	<moz:SearchForm>http://stbbs.longluntan.com/search.forum</moz:SearchForm>
+</OpenSearchDescription>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>搜索论坛</ShortName>
+    <Description>论坛 - 搜索</Description>
+    <InputEncoding>utf-8</InputEncoding>
+    <Contact>www.longluntan.com</Contact>
+    <Image height="16" width="16" type="image/x-icon">//redcdn.net/frmste/images/favicon.ico</Image>
+    <Url type="text/html" method="get" template="//www.souluntan.com/search/search.php?q={searchTerms}&amp;src={referrer:source?}" />
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateUrl>http://www.longluntan.com/search/improvedsearch.xml</UpdateUrl>
+    <IconUpdateUrl>//redcdn.net/frmste/images/favicon.ico</IconUpdateUrl>
+    <moz:SearchForm>//www.souluntan.com</moz:SearchForm>
+</OpenSearchDescription>

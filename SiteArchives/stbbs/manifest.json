@@ -1,0 +1,51 @@
+{
+    "name": "大贰无疆 索托论坛",
+    "short_name": "stbbs",
+    "description": "\u5927\u8d30\u65e0\u7586 \u7d22\u6258\u8bba\u575b",
+    "lang": "zh",
+    "dir": "ltr",
+    "start_url": "/?utm_source=pwa",
+    "scope": "/",
+    "gcm_sender_id": "376695005133",
+    "icons": [
+        {
+            "src": "/images/icons-48.png",
+        "sizes": "48x48",
+        "type": "image/png",
+        "density": "1.0"
+        },
+        {
+            "src": "/images/icons-72.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "density": "1.5"
+        },
+        {
+            "src": "/images/icons-96.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "density": "2.0"
+        },
+        {
+            "src": "/images/icons-144.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "density": "3.0"
+        },
+        {
+            "src": "/images/icons-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "density": "4.0"
+        },
+        {
+            "src": "/images/icons-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "density": "4.0"
+        }
+    ],
+    "background_color": "#0598E4",
+    "theme_color": "#0598E4",
+    "display": "standalone"
+}
