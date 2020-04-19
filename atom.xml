@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2020-03-24T08:07:41.598Z</updated>
+  <updated>2020-04-19T07:40:45.355Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>疫情期间空气质量变好了吗？</title>
+    <link href="https://enoch2090.github.io/2020/04/16/%E6%8A%80%E6%9C%AF/%E7%96%AB%E6%83%85%E6%9C%9F%E9%97%B4%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E5%8F%98%E5%A5%BD%E4%BA%86%E5%90%97%EF%BC%9F/"/>
+    <id>https://enoch2090.github.io/2020/04/16/%E6%8A%80%E6%9C%AF/%E7%96%AB%E6%83%85%E6%9C%9F%E9%97%B4%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E5%8F%98%E5%A5%BD%E4%BA%86%E5%90%97%EF%BC%9F/</id>
+    <published>2020-04-15T16:00:00.000Z</published>
+    <updated>2020-04-19T07:40:45.355Z</updated>
+    
+    <content type="html"><![CDATA[<p>CNN 前几天有一篇报道，介绍了<a href="https://www.cnn.com/2020/03/31/asia/coronavirus-lockdown-impact-pollution-india-intl-hnk/index.html" target="_blank" rel="noopener">疫情期间印度的空气变化</a>。因为新德里的空气一直很差，所以这个变化特别明显：</p><p><img src="/2020/04/16/%E6%8A%80%E6%9C%AF/%E7%96%AB%E6%83%85%E6%9C%9F%E9%97%B4%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E5%8F%98%E5%A5%BD%E4%BA%86%E5%90%97%EF%BC%9F/air_in_ND.png" alt="新德里疫情前后空气对比，from CNN"></p><p>国内空气很少差到这个地步的，因此光靠照片比对也不一定能看出什么。我试着去查询了一下数据。采用的数据集是：</p><ul><li><a href="https://beijingair.sinaapp.com" target="_blank" rel="noopener">中国空气质量历史数据</a></li><li><a href="https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data" target="_blank" rel="noopener">COVID-19 Coronavirus data </a></li></ul><p>我选了哈尔滨作为研究对象，因为北方城市空气普遍要差一些，变化应该会比较明显。使用 <code>matplotlib</code> 画出来是这样子的：</p><p><img src="/2020/04/16/%E6%8A%80%E6%9C%AF/%E7%96%AB%E6%83%85%E6%9C%9F%E9%97%B4%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E5%8F%98%E5%A5%BD%E4%BA%86%E5%90%97%EF%BC%9F/plot.png" alt="plot"></p><p>图中蓝色曲线是 COV19 国内报告的病例总数，红色虚线是今年哈尔滨的空气质量指数趋势（AQI），绿色虚线是去年哈尔滨同期的空气质量指数趋势，两者多项式拟合都采用了六次方。后面的散点图是今年哈尔滨空气质量指数的原始数据，一天 24 个数据点。</p><p>光靠这张图不能给出确定性的结论，因为影响空气质量的因素很多。不过确实可以看出，在疫情爆发最严重的两周内，空气质量一下子就变好了。</p><p>你可以在<a href="https://enoch2090.me/downloads/codes/AQI.ipynb" target="_blank" rel="noopener">这里</a>下载到我使用的源代码。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;CNN 前几天有一篇报道，介绍了&lt;a href=&quot;https://www.cnn.com/2020/03/31/asia/coronavirus-lockdown-impact-pollution-india-intl-hnk/index.html&quot; target=&quot;_bl
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Python" scheme="https://enoch2090.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>解决 Drafts 无法发送到印象笔记的问题</title>
@@ -513,30 +537,6 @@
     
     
       <category term="影评" scheme="https://enoch2090.github.io/tags/%E5%BD%B1%E8%AF%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>克服睡眠焦虑</title>
-    <link href="https://enoch2090.github.io/2018/07/07/%E6%95%88%E7%8E%87/%E5%85%8B%E6%9C%8D%E7%9D%A1%E7%9C%A0%E7%84%A6%E8%99%91/"/>
-    <id>https://enoch2090.github.io/2018/07/07/%E6%95%88%E7%8E%87/%E5%85%8B%E6%9C%8D%E7%9D%A1%E7%9C%A0%E7%84%A6%E8%99%91/</id>
-    <published>2018-07-06T16:00:00.000Z</published>
-    <updated>2019-12-30T16:44:05.237Z</updated>
-    
-    <content type="html"><![CDATA[<p>我一直是那种比较难入睡的那种人，日常不躺个二十几分钟是睡不着的。因而电子设备对我睡眠的影响相当大，假如睡前长时间看手机，我躺下直到入睡的时间可能会超过四十分钟。Night Shift 这一功能的确对我的情况有帮助，但效果仍不理想。上高中以后我的睡眠质量就变得很差劲，这大概是因为我不习惯学校那种大清早起床的作息，导致整个人的作息有点紊乱，甚至在睡不着的时候会感到相当焦虑。以下是我这三年来为了克服睡眠焦虑想的种种措施。</p><h2 id="解决电子设备对睡眠的影响"><a href="#解决电子设备对睡眠的影响" class="headerlink" title="解决电子设备对睡眠的影响"></a>解决电子设备对睡眠的影响</h2><p>对于电子设备带来的影响，我目前的解决方案是尽量避免在睡前看手机。这包括两方面：</p><ol><li><strong>在家</strong>：iOS 的就寝功能有一个提前十五分钟的入睡提醒。收到提醒以后，我就放下手机，看一会纸质书然后睡觉。有时我也会用 Kindle 看书，但我会特地把它白色的背光调到较暗的等级，然后用暖色光线的床头灯辅助照明。</li><li><strong>在学校</strong>：在学校里没有床头灯这种暖色调的光线条件，所以我的选择是收到就寝提示以后，躺在床上听一会播客。一般不会发生听到一半我睡着的情况，但是反正 Castro 有睡眠定时也无所谓。<h2 id="进一步改进睡眠质量"><a href="#进一步改进睡眠质量" class="headerlink" title="进一步改进睡眠质量"></a>进一步改进睡眠质量</h2>高三时我越发重视调整作息这件事，最后大致总结出以下几点：</li><li><strong>下午三点之后绝不碰含大量咖啡因的食物和饮品。</strong>对我来说这真的不是夸张，有一回我下午喝了杯冷萃咖啡，结果到凌晨四点都没睡着……</li><li><strong>下午或者晚上尽量抽空做一些运动</strong>，打篮球或者跟着 Keep 练练肌肉都行。</li><li>中午可以睡午觉，<strong>但是白天绝不能仅仅因为困就睡太多</strong>。<h2 id="智能手环与睡眠"><a href="#智能手环与睡眠" class="headerlink" title="智能手环与睡眠"></a>智能手环与睡眠</h2>这几年我一共用过两个智能手环：<br>第一个是 Weloop Now 2。这款手环最大的优点就是轻，只有十几克，晚上戴着不会有不适感。它能大致记录你的睡眠时间，包括深度睡眠、浅睡等，而且是自动记录的，无需手动开关。<br>第二个是 Watch Series 3。Watch 相较其它各种手环最大的优势就在于和手机之间能完全自动同步，查看数据方便；此外 Autosleep 也确实很好用。不过我的确也意识到一个问题：就算你知道了自己睡眠的详细情况，你也无法根据它作出什么精确的自我调整，能做的无非就是大致改变作息罢了。就这个角度来说，睡眠记录之于改善睡眠，更多可能还是心理上的安慰作用。不过 Watch 还有个很不错的功能：呼吸。睡不着的时候做三分钟深呼吸，人会变得放松一些，这倒是一个很不错的助眠手段。</li></ol><p>本文整理自我在少数派<a href="https://sspai.com/article/45499?series_id=9" target="_blank" rel="noopener">第44周Power+预告</a>下的评论。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;我一直是那种比较难入睡的那种人，日常不躺个二十几分钟是睡不着的。因而电子设备对我睡眠的影响相当大，假如睡前长时间看手机，我躺下直到入睡的时间可能会超过四十分钟。Night Shift 这一功能的确对我的情况有帮助，但效果仍不理想。上高中以后我的睡眠质量就变得很差劲，这大概是
-      
-    
-    </summary>
-    
-    
-    
-      <category term="π" scheme="https://enoch2090.github.io/tags/%CF%80/"/>
     
   </entry>
   
