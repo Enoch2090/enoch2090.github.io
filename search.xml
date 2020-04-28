@@ -4,25 +4,6 @@
   
     
     <entry>
-      <title>疫情期间空气质量变好了吗？</title>
-      <link href="/2020/04/16/%E6%8A%80%E6%9C%AF/%E7%96%AB%E6%83%85%E6%9C%9F%E9%97%B4%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E5%8F%98%E5%A5%BD%E4%BA%86%E5%90%97%EF%BC%9F/"/>
-      <url>/2020/04/16/%E6%8A%80%E6%9C%AF/%E7%96%AB%E6%83%85%E6%9C%9F%E9%97%B4%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E5%8F%98%E5%A5%BD%E4%BA%86%E5%90%97%EF%BC%9F/</url>
-      
-        <content type="html"><![CDATA[<p>CNN 前几天有一篇报道，介绍了<a href="https://www.cnn.com/2020/03/31/asia/coronavirus-lockdown-impact-pollution-india-intl-hnk/index.html" target="_blank" rel="noopener">疫情期间印度的空气变化</a>。因为新德里的空气一直很差，所以这个变化特别明显：</p><p><img src="/2020/04/16/%E6%8A%80%E6%9C%AF/%E7%96%AB%E6%83%85%E6%9C%9F%E9%97%B4%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E5%8F%98%E5%A5%BD%E4%BA%86%E5%90%97%EF%BC%9F/air_in_ND.png" alt="新德里疫情前后空气对比，from CNN"></p><p>国内空气很少差到这个地步的，因此光靠照片比对也不一定能看出什么。我试着去查询了一下数据。采用的数据集是：</p><ul><li><a href="https://beijingair.sinaapp.com" target="_blank" rel="noopener">中国空气质量历史数据</a></li><li><a href="https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data" target="_blank" rel="noopener">COVID-19 Coronavirus data </a></li></ul><p>我选了哈尔滨作为研究对象，因为北方城市空气普遍要差一些，变化应该会比较明显。使用 <code>matplotlib</code> 画出来是这样子的：</p><p><img src="/2020/04/16/%E6%8A%80%E6%9C%AF/%E7%96%AB%E6%83%85%E6%9C%9F%E9%97%B4%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E5%8F%98%E5%A5%BD%E4%BA%86%E5%90%97%EF%BC%9F/plot.png" alt="plot"></p><p>图中蓝色曲线是 COV19 国内报告的病例总数，红色虚线是今年哈尔滨的空气质量指数趋势（AQI），绿色虚线是去年哈尔滨同期的空气质量指数趋势，两者多项式拟合都采用了六次方。后面的散点图是今年哈尔滨空气质量指数的原始数据，一天 24 个数据点。</p><p>光靠这张图不能给出确定性的结论，因为影响空气质量的因素很多。不过确实可以看出，在疫情爆发最严重的两周内，空气质量一下子就变好了。</p><p>你可以在<a href="https://enoch2090.me/downloads/codes/AQI.ipynb" target="_blank" rel="noopener">这里</a>下载到我使用的源代码。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> Python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>解决 Drafts 无法发送到印象笔记的问题</title>
       <link href="/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
       <url>/2020/03/24/%E5%BA%94%E7%94%A8/%E8%A7%A3%E5%86%B3%20Drafts%20%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%E5%88%B0%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
