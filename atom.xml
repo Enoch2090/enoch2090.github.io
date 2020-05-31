@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2020-05-28T01:27:22.813Z</updated>
+  <updated>2020-05-31T08:19:39.707Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Opportunity&#39;s dream</title>
+    <link href="https://enoch2090.github.io/2020/05/31/%E6%96%87%E5%8C%96/Opportunity&#39;s%20dream/"/>
+    <id>https://enoch2090.github.io/2020/05/31/%E6%96%87%E5%8C%96/Opportunity&#39;s%20dream/</id>
+    <published>2020-05-30T16:00:00.000Z</published>
+    <updated>2020-05-31T08:19:39.707Z</updated>
+    
+    <content type="html"><![CDATA[<p>The rover sees no difference between<br>Mars and Earth. The same vast plain<br>with some pits at the center and ridges lie far.<br>Her internal clock always claim<br>that a sol is no different than a day<br>except forty more minutes of slack.<br>Therefore most of time she rests<br>on the edge of a crater. And soaked<br>in the dim sunlight just like<br>back in Mojave, at dusk. If weather permits a stretch she’ll<br>notify those remote engineers and<br>never use up her cell. Until<br>the day when she looked upon<br>the glowing dome where she came from,<br>it stroke her that Mars is different than<br>Earth. It has two moons. One in clear sight<br>but the other concealed itself behind<br>the approaching sandstorm.<br>Soon she felt drowsy underneath<br>a sudden dune who promises<br>gloomy sleepiness, then tranquil dormancy.<br>Opportunity needs a distant dream<br>after all this place is not Earthly<br>and her cell is now empty.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;The rover sees no difference between&lt;br&gt;Mars and Earth. The same vast plain&lt;br&gt;with some pits at the center and ridges lie far.&lt;br&gt;Her in
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Poems" scheme="https://enoch2090.github.io/tags/Poems/"/>
+    
+  </entry>
   
   <entry>
     <title>The Rainy Redemption</title>
@@ -512,30 +536,6 @@
       <category term="指南" scheme="https://enoch2090.github.io/tags/%E6%8C%87%E5%8D%97/"/>
     
       <category term="旅行" scheme="https://enoch2090.github.io/tags/%E6%97%85%E8%A1%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用 Taskpaper 来背单词</title>
-    <link href="https://enoch2090.github.io/2019/02/27/%E6%95%88%E7%8E%87/%E7%94%A8%20Taskpaper%20%E6%9D%A5%E8%83%8C%E5%8D%95%E8%AF%8D/"/>
-    <id>https://enoch2090.github.io/2019/02/27/%E6%95%88%E7%8E%87/%E7%94%A8%20Taskpaper%20%E6%9D%A5%E8%83%8C%E5%8D%95%E8%AF%8D/</id>
-    <published>2019-02-26T16:00:00.000Z</published>
-    <updated>2019-12-30T16:44:44.436Z</updated>
-    
-    <content type="html"><![CDATA[<p>前些时候我把自己的任务管理系统从 Todoist 迁移到了 Taskpaper。<br>这么做有许多原因，其中有一个原因是：Taskpaper 用的是纯文本，更加朴素简洁。<br>说起纯文本，我一直在使用的 Drafts，本质上也用的是纯文本。在担任任务管理系统这件事以外，使用 Taskpaper 的实质是把一部分本来用 Drafts 做的事情给继承了过来。有时候，我会在看到某个生词的时候把它随手记在 Drafts 里，翻草稿的时候看到就顺便背一背。因此我想到了这个问题：能不能用 Taskpaper 来背单词呢？<br>答案显然是可以的。</p><h2 id="为什么可以这样做？"><a href="#为什么可以这样做？" class="headerlink" title="为什么可以这样做？"></a>为什么可以这样做？</h2><p>很多时候，背单词这件事情，靠的就是反复。如果想快速记住大量单词，自然有很多高阶的技巧；但是靠堆熟练度来帮助掌握，一定是永远有效且最靠谱的方案。<br>而 Taskpaper 就可以帮助我去反复熟悉单词。我对于 Taskpaper 平常的使用，是借鉴了 @Minja 的思路：把每日任务的窗口始终放置在屏幕左上角，这样每次回到桌面都能看到。此外我还用 Keyboard Maestro 给 Taskpaper 设置了一组快捷键 <code>⌘cmd + ⌥option + ⌃ctrl + ⌂shift + T</code>，每次要做一件事情前，先调 Taskpaper 的窗口出来确认一下还有哪些事情要做。<br>所以我每天是要看很多次 Taskpaper 的，这就提供了一个反复熟悉的机会。如果把要背的单词放在这个地方，每次打开 Taskpaper 的时候在心里默念一番，一天下来就差不多记住了。</p><h2 id="具体怎么操作？"><a href="#具体怎么操作？" class="headerlink" title="具体怎么操作？"></a>具体怎么操作？</h2><p>首先，你的 Taskpaper 窗口必须始终放在桌面左上角。为了便于时常调出 Taskpaper，我还做了一个 Keyboard Maestro 动作来快速调出 Taskpaper，你可以在<a href="https://github.com/Enoch2090/Phillip-s-Gadgets/blob/master/Keyboard%20Maestro/Launcher/Taskpaper.kmmacros" target="_blank" rel="noopener">这里下载</a>。这个动作本身很简单，但它的触发方式用上了 Mac 的四个修饰键，你或许需要参考《<a href="https://sspai.com/post/46184" target="_blank" rel="noopener">macOS 改键利器：Karabiner-Elements 使用详解</a>》这篇文章来了解怎么定制一颗 <code>Hyper</code> 键来一次按下这四个键。当然，你也可以自行修改这个动作里的快捷键。<br>至此你应该就能很方便地调出 Taskpaper 来参考了。这时你需要做的就是找几个单词，连带中文含义、词性等必备信息一起丢进 Taskpaper。放进 Taskpaper 时需要注意的是：</p><ul><li><strong>把每一个单词单独作为一条任务。</strong>如此一来，背出来了就可以当作任务完成，直接把这个词勾掉就好。</li><li><strong>一屏内不要放太多单词。</strong>我们现在是通过每次看任务的时候扫上一眼在背单词，属于无心插柳。这种方法不比正儿八经集中精神地背，所以一眼能看到的单词不宜过多，三个以内最佳。</li><li><strong>要有同普通任务区分的标记。</strong>这些单词毕竟不是任务，我建议给它们打上「@word」的标签，以便于同普通任务区分。这样一来执行各类搜索等操作的时候，也方便把它们排除出去。具体的排除语法是：<code>not @word</code>。只要在搜索栏键入这行语句，就可以把所有的单词都过滤掉了。</li></ul><h2 id="这一方法有什么限制？"><a href="#这一方法有什么限制？" class="headerlink" title="这一方法有什么限制？"></a>这一方法有什么限制？</h2><p>经过我一段时间的尝试，我觉得这一方法最大的限制在于，它不能大量地记忆词汇；它更适合用来记忆少量比较难记的单词。这个「难记」也不是泛指那种背了很多遍，却仍然可能搞不清楚意思的单词，例如 yield 这种多词义的词。相对地，它更适合用来记忆一些比较长，但是含义简单的单词，例如 procrastination。<br>另外一大限制就是效率不算很高。不过这么背起单词来，本就是锦上添花。如果想正经背单词，还是去用 <a href="https://quizlet.com/zh-cn" target="_blank" rel="noopener">Quizlet</a> 吧。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;前些时候我把自己的任务管理系统从 Todoist 迁移到了 Taskpaper。&lt;br&gt;这么做有许多原因，其中有一个原因是：Taskpaper 用的是纯文本，更加朴素简洁。&lt;br&gt;说起纯文本，我一直在使用的 Drafts，本质上也用的是纯文本。在担任任务管理系统这件事以外，
-      
-    
-    </summary>
-    
-    
-    
-      <category term="Taskpaper" scheme="https://enoch2090.github.io/tags/Taskpaper/"/>
     
   </entry>
   
