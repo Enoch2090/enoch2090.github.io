@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2020-07-09T15:56:45.686Z</updated>
+  <updated>2020-07-18T10:04:08.823Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Arctic Code Vault</title>
+    <link href="https://enoch2090.github.io/2020/07/18/culture/Arctic%20Code%20Vault/"/>
+    <id>https://enoch2090.github.io/2020/07/18/culture/Arctic%20Code%20Vault/</id>
+    <published>2020-07-17T16:00:00.000Z</published>
+    <updated>2020-07-18T10:04:08.823Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2020/07/18/culture/Arctic%20Code%20Vault/Arctic%20Code%20Vault.png" alt="Arctic Code Vault"></p><p>My code was sent to the north pole.<br>All the segment faults. Invalid<br>access. And stack overflows.<br>And I was told<br>that one day the vault would be moved<br>to Pluto. An archive for humanity, carved<br>on giant obelisks made of<br>granite. There lies my code, silently rendering<br>compiler error, and consuming extra<br>threads, even it’s a static<br>cast on the monument. Observed by<br>all the stellar trevellers carrying different<br>types of editor themes. Please tell them I<br>like Nord the most.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/2020/07/18/culture/Arctic%20Code%20Vault/Arctic%20Code%20Vault.png&quot; alt=&quot;Arctic Code Vault&quot;&gt;&lt;/p&gt;
+&lt;p&gt;My code was sent to the no
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Poems" scheme="https://enoch2090.github.io/tags/Poems/"/>
+    
+  </entry>
   
   <entry>
     <title>Hyposomnia Hypothesis</title>
@@ -502,34 +527,6 @@
     
     
       <category term="LaunchBar" scheme="https://enoch2090.github.io/tags/lb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LaTeX Toolbox 2.0</title>
-    <link href="https://enoch2090.github.io/2019/07/11/efficiency/LaTeX%20Toolbox%202.0/"/>
-    <id>https://enoch2090.github.io/2019/07/11/efficiency/LaTeX%20Toolbox%202.0/</id>
-    <published>2019-07-10T16:00:00.000Z</published>
-    <updated>2019-12-30T16:44:20.719Z</updated>
-    
-    <content type="html"><![CDATA[<p>这几个学期我都有实验课，几乎每周都要用用 LaTeX 码一篇报告。LaTeX 继承了纯文本的一切优点，排版层次分明，并且不会有各种富文本才会发生的诡异错误。<br>但 LaTeX 的问题在于，要重复使用一种格式时，反复输入命令真的很麻烦——我可能只是想加粗一个词，但要打上 <code>\textbf{}</code> 这样一串冗长的命令，一篇报告重复十几次。<br>春季的时候我为了方便，随手制作了一个 LaTeX Toolbox。那时候常用的命令比较少，所以就比较随心所欲地指定了一些快捷键来直接粘贴命令。最近又开始码报告，所以我对这个工具箱进行了一些小修改，把一些快捷键触发的命令改成了短语扩展，这样书写时更为自然，不必很别扭地去够快捷键。<br>这个工具箱是开箱即用的，你可以在我的 GitHub 下载：<br><a href="https://github.com/Enoch2090/Phillip-s-Gadgets/blob/master/Keyboard%20Maestro/Toolboxes/LaTeX%20工具箱.kmmacros" target="_blank" rel="noopener">下载 LaTeX 工具箱</a><br>另外需要注意的是，这个工具箱是针对 Sublime Text 定做的。它在很多别的编辑器里也能使用，但少部分命令可能会出现小错误，请自行调整动作里的输出格式。我为了防止误触发，设置仅当窗口标题包含 ‘.tex’ 字样时才生效，但有些编辑器并不在窗口标题里显示文件名。这一点也可能需要作修改。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这几个学期我都有实验课，几乎每周都要用用 LaTeX 码一篇报告。LaTeX 继承了纯文本的一切优点，排版层次分明，并且不会有各种富文本才会发生的诡异错误。&lt;br&gt;但 LaTeX 的问题在于，要重复使用一种格式时，反复输入命令真的很麻烦——我可能只是想加粗一个词，但要打上 
-      
-    
-    </summary>
-    
-    
-    
-      <category term="效率" scheme="https://enoch2090.github.io/tags/%E6%95%88%E7%8E%87/"/>
-    
-      <category term="LaTeX" scheme="https://enoch2090.github.io/tags/LaTeX/"/>
-    
-      <category term="KeyboardMaestro" scheme="https://enoch2090.github.io/tags/KeyboardMaestro/"/>
     
   </entry>
   
