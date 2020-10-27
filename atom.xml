@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2020-07-22T02:46:48.536Z</updated>
+  <updated>2020-10-27T05:58:36.433Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>梦醒时分</title>
+    <link href="https://enoch2090.github.io/2020/10/27/culture/%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/"/>
+    <id>https://enoch2090.github.io/2020/10/27/culture/%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/</id>
+    <published>2020-10-26T16:00:00.000Z</published>
+    <updated>2020-10-27T05:58:36.433Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2020/10/27/culture/%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/DREAMs.jpg" alt="DREAMs" style="zoom:67%;"></p><h2 id="沉"><a href="#沉" class="headerlink" title="沉"></a>沉</h2><p>临下水时，墙角里<br>一只甲虫风声鹤唳。<br>窗外几百米是一条乡间<br>高速公路。月光稀释在<br>路灯的反光里，打碎<br>货车经过的回响。<br>逐渐下沉。黑暗是唯一的<br>潜水服，水底的声速有<br>每秒一千六百米<br>躺在床上空想，<br>不可准确获知路况<br>所以潜泳的人<br>都要学习多普勒效应。</p><hr><h2 id="林奇主义者的自传"><a href="#林奇主义者的自传" class="headerlink" title="林奇主义者的自传"></a>林奇主义者的自传</h2><p>床，虚无的<br>意向，上面躺着死人。<br>他曾在夕阳下出发，踏进<br>落雨的屋门。一小片<br>碧绿而皱折的墙纸——<br>那后面传来不少空洞笑声。<br>不知所云，自以为是。这些<br>都归因给生活，灰暗的迷雾里<br>看不清蓝丝绒长裙下的血。<br>墙角那根煤气管多半死了，<br>而人们还在对话。<br>兔子发问<br>婴孩作答<br>观影的人昏昏欲睡<br>读诗的人暗自咒骂</p><hr><h2 id="假阳光"><a href="#假阳光" class="headerlink" title="假阳光"></a>假阳光</h2><p>你，孤独的守夜人，身处<br>斑驳黑暗中。等待<br>某个夏天黄昏，<br>长久坐在窗边。<br>遥远的平面寂静，<br>而角落里一束未名之光，<br>无息地扫过<br>美术馆谨慎的冷气</p><p>那里的窗棂反射着<br>聚光灯的回响。</p><hr><h2 id="醒"><a href="#醒" class="headerlink" title="醒"></a>醒</h2><p>在梦里做梦，是没有分支的递归。<br>我们常说的栈溢出，也不过是惊厥<br>深埋在丝绒和棉布之间的<br>自愿醒来或被迫沉睡，对象后来<br>新建于堆上面。空间都在午夜释放。<br>但我向来不敢<br>关掉闹钟。否则梦醒时分<br>何处是返回的指针？<br>一块碎裂时间<br>如此划给英灵殿。<br>滚滚雷声在命令行<br>警示世人：确切泄漏了七万六千字节。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/2020/10/27/culture/%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/DREAMs.jpg&quot; alt=&quot;DREAMs&quot; style=&quot;zoom:67%;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;沉&quot;&gt;&lt;a href=&quot;#沉
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Poems" scheme="https://enoch2090.github.io/tags/Poems/"/>
+    
+  </entry>
   
   <entry>
     <title>鲸</title>
@@ -499,34 +524,6 @@
       <category term="影评" scheme="https://enoch2090.github.io/tags/%E5%BD%B1%E8%AF%84/"/>
     
       <category term="人类电影精华" scheme="https://enoch2090.github.io/tags/%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TouchBar 替代指南</title>
-    <link href="https://enoch2090.github.io/2019/09/04/efficiency/TouchBar%20%E6%9B%BF%E4%BB%A3%E6%8C%87%E5%8D%97/"/>
-    <id>https://enoch2090.github.io/2019/09/04/efficiency/TouchBar%20%E6%9B%BF%E4%BB%A3%E6%8C%87%E5%8D%97/</id>
-    <published>2019-09-03T16:00:00.000Z</published>
-    <updated>2019-12-30T16:44:36.680Z</updated>
-    
-    <content type="html"><![CDATA[<p>虽然一直嫌弃 TouchBar 没用，但当我真的失去它的时候，我依然经历了相当一段时间的 cognitive malaise。<br>谁有会想到它有一天突然失灵了呢？整个右侧八分之七的区域全部没反应了，只剩下最左边的两个键可以用。想来想去，终究是回忆起来了：那天去工训做东西的时候拿出来调试过代码，不小心螺丝刀砸在上面过一次。明明表面看来没有问题，结果居然电路坏了。<br>令我头疼的事情，主要其实也就两样。因为我是坚定的快捷键使用者，TouchBar 对我来说意义只有：音量调节和亮度调节。这两件事情，在 macOS 上都没有对应的快捷键。从操作的逻辑来说，其实倒确实是 TouchBar 最适合完成「调节某个量」这个操作。手指放上去，滑动一下一次到位，不必像硬件按钮那样反复去按一个键来调节。<br>想要彻底模拟出 TouchBar 的手感是不可能的。作为代替，我找了两个方案：</p><h2 id="方案一：LaunchBar-直接设定音量和亮度"><a href="#方案一：LaunchBar-直接设定音量和亮度" class="headerlink" title="方案一：LaunchBar 直接设定音量和亮度"></a>方案一：LaunchBar 直接设定音量和亮度</h2><p>LaunchBar 自带音量调节的动作，可以快速把系统音量设置为 25%/50%/75%/100%。我在网上又找到一段 AppleScript，可以快速设置系统亮度。仿照前者做四个动作，分别设置亮度为 25%/50%/75%/100%，就可以用 LaunchBar 代替 TouchBar了——好巧不巧，两个都是「Bar」。<br>这个方案我用了约莫有一周，然后我就找到了更好的办法：</p><h2 id="方案二：用-Better-Touch-Tool-调整音量和亮度"><a href="#方案二：用-Better-Touch-Tool-调整音量和亮度" class="headerlink" title="方案二：用 Better Touch Tool 调整音量和亮度"></a>方案二：用 Better Touch Tool 调整音量和亮度</h2><p>Better Touch Tool 是公认最好的 TouchBar 优化工具之一。说起来很奇怪，在我的 TouchBar 仍然在世的时候，我从没好好用过 BTT；它一凉，BTT 反而派上用处了。但是 BTT 不仅可以调整 TouchBar，它还支持将触控板上的滑动动作映射为其它操作，并且可以附加修饰键防止误触——确实是我能找到的最好选择了。<br>这次我的方案是：把「三指上/下滑」+修饰键映射为音量/亮度的上升/下降。这是用 BTT 很容易实现的，也是最自然的。</p><h2 id="修理-TouchBar"><a href="#修理-TouchBar" class="headerlink" title="修理 TouchBar"></a>修理 TouchBar</h2><p>替代方案用归用，修总还是要修的，所以我还是预约了天才吧。他们并没有当场帮我修，不过我最后得到了一些重要的信息。<br>众所周知 TouchBar 其实是一小块触摸屏。但我不知道的是，这玩意是和键盘完全一体的，要换就要连带键盘一起换。但这样其实是有好处的，因为和它连在一起的不是普通的键盘……而是苹果的蝶式键盘。以我的 2018 款 15’ MBP  为例，它使用的三代蝶式键盘是有 4 年保修的。所以，只要这四年内出现连击、失灵等状况，你就可以去免费换一块键盘。这样，TouchBar 就顺便被换掉了。</p><p>所以结论是：<strong>如果你的 TouchBar 坏了，那你应该做的事情是赶快把键盘也用坏</strong>。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;虽然一直嫌弃 TouchBar 没用，但当我真的失去它的时候，我依然经历了相当一段时间的 cognitive malaise。&lt;br&gt;谁有会想到它有一天突然失灵了呢？整个右侧八分之七的区域全部没反应了，只剩下最左边的两个键可以用。想来想去，终究是回忆起来了：那天去工训做东西
-      
-    
-    </summary>
-    
-    
-    
-      <category term="效率" scheme="https://enoch2090.github.io/tags/%E6%95%88%E7%8E%87/"/>
-    
-      <category term="指南" scheme="https://enoch2090.github.io/tags/%E6%8C%87%E5%8D%97/"/>
-    
-      <category term="macOS" scheme="https://enoch2090.github.io/tags/macOS/"/>
     
   </entry>
   
