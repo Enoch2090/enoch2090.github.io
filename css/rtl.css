@@ -1,11 +1,11 @@
 @font-face {
-  font-family: FZShuSong;
+  font-family: 'FZShuSong';
   src: url("../lib/FZShuSong/FZShuSong.eot");
   src: url("../lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("../lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("../lib/FZShuSong/FZShuSong.woff") format('woff'), url("../lib/FZShuSong/FZShuSong.ttf") format('truetype');
   font-weight: normal;
 }
 @font-face {
-  font-family: FZShuSong;
+  font-family: 'FZShuSong';
   src: url("../lib/FZShuSong/FZShuSong.eot");
   src: url("../lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("../lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("../lib/FZShuSong/FZShuSong.woff") format('woff'), url("../lib/FZShuSong/FZShuSong.ttf") format('truetype');
   font-weight: bold;
