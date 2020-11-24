@@ -1,17 +1,17 @@
 @font-face {
-  font-family: JetBrains Mono;
-  src: url("../JetBrainsMono-1.0.3/web/eot/JetBrainsMono-Regular.eot");
-  src: url("../JetBrainsMono-1.0.3/web/eot/JetBrainsMono-Regular.eot#iefix") format('embedded-opentype'), url("../lib/JetBrainsMono-1.0.3/web/woff2/JetBrainsMono-Regular.woff2") format('woff2'), url("../lib/JetBrainsMono-1.0.3/web/woff/JetBrainsMono-Regular.woff") format('woff'), url("../lib/JetBrainsMono-1.0.3/ttf/JetBrainsMono-Regular.ttf") format('truetype');
+  font-family: FZShuSong;
+  src: url("../lib/FZShuSong/FZShuSong.eot");
+  src: url("../lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("../lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("../lib/FZShuSong/FZShuSong.woff") format('woff'), url("../lib/FZShuSong/FZShuSong.ttf") format('truetype');
   font-weight: normal;
 }
 @font-face {
-  font-family: JetBrains Mono;
-  src: url("../lib/JetBrainsMono-1.0.3/web/eot/JetBrainsMono-Bold.eot");
-  src: url("../lib/JetBrainsMono-1.0.3/web/eot/JetBrainsMono-Bold.eot?#iefix") format('embedded-opentype'), url("../lib/JetBrainsMono-1.0.3/web/woff2/JetBrainsMono-Bold.woff2") format('woff2'), url("../lib/JetBrainsMono-1.0.3/web/woff/JetBrainsMono-Bold.woff") format('woff'), url("../lib/JetBrainsMono-1.0.3/ttf/JetBrainsMono-Bold.ttf") format('truetype');
+  font-family: FZShuSong;
+  src: url("../lib/FZShuSong/FZShuSong.eot");
+  src: url("../lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("../lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("../lib/FZShuSong/FZShuSong.woff") format('woff'), url("../lib/FZShuSong/FZShuSong.ttf") format('truetype');
   font-weight: bold;
 }
 .rtl {
-  font-family: JetBrains Mono, Mono;
+  font-family: FZShuSong, serif;
   direction: ltr;
 }
 .rtl #nav li {
