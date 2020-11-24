@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'FZShuSong';
   src: url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.eot");
-  src: url(".https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff") format('woff'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.ttf") format('truetype');
+  src: url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff") format('woff'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.ttf") format('truetype');
   font-weight: normal;
 }
 @font-face {
   font-family: 'FZShuSong';
   src: url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.eot");
-  src: url(".https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff") format('woff'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.ttf") format('truetype');
+  src: url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff") format('woff'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.ttf") format('truetype');
   font-weight: bold;
 }
 .rtl {
