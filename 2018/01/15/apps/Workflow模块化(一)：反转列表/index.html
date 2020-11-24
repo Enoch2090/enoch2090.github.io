@@ -153,6 +153,8 @@
 
 
     </div>
+    <!-- FIXME: -->
+    <!-- <script type="text/javascript" src="https://cdn1.foundertype.com/webfont/js/ftfont-init.js"></script> -->
   </header>
   
 
@@ -161,6 +163,18 @@
 <p>Workflow本身并没有反转列表内容的动作，因此我打算做一个Workflow当成模块来调用。要完成这件事情，无非是依次取出输入列表的最后一项添加到一个新列表里。「新列表」这件事情可以直接用<em>Add to Variable</em>动作完成，它会自动生成一个列表。然而Workflow又没有把列表内项移除的动作(这件事情也可以写一个模块，但是模块内引模块似乎不太好)，因此还是用取Index的方法最好。这个方法就类似于Python用While代替for循环——循环x次，x是列表内的元素个数。每次循环取出第n项，n一开始等于x，每次循环完成减一。这样n=0时正好取完。<br>你可以<a href="https://workflow.is/workflows/897af64d14f841da9d48bf92e4c2be43" target="_blank" rel="noopener">点击这里</a>下载该Workflow。</p>
 
   </div>
+  <!-- <script type="text/javascript">
+    var fontCfg = {
+      p: 'hgnyUwebf77VVZwY',
+      fonts: [
+        {
+          fontName: 'FZXSSJW',
+          selecters: [p, h1, h2, h3, h4]
+        }
+      ]
+    };
+    var myFont = new FTFont(fontCfg);
+  </script> -->
 </article>
 
     <div class="blog-post-comments">
@@ -168,7 +182,6 @@
             <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
         </div>
     </div>
-
 
 
         

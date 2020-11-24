@@ -156,6 +156,8 @@
 
 
     </div>
+    <!-- FIXME: -->
+    <!-- <script type="text/javascript" src="https://cdn1.foundertype.com/webfont/js/ftfont-init.js"></script> -->
   </header>
   
 
@@ -166,6 +168,18 @@
 <p>由于之前没见到过这种Workflow，我就自己动手写了一个，在这个过程中也有了一些新的认识。<br><img src="/2017/05/04/apps/%E4%BD%BF%E7%94%A8Workflow%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E6%8A%93%E5%9B%BE%E5%8A%9F%E8%83%BD/IMG_4786.PNG" alt><br>执行原理很简单，通过Get Contents of Web Page动作抓取网页内容，返回格式为富文本，再使用Convert Image动作筛选出图片，输出一个由图片组成的列表，用Choose from List来选取，然后保存。<br>在一开始构思的时候，我以为Choose from List可能会输出文字列表，这会很大程度上降低这个Workflow的使用体验。但最终Workflow的表现令人满意：在输入为图片构成的列表时，Choose from List动作自动改为了图片选框。<br><img src="/2017/05/04/apps/%E4%BD%BF%E7%94%A8Workflow%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E6%8A%93%E5%9B%BE%E5%8A%9F%E8%83%BD/IMG_4790.PNG" alt="图片选框和文字选框的区别"><br>由此也可以想到，Workflow的每一个动作实际上是有着多种预设功能的，能够根据输入来调整。<br><a href="https://workflow.is/workflows/cc8fdec0ab664f3c9b31244c74ce1f27" target="_blank" rel="noopener">点击安装<em>WebPic</em></a></p>
 
   </div>
+  <!-- <script type="text/javascript">
+    var fontCfg = {
+      p: 'hgnyUwebf77VVZwY',
+      fonts: [
+        {
+          fontName: 'FZXSSJW',
+          selecters: [p, h1, h2, h3, h4]
+        }
+      ]
+    };
+    var myFont = new FTFont(fontCfg);
+  </script> -->
 </article>
 
     <div class="blog-post-comments">
@@ -173,7 +187,6 @@
             <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
         </div>
     </div>
-
 
 
         
