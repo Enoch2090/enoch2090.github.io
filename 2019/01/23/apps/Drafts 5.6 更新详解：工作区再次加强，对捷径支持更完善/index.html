@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="自上一篇 Drafts 更新详解发布以来，已经过去了近四个月。这段时间里，Drafts 的 Mac Beta 版本迭代了数次，基础功能已经可以正常使用了。不过令人惊喜的是，在 Mac 版开发之余，iOS 版本也仍然在保持更新。就在前不久，Drafts 发布了 5.6.0 版本。这个版本再一次加强了工作区的功能，同时也带来了一些其它的新特性。 工作区可以直接载入动作组和列表了很久以前，我在 如何在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善">
+<meta property="og:url" content="https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/index.html">
+<meta property="og:site_name" content="Enoch2090">
+<meta property="og:description" content="自上一篇 Drafts 更新详解发布以来，已经过去了近四个月。这段时间里，Drafts 的 Mac Beta 版本迭代了数次，基础功能已经可以正常使用了。不过令人惊喜的是，在 Mac 版开发之余，iOS 版本也仍然在保持更新。就在前不久，Drafts 发布了 5.6.0 版本。这个版本再一次加强了工作区的功能，同时也带来了一些其它的新特性。 工作区可以直接载入动作组和列表了很久以前，我在 如何在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/%E5%9B%BE%E5%83%8F%2021.jpg">
+<meta property="og:image" content="https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/new-IMG_0974.jpg">
+<meta property="og:image" content="https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/15480438766290.jpg">
+<meta property="og:image" content="https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/new-ani.gif">
+<meta property="og:image" content="https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/new-IMG_0982.jpg">
+<meta property="article:published_time" content="2019-01-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-03T02:38:34.402Z">
+<meta property="article:author" content="Phillip Gu">
+<meta property="article:tag" content="Drafts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/%E5%9B%BE%E5%83%8F%2021.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Enoch2090" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 rtl">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Links/">链接</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/02/27/efficiency/%E7%94%A8%20Taskpaper%20%E6%9D%A5%E8%83%8C%E5%8D%95%E8%AF%8D/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/09/02/culture/Legion%20%E8%A7%82%E7%9C%8B%E6%8C%87%E5%8D%97/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&text=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&is_video=false&description=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善&body=Check out this article: https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&name=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&t=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#工作区可以直接载入动作组和列表了"><span class="toc-number">1.</span> <span class="toc-text">工作区可以直接载入动作组和列表了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可以用-URL-Scheme-快速添加捷径了"><span class="toc-number">2.</span> <span class="toc-text">可以用 URL Scheme 快速添加捷径了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些其他更新"><span class="toc-number">3.</span> <span class="toc-text">一些其他更新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#草稿列表的-All-标签页回归了"><span class="toc-number">3.1.</span> <span class="toc-text">草稿列表的 All 标签页回归了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#支持更进阶的-Markdown-语法"><span class="toc-number">3.2.</span> <span class="toc-text">支持更进阶的 Markdown 语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模板标签-line-支持反向获取文本"><span class="toc-number">3.3.</span> <span class="toc-text">模板标签 [[line]] 支持反向获取文本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结与展望"><span class="toc-number">4.</span> <span class="toc-text">小结与展望</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Enoch2090</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-01-22T16:00:00.000Z" itemprop="datePublished">2019-01-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/drafts/" rel="tag">Drafts</a>
+    </div>
+
+
+    </div>
+    <!-- FIXME: -->
+    <!-- <script type="text/javascript" src="https://cdn1.foundertype.com/webfont/js/ftfont-init.js"></script> -->
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/%E5%9B%BE%E5%83%8F%2021.jpg" alt><br>自上一篇 Drafts 更新详解发布以来，已经过去了近四个月。这段时间里，Drafts 的 Mac Beta 版本迭代了数次，基础功能已经可以正常使用了。不过令人惊喜的是，在 Mac 版开发之余，iOS 版本也仍然在保持更新。就在前不久，Drafts 发布了 5.6.0 版本。这个版本再一次加强了工作区的功能，同时也带来了一些其它的新特性。</p>
+<h2 id="工作区可以直接载入动作组和列表了"><a href="#工作区可以直接载入动作组和列表了" class="headerlink" title="工作区可以直接载入动作组和列表了"></a>工作区可以直接载入动作组和列表了</h2><p>很久以前，我在 <a href="https://sspai.com/article/45895?series_id=9" target="_blank" rel="noopener">如何在 Drafts 中打造一个排除干扰且高效的工作环境</a> 一文中介绍过一种同时载入工作区、动作组和键盘扩展条的方法。在不同的情境下，我们常用的动作和按键很有可能是不同的。在写作时我可能会载入一个用于写作的工作区，同时使用一套文字处理的键盘；在平时速记时我可能会用另一个用于任务管理的工作区，同时使用一套快速输入标记符号的键盘。当我们想做一件事情的时候，我们使用的工作区和键盘扩展往往是配套的——因此，找到一种同时载入工作区和键盘扩展的方法是很有必要的。<br>当时我采取的方案是使用 JavaScript 来载入内容。不过 JavaScript 固然强大，但是易用性就大打折扣。如果想要修改载入内容，我们还得对代码进行修改。但现在，我们有了更简便易行的方案。在这次更新中，工作区可以在载入时直接加载指定的动作组和键盘扩展条了。如此一来，我们就只需要对工作区的设置稍作修改即可。<br>修改的方法很简单：点击草稿列表右上角的设置按钮进入工作区列表，在某个工作区上左滑，点击「Edit」进入它的设置界面。在设置列表的最下方，有一个「SELECT」选项，你可以在这里设置载入工作区时的额外加载选项。<br><img src="/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/new-IMG_0974.jpg" alt="设置工作区的加载选项"></p>
+<p>以我自己的设置为例，我有一个工作区是专门用来写东西的：</p>
+<ol>
+<li>第一项是设置载入工作区时默认载入的草稿列表。因为新写的东西一般都会放在收件箱里，所以选择 <code>Inbox</code>。</li>
+<li>第二项是设置载入工作区时默认载入的动作列表。写东西时我不会经常打开动作列表，所以我就没有设置。</li>
+<li>第三项是设置载入工作区时默认载入的键盘扩展。我选择载入一个专门用于文字编辑的动作组作为键盘扩展。<br>设置好这几项后关闭设置界面，下次再打开这个工作区的时候，一切就都会自动载入了。<br>这个更新虽然不是什么翻天覆地的大变化，但确实非常实用。不难看出，Drafts 对 5.0 版本新增的工作区功能相当重视，颇有将它打造成一个特色功能的势头。</li>
+</ol>
+<h2 id="可以用-URL-Scheme-快速添加捷径了"><a href="#可以用-URL-Scheme-快速添加捷径了" class="headerlink" title="可以用 URL Scheme 快速添加捷径了"></a>可以用 URL Scheme 快速添加捷径了</h2><p>我们都知道 Drafts 的动作支持运行捷径。在遇到一些较为复杂的需求时，用易于编写的捷径来解决问题，是非常实用便捷的方案。在过去，如果我们要用 Drafts 运行一条捷径，就需要新建一个动作，手动输入捷径的名字。有的时候我们要运行的捷径仍处在调试阶段，它可能长这样：</p>
+<p><img src="/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/15480438766290.jpg" alt="捷径的名字长且复杂"></p>
+<p>这样的命名确实方便我们进行调试，也方便快速找到某条捷径。但要把这么一长串名字手动输入到 Drafts 里未免有些麻烦。就算复制粘贴，我们也需要操作一番才能复制到捷径的名字。<br>现在这件事情简单多了。Drafts 在这次更新中支持了一条新的 URL Scheme:<br><code>drafts5://create_shortcut_action?name=捷径名字</code><br>运行这条 URL Scheme，Drafts 就会引导我们快速创建一个动作来调用对应的捷径。用 Drafts 调用捷径是常有的事，而有了这一条 URL Scheme，我们就可以用自动化的手段来向 Drafts 添加捷径了。例如，我们可以把这个过程制作成捷径：<br><img src="/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/new-ani.gif" alt="用捷径快速添加捷径"></p>
+<p>这是 Drafts 官方论坛提供的一条捷径，运行后可以从你已有的捷径中选择一条来直接添加到 Drafts。<br>你可以 <a href="https://www.icloud.com/shortcuts/bbcafbdca9324a8d8a8d4306de8121bb" target="_blank" rel="noopener">点击这里</a> 安装这条捷径。 </p>
+<h2 id="一些其他更新"><a href="#一些其他更新" class="headerlink" title="一些其他更新"></a>一些其他更新</h2><p>除了工作区新增了更丰富的自定义能力以外，Drafts 从 5.4 版本到如今，还有不少其它变化：</p>
+<h3 id="草稿列表的-All-标签页回归了"><a href="#草稿列表的-All-标签页回归了" class="headerlink" title="草稿列表的 All 标签页回归了"></a>草稿列表的 <code>All</code> 标签页回归了</h3><p>在 Drafts 4 中，草稿列表除了 <code>Inbox</code>、<code>Flagged</code>、<code>Archive</code>、<code>Trashed</code> 这四个标签页以外，还有一个 <code>All（全部）</code> 标签页。在Drafts 5 的早期版本中，这个标签页不知为何被移除了。<br>在 5.6 版本中，这个标签页又回来了。有了这个标签页，我们就可以同时浏览 <code>Inbox</code> 和 <code>Archive</code> 这两个标签页中的内容了。我觉得一个比较理想的使用场景应该是：我们正好在处理与某个特定主题相关的事情，例如写一份关于 A 产品的报告。这时在 <code>Inbox</code> 里可能有不少关于 A 产品的草稿，同时在 <code>Archive</code> 里又有大量已经存档的资料。这个时候我们只需要在搜索栏中输入 A 产品的名字，然后切换到 <code>All</code> 这个标签页，就能从容浏览所有相关的信息。</p>
+<h3 id="支持更进阶的-Markdown-语法"><a href="#支持更进阶的-Markdown-语法" class="headerlink" title="支持更进阶的 Markdown 语法"></a>支持更进阶的 Markdown 语法</h3><p>在 5.5 版本中，Drafts 更新了对 MultiMarkdown 和 Github Markdown 语法的支持。<br>Drafts 先前仅支持原生的 Markdown 语法，因而能实现的功能极为简陋——甚至于不支持脚注、删除线等语法的高亮。MultiMarkdown 为 Drafts 的标记能力带来了一次飞跃，不仅是脚注等一众语法能够正确地高亮了，我们还获得了一套强大的标注语法：Critic Markup。<br>如果你是 Ulysses 用户，你一定不会对这套语法感到陌生。<a href="http://criticmarkup.com/users-guide.php" target="_blank" rel="noopener">Critic Markup</a> 是一套用于对纯文本进行标注的语法，通过使用各种不同的语法标记，我们可以用纯文本来表示添加、删除、替换等操作。<br><img src="/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/new-IMG_0982.jpg" alt="Drafts 对 CriticMarkup 的高亮支持"></p>
+<p>可以说，CriticMarkup 是再适合 Drafts 不过了。<strong>一方面，Drafts 提供的自动化支持让语法复杂的 CriticMarkup 变得易于输入。</strong>论坛上已经有了不少相关的资源，如果你有兴趣尝试这套标记，<a href="https://actions.getdrafts.com/a/1RL" target="_blank" rel="noopener">这个动作</a>就可以帮助你快速输入标记符号。 <strong>另一方面，Drafts 正需要一些能够加强写作功能的特性，而 CriticMarkup 恰好能提供这一点。</strong>虽然 Drafts 一直以来都被我们称作是速记工具，但它确实也能用来写作。曾经，Drafts 面对的阻碍在于：它虽然在速记方面占尽优势，但谈及长篇写作，却并没有太多值得称赞的亮点。如今有了这套标记语法的加持，再加上各种各样的自动化动作，Drafts 的底气已经相当充足了，我私以为在长篇写作方面完全值得一用。<br>至于 Github Markdown 语法，它更多注重的是与 Github 功能的交互，例如代码高亮、@特定用户等，而这些都是 Drafts 在本地无法渲染的，因此我觉得这暂时不会特别实用。如果你对这种语法感兴趣的话，我这里也有个<a href="https://getdrafts.com/actions/examples/downloads/Post-Gist-to-Github.draftsAction" target="_blank" rel="noopener">小玩具</a>，可以帮你把当前草稿发布到 Github Gist。<br>相关阅读：<br><a href="https://sspai.com/article/51943?series_id=70" target="_blank" rel="noopener">Drafts、TextExpander、Pixelmator Pro、Instapaper | 奏折 01</a><br><a href="http://criticmarkup.com/users-guide.php" target="_blank" rel="noopener">CriticMarkup User’s Guide</a></p>
+<h3 id="模板标签-line-支持反向获取文本"><a href="#模板标签-line-支持反向获取文本" class="headerlink" title="模板标签 [[line]] 支持反向获取文本"></a>模板标签 <code>[[line]]</code> 支持反向获取文本</h3><p>在 Power+ 1.0 中，Hum 曾经介绍过 <code>[[line]]</code> 这个模板标签的用法：我们可以通过这个标签获取 Drafts 的特定几行，例如用 <code>[[line|2]]</code> 表示草稿第二行的内容，用 <code>[[line|3..]]</code> 表示草稿第三行及之后的内容，等等。<br>这个模板标签在 5.5 版本的更新中得到了加强：现在我们可以用负数来从草稿的末尾向前获取文本了。例如使用 <code>[[line|-1]]</code> 就可以表示草稿最后一行的内容；使用 <code>[[line|2..-3]]</code> 则可以表示草稿的第二行至倒数第三行的内容。<br>相关阅读：<br><a href="https://sspai.com/article/41954?series_id=9" target="_blank" rel="noopener">通过 Bear 来认识 Drafts 的 [[line]] 用法</a></p>
+<h2 id="小结与展望"><a href="#小结与展望" class="headerlink" title="小结与展望"></a>小结与展望</h2><p>在这次的更新中，Drafts 主要带来了工作区的进一步强化，以及一条新的 URL Scheme。此外，在之前的版本更新中，Drafts 还支持了新的高亮语法，并作了大量细节上的优化。<br>我在本文开篇提到 Drafts for Mac 已经初具雏形了，这款强大的笔记应用即将正式来到 Mac 平台。目前的 Drafts for Mac 仅实现了草稿列表、工作区等功能，但还不支持自定义动作。这里的一部分原因是由于 Mac 系统和 iOS 系统有一定的区别，因此不少动作的移植需要很大的工作量。不过我觉得更重要的一点是：相比封闭的 iOS 系统，Mac 要开放得多。我们有很多办法在 Mac 上玩出花样：Keyboard Maestro、LaunchBar、Apple Script……自定义动作在 Mac 上是否有存在的必要，这一点仍值得商榷。但可以肯定的是，无论 Drafts for Mac 最终版本支持自定义动作与否，我们都能找到办法，让它给我们带来更多效率。<br>值得在这里说明的是，Drafts 的 Mac 版本现在正在向 Drafts Pro 的订阅用户开放测试。如果你是 Drafts 的长期用户，手上又正好有 Mac 电脑，你可以在 <a href="https://getdrafts.com/mac/beta/" target="_blank" rel="noopener">这个页面</a> 获取测试版本的 Drafts for Mac。不过测试版本毕竟存在着风险，请在尝鲜前务必做好备份。<br>让我们一起期待一个更为强大的 Drafts 吧。</p>
+
+  </div>
+  <!-- <script type="text/javascript">
+    var fontCfg = {
+      p: 'hgnyUwebf77VVZwY',
+      fonts: [
+        {
+          fontName: 'FZXSSJW',
+          selecters: [p, h1, h2, h3, h4]
+        }
+      ]
+    };
+    var myFont = new FTFont(fontCfg);
+  </script> -->
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Links/">链接</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#工作区可以直接载入动作组和列表了"><span class="toc-number">1.</span> <span class="toc-text">工作区可以直接载入动作组和列表了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可以用-URL-Scheme-快速添加捷径了"><span class="toc-number">2.</span> <span class="toc-text">可以用 URL Scheme 快速添加捷径了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些其他更新"><span class="toc-number">3.</span> <span class="toc-text">一些其他更新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#草稿列表的-All-标签页回归了"><span class="toc-number">3.1.</span> <span class="toc-text">草稿列表的 All 标签页回归了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#支持更进阶的-Markdown-语法"><span class="toc-number">3.2.</span> <span class="toc-text">支持更进阶的 Markdown 语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模板标签-line-支持反向获取文本"><span class="toc-number">3.3.</span> <span class="toc-text">模板标签 [[line]] 支持反向获取文本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结与展望"><span class="toc-number">4.</span> <span class="toc-text">小结与展望</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&text=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&is_video=false&description=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善&body=Check out this article: https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&title=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&name=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2019/01/23/apps/Drafts%205.6%20%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%8D%E6%AC%A1%E5%8A%A0%E5%BC%BA%EF%BC%8C%E5%AF%B9%E6%8D%B7%E5%BE%84%E6%94%AF%E6%8C%81%E6%9B%B4%E5%AE%8C%E5%96%84/&t=Drafts 5.6 更新详解：工作区再次加强，对捷径支持更完善" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Phillip Gu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Links/">链接</a></li>
+         
+          <li><a href="/Projects/">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'enoch2090';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>
