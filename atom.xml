@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2020-12-02T11:02:31.708Z</updated>
+  <updated>2020-12-06T11:31:57.300Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -17,20 +17,43 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Chegg日卡也能变成产品……¿</title>
+    <link href="https://enoch2090.github.io/2020/12/06/ideas/Chegg%E6%97%A5%E5%8D%A1%E4%B9%9F%E8%83%BD%E5%8F%98%E6%88%90%E4%BA%A7%E5%93%81%E2%80%A6%E2%80%A6%C2%BF/"/>
+    <id>https://enoch2090.github.io/2020/12/06/ideas/Chegg%E6%97%A5%E5%8D%A1%E4%B9%9F%E8%83%BD%E5%8F%98%E6%88%90%E4%BA%A7%E5%93%81%E2%80%A6%E2%80%A6%C2%BF/</id>
+    <published>2020-12-05T16:00:00.000Z</published>
+    <updated>2020-12-06T11:31:57.300Z</updated>
+    
+    <content type="html"><![CDATA[<p>考试周，我试图用一个周末学完电磁学。为了方便看书上的例题，我准备去搞个Chegg账户。<br>先解释下Chegg是什么。这是一个国外的网站，性质大概等同于本科生级别的小猿搜题，只不过是收费的。Chegg的收费相当贵，要$14.99一个月，而且上面的答案质量也普通，说实话是很不值的。估计正是因为这样，很多人选择和朋友拼车。Chegg官方可能也是意识到这种情况，因此附加了很严格的登陆限制：一旦一个账户同时在两个IP上登陆就会被封号。和室友被坑了一回之后，我们大骂资本家不好好改进自己的题库质量而是选择压榨消费者（其实我们这拼车等于是偷渡的），然后准备再也不用这个垃圾网站了。<br>这回算是实在没有办法，因为网上实在是搜不到Griffths的电动力学第四版答案，只有Chegg上找得到，是好是坏都得将就。付款之前我先去万能的闲鱼上搜了一圈，结果找到了一个叫Chegg日卡的东西。<br>Chegg是月付的，根本就没有日卡这个东西。但是他们的描述里有给出用这个日卡的「查题网站」。我上去看了一眼，马上决定：可以买。<br>这个东西真的很有意思。他们所谓的「日卡」、「次卡」是一串CDK一样的代码。日卡8块钱一张，24小时有效；次卡五毛钱一张，可以查一道题。而那个网站只有一个页面：</p><p><img src="/2020/12/06/ideas/Chegg%E6%97%A5%E5%8D%A1%E4%B9%9F%E8%83%BD%E5%8F%98%E6%88%90%E4%BA%A7%E5%93%81%E2%80%A6%E2%80%A6%C2%BF/chegg.png" alt="chegg"></p><p>其实意思挺明显的了，他们后台有个Chegg账号。你输入CDK，有效的话，他们用那个账号去访问你给出的题目链接，把答案爬下来再返回给你。中间过程不涉及任何异地登录，就是单个账号查了很多次题而已。实现技术也很简单，我感觉Flask+BS4/Selenium完全可以搞定。要是哪天想搞side project，整一个这玩意的国外版，甚至能小赚一笔……<br>——开玩笑的。我个人对于数字产品的态度还是能用正版就用正版。但是务实来讲，我也没必要花15刀就为了看两天答案，这个日卡正好满足了我的需求。不看版权问题，这东西可以勉强称作是个产品。而这种「产品」居然会存在，可以看出其实很多人的需求真的就是偶尔查个实在不会的题，或者考试前复习用用。真的每题都不用Chegg就没法活，那也别学了。<br>但是我倒是希望我付的钱能流到官方的口袋里，只可惜Chegg死板的收费方式让这种日卡产品截了胡。Anyway，记录一下这个奇葩黑产的存在。我觉得Chegg迟早有一天会发现这种东西的存在。这时候有三种可能性：</p><ol><li><p>他们不去管。那就是每年损失一些收入，具体多少我也没法估计。</p></li><li><p>官方推出类似的日卡收费方式。这是最好的情况。</p></li><li><p>通过监控每个账号的搜题情况阻止这种事情。这是最low的办法，而且可以预见到黑产会有新的方案去绕过Chegg的屏蔽算法（我已经想得出好几种了），那以后就是一场旷日持久的大战。</p><p>说实话我感觉他们会用第三种方法。No reason，我觉得他们只在意钱。</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;考试周，我试图用一个周末学完电磁学。为了方便看书上的例题，我准备去搞个Chegg账户。&lt;br&gt;先解释下Chegg是什么。这是一个国外的网站，性质大概等同于本科生级别的小猿搜题，只不过是收费的。Chegg的收费相当贵，要$14.99一个月，而且上面的答案质量也普通，说实话是很
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Zeit</title>
     <link href="https://enoch2090.github.io/2020/11/30/culture/Zeit/"/>
     <id>https://enoch2090.github.io/2020/11/30/culture/Zeit/</id>
     <published>2020-11-29T16:00:00.000Z</published>
-    <updated>2020-12-02T11:02:31.708Z</updated>
+    <updated>2020-12-06T11:27:51.301Z</updated>
     
-    <content type="html"><![CDATA[<p>夏天的时候拍的一点碎片以及冬天的回忆，我们管这种碎裂的残缺的离散的孤立的片段叫时间。</p><div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"theme":"#FADFA3","video":{"url":"http://lvideo.dafork.com/lqntXISn3x-mSX2IQeNrFkt0TgTr"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>]]></content>
+    <content type="html"><![CDATA[<p>夏天的时候拍的一点碎片以及冬天的回忆，我们管这种碎裂的残缺的离散的孤立的片段叫时间。</p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">    <iframe src="//player.bilibili.com/player.html?aid=17963687&cid=29326684&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;夏天的时候拍的一点碎片以及冬天的回忆，我们管这种碎裂的残缺的离散的孤立的片段叫时间。&lt;/p&gt;
-&lt;div id=&quot;dplayer0&quot; class=&quot;dplayer hexo-tag-dplayer-mark&quot; style=&quot;margin-bottom: 20px;&quot;&gt;&lt;/di
+&lt;div style=&quot;position: relative; width: 100%; height: 0; padding-bottom: 75%;&quot;&gt;
+    &lt;iframe
       
     
     </summary>
@@ -503,34 +526,6 @@
       <category term="影评" scheme="https://enoch2090.github.io/tags/%E5%BD%B1%E8%AF%84/"/>
     
       <category term="人类电影精华" scheme="https://enoch2090.github.io/tags/%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TouchBar 替代指南</title>
-    <link href="https://enoch2090.github.io/2019/09/04/efficiency/TouchBar%20%E6%9B%BF%E4%BB%A3%E6%8C%87%E5%8D%97/"/>
-    <id>https://enoch2090.github.io/2019/09/04/efficiency/TouchBar%20%E6%9B%BF%E4%BB%A3%E6%8C%87%E5%8D%97/</id>
-    <published>2019-09-03T16:00:00.000Z</published>
-    <updated>2019-12-30T16:44:36.680Z</updated>
-    
-    <content type="html"><![CDATA[<p>虽然一直嫌弃 TouchBar 没用，但当我真的失去它的时候，我依然经历了相当一段时间的 cognitive malaise。<br>谁有会想到它有一天突然失灵了呢？整个右侧八分之七的区域全部没反应了，只剩下最左边的两个键可以用。想来想去，终究是回忆起来了：那天去工训做东西的时候拿出来调试过代码，不小心螺丝刀砸在上面过一次。明明表面看来没有问题，结果居然电路坏了。<br>令我头疼的事情，主要其实也就两样。因为我是坚定的快捷键使用者，TouchBar 对我来说意义只有：音量调节和亮度调节。这两件事情，在 macOS 上都没有对应的快捷键。从操作的逻辑来说，其实倒确实是 TouchBar 最适合完成「调节某个量」这个操作。手指放上去，滑动一下一次到位，不必像硬件按钮那样反复去按一个键来调节。<br>想要彻底模拟出 TouchBar 的手感是不可能的。作为代替，我找了两个方案：</p><h2 id="方案一：LaunchBar-直接设定音量和亮度"><a href="#方案一：LaunchBar-直接设定音量和亮度" class="headerlink" title="方案一：LaunchBar 直接设定音量和亮度"></a>方案一：LaunchBar 直接设定音量和亮度</h2><p>LaunchBar 自带音量调节的动作，可以快速把系统音量设置为 25%/50%/75%/100%。我在网上又找到一段 AppleScript，可以快速设置系统亮度。仿照前者做四个动作，分别设置亮度为 25%/50%/75%/100%，就可以用 LaunchBar 代替 TouchBar了——好巧不巧，两个都是「Bar」。<br>这个方案我用了约莫有一周，然后我就找到了更好的办法：</p><h2 id="方案二：用-Better-Touch-Tool-调整音量和亮度"><a href="#方案二：用-Better-Touch-Tool-调整音量和亮度" class="headerlink" title="方案二：用 Better Touch Tool 调整音量和亮度"></a>方案二：用 Better Touch Tool 调整音量和亮度</h2><p>Better Touch Tool 是公认最好的 TouchBar 优化工具之一。说起来很奇怪，在我的 TouchBar 仍然在世的时候，我从没好好用过 BTT；它一凉，BTT 反而派上用处了。但是 BTT 不仅可以调整 TouchBar，它还支持将触控板上的滑动动作映射为其它操作，并且可以附加修饰键防止误触——确实是我能找到的最好选择了。<br>这次我的方案是：把「三指上/下滑」+修饰键映射为音量/亮度的上升/下降。这是用 BTT 很容易实现的，也是最自然的。</p><h2 id="修理-TouchBar"><a href="#修理-TouchBar" class="headerlink" title="修理 TouchBar"></a>修理 TouchBar</h2><p>替代方案用归用，修总还是要修的，所以我还是预约了天才吧。他们并没有当场帮我修，不过我最后得到了一些重要的信息。<br>众所周知 TouchBar 其实是一小块触摸屏。但我不知道的是，这玩意是和键盘完全一体的，要换就要连带键盘一起换。但这样其实是有好处的，因为和它连在一起的不是普通的键盘……而是苹果的蝶式键盘。以我的 2018 款 15’ MBP  为例，它使用的三代蝶式键盘是有 4 年保修的。所以，只要这四年内出现连击、失灵等状况，你就可以去免费换一块键盘。这样，TouchBar 就顺便被换掉了。</p><p>所以结论是：<strong>如果你的 TouchBar 坏了，那你应该做的事情是赶快把键盘也用坏</strong>。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;虽然一直嫌弃 TouchBar 没用，但当我真的失去它的时候，我依然经历了相当一段时间的 cognitive malaise。&lt;br&gt;谁有会想到它有一天突然失灵了呢？整个右侧八分之七的区域全部没反应了，只剩下最左边的两个键可以用。想来想去，终究是回忆起来了：那天去工训做东西
-      
-    
-    </summary>
-    
-    
-    
-      <category term="效率" scheme="https://enoch2090.github.io/tags/%E6%95%88%E7%8E%87/"/>
-    
-      <category term="指南" scheme="https://enoch2090.github.io/tags/%E6%8C%87%E5%8D%97/"/>
-    
-      <category term="macOS" scheme="https://enoch2090.github.io/tags/macOS/"/>
     
   </entry>
   
