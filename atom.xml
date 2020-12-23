@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2020-12-06T11:58:44.863Z</updated>
+  <updated>2020-12-23T18:01:18.696Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>还就那个修了两整天电脑</title>
+    <link href="https://enoch2090.github.io/2020/12/25/tech/%E8%BF%98%E5%B0%B1%E9%82%A3%E4%B8%AA%E4%BF%AE%E4%BA%86%E4%B8%A4%E6%95%B4%E5%A4%A9%E7%94%B5%E8%84%91/"/>
+    <id>https://enoch2090.github.io/2020/12/25/tech/%E8%BF%98%E5%B0%B1%E9%82%A3%E4%B8%AA%E4%BF%AE%E4%BA%86%E4%B8%A4%E6%95%B4%E5%A4%A9%E7%94%B5%E8%84%91/</id>
+    <published>2020-12-24T16:00:00.000Z</published>
+    <updated>2020-12-23T18:01:18.696Z</updated>
+    
+    <content type="html"><![CDATA[<p>实验室的电脑更新换代了。如果装机的活不是被甩给了我，那这件事情该多完美。因为最近有个项目需要训练不少模型作对比，他们这次直接搞了一块3090，加起来两万块的配置丢给第二次装机的我——我觉着老师也是心大。</p><p>反正我折腾了一下午，算是让它跑起来了，也没有什么地方烧掉。作为生产环境的电脑，肯定是首选Ubuntu而不是Windows。就在系统安装完启动以后，灾难来了。它连不上网。</p><p>第一反应肯定是<code>ifconfig</code>看看情况。试了一下没辙，<code>net-tools</code>根本没装，没网也没法<code>apt-get</code>。那天很晚了，我就走了。隔天回来研究了好久，最后搜索主板型号+Ubuntu 18.04找到了原因：主板型号太新了，Linux内核还没支持到它的网卡驱动，需要自己装。下载好驱动，用U盘拷到机子上，又出事了：没有<code>Make</code>。下好<code>Make</code>的deb包装好，问题又来了：居然找不到<code>gcc</code>。</p><p>找不到<code>gcc</code>不能编译网卡驱动，没有网卡驱动上不了网，上不了网装不上<code>gcc</code>。Bionic Beaver真有你的！我愤怒地把Canary Mail从收藏夹里删除。办法还是有的：Linux系统自带一个旧版本的<code>gcc</code>，在<code>/usr/bin</code>下面。所以用<code>ln -s</code>把这个<code>gcc</code> 链接到<code>/usr/local/bin</code>下面，就能暂时调用<code>gcc</code>了。</p><p>最后我还需要让这台电脑能外网访问并且使用<code>ssh</code>，这样就不用天天往实验室跑了。外网访问需要几件事情：</p><ol><li>机器上启动<code>ssh</code>服务，这个简单。</li><li>给机器设置一个静态ip地址。</li><li>在路由器里设置虚拟服务器（端口映射），或者设置DMZ主机。</li></ol><p>很简单吧？也不算。实验室的网络拓扑比较复杂，我在弄的时候并不知道，我把网线插在了一个子路由的出口上……于是我对着DHCP自动分配的ip地址里的2号网段疑惑了好久，并且在我设置了静态ip以后，不仅外网找不到这台机器了，这台机器也不认识外网了。</p><p>最后是问了学长才明白这后面的结构。这就好办了，子路由器直接把这台机器设置成DMZ主机，主路由器再把子路由器的端口分别作映射。DONE。</p><p>本来我还想寒假装台电脑的，现在看来还是算了。我现在看到硅脂和理线带就想吐。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;实验室的电脑更新换代了。如果装机的活不是被甩给了我，那这件事情该多完美。因为最近有个项目需要训练不少模型作对比，他们这次直接搞了一块3090，加起来两万块的配置丢给第二次装机的我——我觉着老师也是心大。&lt;/p&gt;
+&lt;p&gt;反正我折腾了一下午，算是让它跑起来了，也没有什么地方烧掉
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Linux" scheme="https://enoch2090.github.io/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>Chegg日卡也能变成产品……¿</title>
@@ -500,32 +525,6 @@
     
     
       <category term="旅行" scheme="https://enoch2090.github.io/tags/%E6%97%85%E8%A1%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>人类最后的堡垒 | 人类电影精华欣赏</title>
-    <link href="https://enoch2090.github.io/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/"/>
-    <id>https://enoch2090.github.io/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/</id>
-    <published>2019-09-04T16:00:00.000Z</published>
-    <updated>2019-12-31T04:05:36.292Z</updated>
-    
-    <content type="html"><![CDATA[<p>很久没有开寝室电影欣赏大会了，恰巧军训有一天晚上我们几个都「感冒」请了假，于是计划着开始欣赏《上海堡垒》。看这个片子之前我们万万没想到，能有这种比《逐梦演艺圈》还需要快进键的电影。<br>以下使用名字缩写来表示每个人的发言。whc 今天好像是真感冒了，所以只好听我们谐。zhc 来自台湾，为了保持他原话的风味我会用繁体字表示他的吐槽。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0001.png" alt><br>lsq：哇暂停，他这个敬礼是啥玩意啊？<br>gyc：这不是敬礼，是在谢罪。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0003.png" alt><br>电影：「……把捕食者赶出陆家嘴！」<br>gyc：对对，赶到闵大荒，那里的人命不值钱。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0007.png" alt><br><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0009.png" alt></p><p>操作员在键盘上一通敲打，启动了某个系统。<br>lsq：暂停暂停，他的键盘什么鬼？<br>gyc：我看看 …… md 他用的是 OEM 高度键帽吧，一看就是最垃圾的那种。<br>lsq：等下他按了什么？你回放一下。<br>（一通回放操作）<br>（三人一起）：T……Y……上？他按了一下上方向键就好了？就启动了？啊？</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0010.png" alt></p><p>主角之一在盯着显示器看，显示器上是侵略者聚集在防护罩外围的画面。<br>gyc：等等这个画面他是怎么得到的？他的摄像机在哪？<br>zhc：好問題。<br>其实这个画面前一秒刚出现过，明显就是省成本的时候没动脑子。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0012.png" alt></p><p>操作员在启动上海大炮，画面在一个不断有代码滚动的屏幕上一闪而过。<br>lsq：不是这……哈哈哈这怎么还现场写代码！<br>lsq：暂停一下，看看左边是啥啊。<br>（三人一通研究）<br>lsq：build？police doc？<br>zhc：screen shot？<br>gyc：search_data……sample clip……<br>lsq：platforms_data……<br>gyc：哎直接看代码直接看代码。init Main……我靠 <code>Main System.cpp</code> ？<br>（三人一起傻笑）<br>搞了半天这么先进一玩意原来还是 C++ 驱动的啊。我们后来还仔细读了读代码，写得有模有样的，只不过语法根本不是 C++。</p><p>上海大炮启动了，从江底缓缓升起。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0013.png" alt><br><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0014.png" alt><br><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0015.png" alt></p><p>zhc：哦喔，終於要出來了！<br>lsq：握草这大炮。<br>zhc：感覺和你想的不太一樣嗎。<br>lsq：这感觉有点菜……这口径不行。<br>gyc：草要什么口径啊，人家这肯定是能量武器啊。<br>lsq：那为什么要炮管？<br>沉默。<br>gyc：……好问题。<br>炮台完全升出水面。<br>zhc：哇這還挺大的。其實看起來還行。<br>lsq：这不可能收到黄浦江里面的啊。<br>gyc：人家可以挖河道的啊。<br>zhc：你把河道挖深就為了藏這個東西？<br>gyc：好傻逼啊。<br>zhc：不過你們上海是真的不好藏東西……誒這能垂直到九十度嗎？<br>gyc：那我没搞懂，为什么要藏起来啊？你就摆那儿不好吗？反正顶上有个罩子啊。</p><p><HR align="center" width="300" color="#987cb9" size="1"><br>上海大炮向敌军母舰开火倒计时。<br>「四……」<br>lsq：喂他从里面射不会把这个（防护罩）打爆吗？<br>「三……」<br>上海大炮开始聚能。<br>lsq：哇这太傻逼了吧，浪费了多少能量啊！<br>上海大炮开火了。</HR></p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0016.png" alt></p><p>（三人一起绝望地大叫）<br>zhc：啊——！<br>lsq：这什么智障爆炸啊！<br>gyc：这用 AE 随便画上去的吧！<br>（三人开始倒回去看特效）<br>zhc：五毛錢耶！啊到這邊都可以接受，停停停就是這裡，啊——！<br>（三人再次绝望地大叫）</p><p>画面切到女二的寝室。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0017.png" alt></p><p>gyc：这啥电脑……暂停看看。<br>lsq：ThinkPad，这就是个换了皮的 ThinkPad。你看这个键盘就知道是 ThinkPad了。<br>gyc：后面还有丹麦皇家曲奇。<br>zhc：軍人宿舍允許這麼多吃的？<br>gyc：我也想说……为什么我们军训就那么多要求？<br>（三人第三次一起绝望地大叫，虽然 zhc 根本不用参加军训）</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0019.png" alt><br><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0020.png" alt></p><p>背景播报：「危机解除。」<br>绍将军：「好，大家休息一下。」<br>gyc：好，大家休息一下！<br>lsq：休息！坐！<br>gyc：坐！<br>lsq：我现在就坐着呢……准备被子！<br>gyc：躺！<br>（军训梗）</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0023.png" alt></p><p>主角团队：「防护罩被外星人撤销了，怎么办？」<br>gyc：那当然是 Command - Shift - Z 啊。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0025.png" alt></p><p>主角内心 OS：「……那一刻我才意识到，守护上海的不是泡防御，不是大炮，也不是 AV28 和我们的无人机。真正的堡垒，是大家破釜沉舟的勇气。」<br>gyc：破釜沉舟的勇气？你们是想自己把上海先炸了吗？诶我们要是先把上海炸了，这样外星人就打不进来了。</p><p>画面再次给到江中升起的大炮。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0026.png" alt></p><p>gyc：还有多久……还有四十分钟，我们二十分钟内应该能结束。<br>zhc：難道敵人不應該直接一鍋端這個大炮嗎，一個能量打下來你擋都擋不住……哎這個能九十度發射嗎？（他还在纠结九十度）<br>gyc：不好说哦。诶要是不能九十度发射那母舰飞到他正上方，这大炮不就凉了吗？<br>zhc：對的呀。<br>lsq：你们看这里……让我往回倒一点……<br>画面闪过上海大炮的操作手，他正在一块键盘上操作。<br>gyc：先停一下，他这又是啥键盘？<br>lsq：雷蛇的。（继续往回倒）<br>lsq：你看这个大炮，首先它不能九十度发射。其次，你看他这个灯，因为它间距只能做这么小，说不定他只有这么大的一个模具（比划了三十厘米高）。<br>lsq：我严重怀疑这个大炮只有这么点大……这个像不像你键盘上的 RGB 灯？<br>gyc：不是，这个大炮只能沿着黄浦江的方向发射啊，往两边不会打到边上的楼吗？<br>（三人一起哀叹）<br>gyc：哎刚才那键盘真的是雷蛇的吗，你开玩笑还是当真？<br>lsq：长成这样，我看像。<br>我们又盯着大炮看了一会。<br>lsq：要我去设计，我肯定不会弄这么一个大炮。是我我就把东方明珠改造成上海大炮，你想想那多帅。首先形状就符合，然后充能的时候还有指示灯——百分之二十的时候第一个球亮，百分之五十的时候第二个球亮，百分之八十的时候第三个球亮，多好啊。<br>gyc：不错，你还解决了上海大炮不能九十度发射的问题。到时候立个牌子，「请飞到我正上方」。因为你这个大炮他妈的只能九十度发射，天才。</p><p>两军开战。<br><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0028.png" alt></p><p>gyc：草这个画面和《独立日》一模一样啊！还有这个飞机是什么鬼阵型啊，你后面开火不会打到前面的吗？</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0031.png" alt></p><p>gyc：他为什么坐在一个巨大的戴森电风扇里面？<br>lsq：你能不能稳重一点啊这个球！（开始星际老男孩）</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0030-7764877.png" alt></p><p>lsq：这不火车打毒爆吗！（继续星际老男孩）<br>zhc：為了蟲群！</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0036.png" alt></p><p>男主落地抄起榴弹枪一通连射。<br>lsq：这是雷神之锤玩家吧！你看这个榴弹枪的娴熟运用！</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0037.png" alt></p><p>gyc：这个秦王走位，我看是 PUBG 玩家……</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0042.png" alt="上海堡垒-0042"></p><p>五年后。<br>gyc：妈的你五年能修成这个样子？<br>战时对比图：<br><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/%E4%B8%8A%E6%B5%B7%E5%A0%A1%E5%9E%92-0039.png" alt></p><p>lsq：哎这不是那个吗！哎我觉得他抄了游戏 CG 啊？</p><p>后来他去查了，左手边最高的楼确实长得很像《半条命 2》里的盟军总部。</p><p><img src="/2019/09/05/culture/%E4%BA%BA%E7%B1%BB%E6%9C%80%E5%90%8E%E7%9A%84%E5%A0%A1%E5%9E%92%20%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E%E6%AC%A3%E8%B5%8F/UNADJUSTEDNONRAW_thumb_1a20.jpg" alt="《半条命 2》 17 号城市"></p><p>不过这俩并不是完全一样，顶多是借鉴，也没法实锤。</p><p>吐槽归吐槽，说点正经的。<br>为什么我们觉得《上海堡垒》这部影片水准不够，原因是多方面的。充斥着廉价感的道具、服饰和布景，还有全程对不上口型的配音，这些因素已经被说烂了；幼稚而毫无逻辑的剧情更是让人难以直视。这些先置条件都差到一个令人难以置信的地步。<br>更为奇怪的是，这部电影采用的展开与编排，几乎就是上个世纪的产物——都 9102 年了，滕导还在试图讲一个英雄拯救世界的老套故事。新千禧年的电影，多是在讨论人对自我定位的迷茫。然后《上海堡垒》整了一出军人爱上上级的奇葩故事，看得我很迷茫。这和《逐梦》有点像，同样是奇怪得让人批评不下去。但《逐梦》比它要好一点，因为毕导终究是讲了一个完整的故事。可能他的手法很幼稚，也许他的故事很天真，但他是想讲清这个故事的。放在《上海堡垒》这，莫名其妙就开始了，匆匆忙忙就结束了。该撑时间的地方一秒带过，该带过的地方猛拖时间。<br>不要说《上海堡垒》代表着中国科幻元年的结束。这玩意不叫科幻，它都不配叫电影。</p><p>「人类电影精华欣赏」是我们寝室的一项传统活动。四个人都有空的时候，我们会一起找部豆瓣评分低于 3.0 的电影。把寝室的灯关上，坐下来吃吃东西，吐槽两句。上一期活动我们欣赏了毕导的旷世之作《逐梦演艺圈》。从这一期开始，我们还顺便把我们的吐槽录下来，并整理成文字。<br>很多时候我觉得，我们这个活动欣赏的不是电影，而是现代艺术。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;很久没有开寝室电影欣赏大会了，恰巧军训有一天晚上我们几个都「感冒」请了假，于是计划着开始欣赏《上海堡垒》。看这个片子之前我们万万没想到，能有这种比《逐梦演艺圈》还需要快进键的电影。&lt;br&gt;以下使用名字缩写来表示每个人的发言。whc 今天好像是真感冒了，所以只好听我们谐。zh
-      
-    
-    </summary>
-    
-    
-    
-      <category term="影评" scheme="https://enoch2090.github.io/tags/%E5%BD%B1%E8%AF%84/"/>
-    
-      <category term="人类电影精华" scheme="https://enoch2090.github.io/tags/%E4%BA%BA%E7%B1%BB%E7%94%B5%E5%BD%B1%E7%B2%BE%E5%8D%8E/"/>
     
   </entry>
   
