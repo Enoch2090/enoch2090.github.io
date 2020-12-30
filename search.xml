@@ -23,6 +23,29 @@
     
     
     <entry>
+      <title>cvat标注工具</title>
+      <link href="/2020/12/25/tech/cvat%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/"/>
+      <url>/2020/12/25/tech/cvat%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/</url>
+      
+        <content type="html"><![CDATA[<p>最近在搞的一个项目需要做一个标注好的数据集来训练。标注的事情是分给实验室里的其他同学一起做的，我在实验室电脑上部署了cvat这个工具用来完成这部分工作。记录一下cvat的部署过程以及具体使用。</p><h2 id="部署cvat"><a href="#部署cvat" class="headerlink" title="部署cvat"></a>部署cvat</h2>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Docker </tag>
+            
+            <tag> 目标检测 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Chegg日卡也能变成产品……¿</title>
       <link href="/2020/12/06/ideas/Chegg%E6%97%A5%E5%8D%A1%E4%B9%9F%E8%83%BD%E5%8F%98%E6%88%90%E4%BA%A7%E5%93%81%E2%80%A6%E2%80%A6%C2%BF/"/>
       <url>/2020/12/06/ideas/Chegg%E6%97%A5%E5%8D%A1%E4%B9%9F%E8%83%BD%E5%8F%98%E6%88%90%E4%BA%A7%E5%93%81%E2%80%A6%E2%80%A6%C2%BF/</url>

@@ -435,9 +435,10 @@ body td {
   border-bottom: none;
 }
 @font-face {
-  font-style: normal;
-  font-family: "Meslo LG";
-  src: local("Meslo LG S"), url("../lib/meslo-LG/MesloLGS-Regular.ttf") format("truetype");
+  font-family: 'FZShuSong';
+  src: url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.eot");
+  src: url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.eot?#iefix") format('embedded-opentype'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff2") format('woff2'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.woff") format('woff'), url("https://github.com/Enoch2090/enoch2090.github.io/raw/master/lib/FZShuSong/FZShuSong.ttf") format('truetype');
+  font-weight: normal;
 }
 *,
 *:before,
@@ -1081,9 +1082,9 @@ article .content h2:before {
   top: -4px;
   left: -1.5rem;
   color: #4c6794;
-  content: "#";
+  content: "§";
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 article .content img,
 article .content video {
