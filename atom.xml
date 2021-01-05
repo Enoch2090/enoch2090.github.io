@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2021-01-02T17:32:35.153Z</updated>
+  <updated>2021-01-05T16:48:22.922Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>把YOLO标注文件转换为COCO格式.md</title>
+    <link href="https://enoch2090.github.io/2021/01/06/tech/%E6%8A%8AYOLO%E6%A0%87%E6%B3%A8%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BACOCO%E6%A0%BC%E5%BC%8F/"/>
+    <id>https://enoch2090.github.io/2021/01/06/tech/%E6%8A%8AYOLO%E6%A0%87%E6%B3%A8%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BACOCO%E6%A0%BC%E5%BC%8F/</id>
+    <published>2021-01-05T16:00:00.000Z</published>
+    <updated>2021-01-05T16:48:22.922Z</updated>
+    
+    <content type="html"><![CDATA[<p>实验室之前用的模型是基于Darknet的YOLO。这两天需要试一些其它模型，所以我准备给标注文件做个格式转换。网上找了半天都找不到个<strong>给人用的</strong>YOLO转COCO脚本，遂自己写了一个。分享一下，大家可能用得上。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原先YOLO标注存放结构：</span></span><br><span class="line"><span class="comment"># - ...</span></span><br><span class="line"><span class="comment">#  |</span></span><br><span class="line"><span class="comment">#  +- FOLDER # 存放所有图片和对应的标注</span></span><br><span class="line"><span class="comment">#  | |</span></span><br><span class="line"><span class="comment">#  | + a.jpg # 图片</span></span><br><span class="line"><span class="comment">#  | |</span></span><br><span class="line"><span class="comment">#  | + a.txt # 图片对应的标注文件</span></span><br><span class="line"><span class="comment">#  |</span></span><br><span class="line"><span class="comment">#  + train.txt # 记录训练/测试/验证的分割文件，里面包含FOLDER下的图片文件名</span></span><br><span class="line"><span class="comment"># -----------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># 转化后在 FOLDER 同级下添加train.json，存放所有 train.txt 包含的文件名的图片对应的标注。其它不作改动，方便兼容。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os.path <span class="keyword">as</span> osp</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----使用前在此设置----</span></span><br><span class="line">origDir = <span class="string">"../data/orig_code/dataset/可疑物品数据集/v1.4"</span> <span class="comment"># 即上面的 FOLDER</span></span><br><span class="line">origList = <span class="string">"../data/orig_code/dataset/可疑物品数据集/v1.4/train_v_1_4.txt"</span> <span class="comment"># 即上面的 train.txt</span></span><br><span class="line">dumpDir = <span class="string">"../data/orig_code/dataset/可疑物品数据集/train.json"</span> <span class="comment"># 即上面的 train.json</span></span><br><span class="line">CLASSES = [] <span class="comment"># 在这里添加所有要用的类</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ----工具函数----</span></span><br><span class="line"><span class="keyword">global</span> id</span><br><span class="line">id = <span class="number">0</span></span><br><span class="line"><span class="keyword">global</span> anno_id</span><br><span class="line">anno_id = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">incr_id</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> id</span><br><span class="line">    id += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> id</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">incr_anno_id</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> anno_id</span><br><span class="line">    anno_id += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> anno_id</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----生成COCO下标注文件的Dict----</span></span><br><span class="line">COCO_OBJ = &#123;&#125;</span><br><span class="line">COCO_OBJ[<span class="string">"categories"</span>] = [</span><br><span class="line">    &#123;<span class="string">"id"</span>: incr_id(), <span class="string">"name"</span>: x, <span class="string">"supercategory"</span>: <span class="string">""</span>&#125; <span class="keyword">for</span> x <span class="keyword">in</span> CLASSES]</span><br><span class="line">COCO_OBJ[<span class="string">"images"</span>] = []</span><br><span class="line">COCO_OBJ[<span class="string">"annotations"</span>] = []</span><br><span class="line">id = <span class="number">0</span></span><br><span class="line">anno_id = <span class="number">0</span></span><br><span class="line">fileList = []</span><br><span class="line"><span class="keyword">with</span> open(origList, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    fileList = [x.replace(<span class="string">"\n"</span>, <span class="string">""</span>) <span class="keyword">for</span> x <span class="keyword">in</span> f.readlines()] <span class="comment"># 根据 train.txt 的格式标准，你可能需要改动这一行来适应。</span></span><br><span class="line"><span class="keyword">for</span> img <span class="keyword">in</span> fileList:</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">".jpg"</span> <span class="keyword">in</span> img):</span><br><span class="line">        print(img)</span><br><span class="line">        anno = img.replace(<span class="string">".jpg"</span>, <span class="string">".txt"</span>)</span><br><span class="line">        annoPath = osp.join(origDir, anno)</span><br><span class="line">        imgPath = osp.join(origDir, img)</span><br><span class="line">        imgObj = cv2.imread(imgPath)</span><br><span class="line">        width = imgObj.shape[<span class="number">1</span>]</span><br><span class="line">        height = imgObj.shape[<span class="number">0</span>]</span><br><span class="line">        imgStruct = &#123;                  <span class="comment"># 有需求自行在此添加</span></span><br><span class="line">            <span class="string">"id"</span>: incr_id(),</span><br><span class="line">            <span class="string">"width"</span>: width,</span><br><span class="line">            <span class="string">"height"</span>: height,</span><br><span class="line">            <span class="string">"file_name"</span>: img,</span><br><span class="line">            <span class="string">"license"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="string">"flickr_url"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"coco_url"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"date_captured"</span>: <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">        COCO_OBJ[<span class="string">"images"</span>].append(imgStruct)</span><br><span class="line">        annoLines = []</span><br><span class="line">        <span class="keyword">with</span> open(annoPath, <span class="string">"r"</span>) <span class="keyword">as</span> a:</span><br><span class="line">            annoLines = a.readlines()</span><br><span class="line">        <span class="keyword">for</span> annoLine <span class="keyword">in</span> annoLines:</span><br><span class="line">            annoLine = annoLine.replace(<span class="string">"\n"</span>, <span class="string">""</span>)</span><br><span class="line">            annoComponents = annoLine.split(<span class="string">" "</span>)</span><br><span class="line">            <span class="keyword">if</span> len(annoComponents) &lt; <span class="number">5</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            c_x = float(annoComponents[<span class="number">1</span>])*width</span><br><span class="line">            c_y = float(annoComponents[<span class="number">2</span>])*height</span><br><span class="line">            w = float(annoComponents[<span class="number">3</span>])*width</span><br><span class="line">            h = float(annoComponents[<span class="number">4</span>])*height</span><br><span class="line">            annoStruct = &#123;             <span class="comment"># 有需求自行在此添加</span></span><br><span class="line">                <span class="string">"id"</span>: incr_anno_id(),</span><br><span class="line">                <span class="string">"image_id"</span>: id,</span><br><span class="line">                <span class="string">"category_id"</span>: int(annoComponents[<span class="number">0</span>]),</span><br><span class="line">                <span class="string">"segmentation"</span>: [],</span><br><span class="line">                <span class="string">"area"</span>: float(int(w)*int(h)),</span><br><span class="line">                <span class="string">"bbox"</span>: [</span><br><span class="line">                    float(int(c_x - w/<span class="number">2</span>) + <span class="number">1</span>),  <span class="comment"># x</span></span><br><span class="line">                    float(int(c_y + h/<span class="number">2</span>) - <span class="number">1</span>),  <span class="comment"># y</span></span><br><span class="line">                    float(int(w) - <span class="number">1</span>),          <span class="comment"># w</span></span><br><span class="line">                    float(int(h) - <span class="number">1</span>)           <span class="comment"># h</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">            COCO_OBJ[<span class="string">"annotations"</span>].append(annoStruct)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(dumpDir, <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(COCO_OBJ, f)</span><br></pre></td></tr></table></figure><p>这里我对坐标转换的处理取了个上下整，尽量保证不溢出图像边缘。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;实验室之前用的模型是基于Darknet的YOLO。这两天需要试一些其它模型，所以我准备给标注文件做个格式转换。网上找了半天都找不到个&lt;strong&gt;给人用的&lt;/strong&gt;YOLO转COCO脚本，遂自己写了一个。分享一下，大家可能用得上。&lt;/p&gt;
+&lt;figure clas
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Python" scheme="https://enoch2090.github.io/tags/Python/"/>
+    
+      <category term="目标检测" scheme="https://enoch2090.github.io/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国王湖落日</title>
+    <link href="https://enoch2090.github.io/2021/01/05/culture/%E5%9B%BD%E7%8E%8B%E6%B9%96%E8%90%BD%E6%97%A5/"/>
+    <id>https://enoch2090.github.io/2021/01/05/culture/%E5%9B%BD%E7%8E%8B%E6%B9%96%E8%90%BD%E6%97%A5/</id>
+    <published>2021-01-04T16:00:00.000Z</published>
+    <updated>2021-01-05T16:49:07.670Z</updated>
+    
+    <content type="html"><![CDATA[<p>那天的游人都自备汽油。<br>一次出乎意料的王车易位，<br>进攻接踵而至。<br>Der Königssee，你最好<br>有千里以外的记忆。有些寒冬<br>人们在冰上滑行，凿出冰窟垂钓<br>青苔。压力如此巨大，<br>陡峭的沙石无法支撑。<br>好了，就此忘掉这段对话。<br>沙滩边的更衣室<br>地面粗粝潮湿，墙上蛛网爬遍。<br>夏天还有多余时间<br>路过请抓紧溺水。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;那天的游人都自备汽油。&lt;br&gt;一次出乎意料的王车易位，&lt;br&gt;进攻接踵而至。&lt;br&gt;Der Königssee，你最好&lt;br&gt;有千里以外的记忆。有些寒冬&lt;br&gt;人们在冰上滑行，凿出冰窟垂钓&lt;br&gt;青苔。压力如此巨大，&lt;br&gt;陡峭的沙石无法支撑。&lt;br&gt;好了，就此忘掉这段对话
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Poems" scheme="https://enoch2090.github.io/tags/Poems/"/>
+    
+  </entry>
   
   <entry>
     <title>梦醒时分</title>
@@ -474,57 +525,6 @@
       <category term="macOS" scheme="https://enoch2090.github.io/tags/macOS/"/>
     
       <category term="自动化" scheme="https://enoch2090.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>硬币 | 柏林故事</title>
-    <link href="https://enoch2090.github.io/2020/02/17/culture/%E7%A1%AC%E5%B8%81%20|%20%E6%9F%8F%E6%9E%97%E6%95%85%E4%BA%8B/"/>
-    <id>https://enoch2090.github.io/2020/02/17/culture/%E7%A1%AC%E5%B8%81%20|%20%E6%9F%8F%E6%9E%97%E6%95%85%E4%BA%8B/</id>
-    <published>2020-02-16T16:00:00.000Z</published>
-    <updated>2020-02-17T10:57:15.651Z</updated>
-    
-    <content type="html"><![CDATA[<p>严格来说，这不是一个完整的故事，也不全部发生在柏林。但既然它是我柏林之行的附属品，那我就写在一起了。</p><p>自从抵达欧洲开始，我就发现，自己最是和硬币过不去。</p><h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>不知道你有没有在景点见过那种压硬币的机器：选好图案，塞一块钱进去，再塞一个几分钱的小硬币，然后使劲摇把手。三五圈后，叮当一声，机器吐出被压扁的小硬币，上面压上了你选的图案。</p><p>这种机器在好多地方都有。柏林有，布拉格有，我在墨尔本也见过。仔细想来，一个地方要有这个东西，最首要的条件就是：当地货币里面的某个硬币，要符合大小并且是铜制的。而且对应的面额得小，用来压了不会很亏。所以德国有，匈牙利也有，但丹麦就没有。</p><p><em>布达佩斯，布达城堡门前。</em> 我翻遍了口袋，也找不到面前的机器需要的一枚五弗林。说实话，落地到现在，我就没见过这个面值的硬币。</p><p>环顾四周，不远处有一个小哥在买旅游套票。我跑过去问他：你有五弗林吗？我想和你换几个。</p><p>我找找看啊。他摸索了一阵，从钱包的夹缝里翻出来一个。他把那枚硬币给我：别换了，送你了。反正我也用不上。</p><p>我想想也是，超市里所有东西都是以 0 结尾的，五弗林确实只能拿来压了。那些压硬币的机器，它们收下五十或一百弗林，然后接连不断地处理掉本地人弃若敝屣的五弗林。</p><p>就是不知道造币厂的人是不是很痛恨它们？每年价值这台机器收入二十分之一的硬币在这里被转化，获得了一些图案，失去了一些价值。</p><p>叮当，我的硬币被压上了一个布达城堡。</p><h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p><em>柏林，康德街，地下。</em> 我被公共厕所门口的收费机拦住了去路，因为这台机器只收五十分，唯一一种我口袋里正好没有的欧元硬币。厕所里面坐着一个清洁工，正在用一脸怀疑的眼神看着我。</p><p>有个人刚从里面出来，正在慢条斯理地洗手。我等他洗完，上去问他：你有五十分吗？我用一欧元和你换两个。</p><p>我怎么总是在和别人换硬币啊。</p><p>好的，你等下。他在钱包里一阵翻找，叮咣声此起彼伏，让人难以相信那是个普通容量的钱包。他小心翼翼地摸出一个五十分给我，好像生怕一不小心把它掉回下面那片深邃的铜镍海洋。随后叮咣声再次响起，等声音又停止的时候，他又给了我两个二十分。</p><p>我感觉这就差不多了，十分钱我实在是用不到。每天回到房间，第一件事就是把口袋里的硬币全倒出来扔在一边。所以我床头摆满了各种硬币，那都是找零给的。有时候我睡觉都担心这些硬币流下来把我给淹死。其中当然是一分和两分的最多，十分的位居第三。不要问我五分都去哪了。我计划离开柏林的时候，就把那堆小硬币留在那里，留给清洁工算了。</p><p>所以我赶紧制止这位好心人。我说，这些已经可以了，非常感谢您。</p><p>啊，别急。那位好心人虽然这么说，他看起来倒是急了。海浪此起彼伏的声音一下子加快，可能生怕追不上我。等声音停下来的时候，我发现我手上多了一大堆一分和两分的硬币。谢谢。那个人拍拍我的肩膀，一下子消失了。</p><p>我转头看向厕所里面，那个清洁工还在用一脸怀疑的眼神看着我。</p><h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p><em>柏林，凯瑟琳-奥古斯都街，Deutch Post 门外。</em></p><p>我走出邮局，深吸了一口气。终于弄完了。</p><p>为了寄几张明信片，我得先买邮票。门口的自动邮票机只收硬币——我必然没有。我昨天明明有个五十分的，鬼知道它现在跑哪去了。我四处张望，邮局门口有个愁眉苦脸的老太太。年纪大的人往往都只说德语，找他们没有用。柜台前面排着长长的队，我想也没有必要排队上去换几个硬币，待会寄东西还要再排一次的。</p><p>我一边考虑一边掏出钱包，这才发现里面最小的面值是五十欧。我掏了掏外套口袋，里面叮叮当当全是景点压的纪念币，就是没有能用的硬币。</p><p>跑了好几条马路，我去便利店买了点东西，这才把手上的纸币找开。再一路小跑回来，在机器上按面值买完邮票，跑到柜台，柜员告诉我：你这是本地邮票。你直接把钱给我，我给你重新贴国际邮票。</p><p>那我跑好几条马路是为的什么啊？</p><p>Anyway，当我走出邮局的时候，我突然发现那个老太太还在那。她招手叫我过去，对着我说了一通德语，一脸哭腔指着地上。我低头一看：是一个阴井盖。是她的钱包掉进去了吗？</p><p>我凑上去看，井盖下面有一个金色的硬币。</p><p>「Fünfzig?」我问她。德语的五十。</p><p>她点了点头。</p><h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><p>如果你买那种按压式的护肤品、沐浴露之类，买来的时候，那个按压头肯定是锁住的。不然在路上，它可能就自己流出来了。有些包装会在按压头里面做内螺纹，把它拧住；还有些包装用的是一个额外的卡扣，把按压头给卡死。</p><p>比如我手上的这瓶护肤霜。</p><p><em>柏林，夏天街，Econtel 酒店。</em></p><p>我已经把东西全收拾好了，就差手上这瓶护肤霜还没塞进箱子里。火车还有不到一小时就到，我必须马上出门。</p><p>但是这瓶东西的卡扣去哪了？</p><p>我不希望自己下次打开箱子的时候，看到里面全是流出来的护肤霜。我也依稀记得，这瓶东西刚买来的时候，我考虑到将来要装箱子，特意把那个卡扣留下来了。应该是放在写字台上了，但现在它并不在那里。</p><p>要赶不上火车了。我蹲下来检查了一遍地上，还有角落里——全都没有。可能是清洁工打扫的时候给扔了。</p><p>我还有五十五分钟。从打车到抵达火车站至少要三十五分钟，而且还要找站台。</p><p>得找点别的什么东西替代。只要差不多尺寸的小东西，硬质的，能正好卡在这个按压头下面就行。但是我所有的东西都收进箱子里了，我没时间一一翻出来。</p><p>等等。也不是所有东西。</p><p>我看向床头那一滩硬币。</p><h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>所以我开头说，到了欧洲发现自己最是和硬币过不去。有的硬币有人要，有的硬币没人要。但到了我这，总是需要的时候没有，不需要的时候嫌多。来来回回一个月，总算是有一回，需要的时候派上点用处了。</p><p>Leider, nicht sein Geldwert.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;严格来说，这不是一个完整的故事，也不全部发生在柏林。但既然它是我柏林之行的附属品，那我就写在一起了。&lt;/p&gt;
-&lt;p&gt;自从抵达欧洲开始，我就发现，自己最是和硬币过不去。&lt;/p&gt;
-&lt;h2 id=&quot;一&quot;&gt;&lt;a href=&quot;#一&quot; class=&quot;headerlink&quot; title=
-      
-    
-    </summary>
-    
-    
-    
-      <category term="旅行" scheme="https://enoch2090.github.io/tags/%E6%97%85%E8%A1%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>捐款 | 柏林故事</title>
-    <link href="https://enoch2090.github.io/2020/01/28/culture/%E6%8D%90%E6%AC%BE%20|%20%E6%9F%8F%E6%9E%97%E6%95%85%E4%BA%8B/"/>
-    <id>https://enoch2090.github.io/2020/01/28/culture/%E6%8D%90%E6%AC%BE%20|%20%E6%9F%8F%E6%9E%97%E6%95%85%E4%BA%8B/</id>
-    <published>2020-01-27T16:00:00.000Z</published>
-    <updated>2020-01-28T20:15:27.287Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>和朋友走到勃兰登堡门广场的时候，我忍不住回头又看了一眼背后的建筑。顶层的雕像覆盖着发白的铜绿，令人无法不厌倦这个潮湿的冬天。</p><p>回过神的时候，面前已经站了一个人。一个外表很平凡的女人，大约是中东移民，穿着很朴素的衣服，拿着一张破破烂烂的纸，冲我说着蹩脚的德语。不管她是在试图推销什么东西，还是想让我参与什么活动，我都对此不感兴趣，所以我摆了摆手想回头走开。然而她又缠了上来，这回改说更蹩脚的英语：你好，你能在这签个名吗？</p><p>我扫了一眼她手上的纸，是某种请愿之类的表格。我大概是一时半会走不掉了，签个名也没什么损失。我接过一支破破烂烂的圆珠笔，一边思忖着要不要从包里拿一支好点的笔出来，一边考虑着编个什么乱七八糟的名字签上去。笔尖磨磨蹭蹭不肯出水，刮拉着挪到行末，那里有一个令人不安的词语——Donation。我又打量了一眼这张纸，低劣的复印质量让人对行末那个词语生起疑惑。这事情不靠谱。要是有多的硬币，我宁可全部给倚在勃兰登堡门下的那个流浪汉，给他的德牧买点好的狗粮，我也不会给这个一看就是骗子的人。</p><p>「我是游客，我身上没钱。」我试图装出迷惑的样子，「早上刚到柏林。抱歉。」</p><p>「那这是什么？」她伸手指指我的裤子口袋，左边鼓起来一块——可惜我的钱包在背包里，那只是一副耳机。我掏出来展示给她看，「这只是个耳机。你接受信用卡捐赠吗？你有没有 POS 机？不行？那对不起，我也没办法……」</p><p>她白了我一眼，骂骂咧咧地走开了。我看着她拿着那支不肯出水的圆珠笔，费力地试图把我煞费苦心编出来的签名划掉。</p><p>等我转过头，我发现我朋友已经给另一个明显是一伙的人捐了十块钱，那人转眼就消失无影无踪。「我是想给个硬币打发她的，然后她说最少要捐十欧。」他无奈地解释，「他妈的，我一掏出钱包那人就盯上我里面的钱了。」</p><p>我摇摇头，摸了摸口袋里的耳机。</p><h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>我的室友照计划要和他的朋友经过柏林，并待上三天。我上午有课，就约好下午去找他们玩。</p><p>中午的时候室友发来消息：他们有人被抢了。</p><p>故事是这样的。他们从国会大厦一路走到勃兰登堡门，结果被几个要捐款的跟上了。他们有个人已经掏出钱包准备捐钱了，却及时被大家劝住。那个老哥于是收起钱包继续走，要捐款的那伙人就追上来继续缠着他不放，几秒种后突然全跑了。又过了五秒，那老哥才意识到：原来钱包被抢了。钱包里放了好几百欧元，还有信用卡、身份证等一堆东西。</p><p>说是抢其实言过其实，说是被偷可能更符合实情一点。Anyway，那伙人几乎是瞬间消失在某个店面附近，从此再也寻不到踪迹。他们于是继续向前走，同时报了警。没走多远，他们又看到了几个类似的要捐款的，于是用单反悄悄拍下了其中几个人的脸。</p><p>那个老哥在警察局做了一下午的笔录。我室友拿出拍的照片给警察看，警察说：这几个人啊，她们在办公室墙上挂着呢！于是他们又花了不少时间依次指认嫌疑犯的照片。警察告诉他们，这伙人被怀疑诈骗了很久，始终没有证据。现在倒是有了，不过不见得抓得到人。</p><p>那个价值连城的钱包，十有八九是找不回来了。我给他们讲了我前些天的经历——看来遇到这种事情，暴露出你的钱包不太明智。</p><h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>查理检查站所在的街角立着一块白底黑字的牌子，上面用多种语言写着：「你正在进入美国管辖区域，禁止在没有许可的情况下携带武器；请遵守交通规则。」</p><p>我走到警示牌下面，几个美国人从我旁边路过。我隐约听到其中一个在开玩笑：「……这里写着你正在进入美国管辖区域。很好笑的是，当你进入美国区域的时候——」他抬手指着马路对面，「你首先看到的是一家麦当劳。」</p><p>我顺着他的目光看过去，却突然发现有个人拦在我面前。似曾相识的一幕：中东移民，拿着一张破破烂烂的纸，冲我说着蹩脚的德语。这回是个年纪大一些的老太太，我感觉她身上的钱搞不好比我要多。我把手插进口袋，按紧了口袋里的钱包和手机，冲她摇了摇头。</p><p>那个老太太立马切换到蹩脚的英语，签满倒霉游客名字的表格几乎要戳到我脸上了。我回忆了最后一次背上包的情景，印象里所有拉链都拉紧了，而且都在一边上，不容易一下子弄开。是在左边还是右边？这我不太记得了，我习惯上是从右边拿东西，那应该是右边……</p><p>那没事了，我就不信你抢得到我的东西。</p><p>「不好意思，我不知道你在说什么。」我直接说起中文，假装听不懂她的蹩脚英文。来啊，我就不信你还会中文。</p><p>她确实不会中文，于是开始给我比划要我去签名。一支似曾相识的圆珠笔反反复复指着表格里 Donation 那一栏，我想那支笔大概也写是不出来的。我继续装傻，开始用中文问她是不是迷路了。</p><p>三十秒后，她放弃了尝试，扭头就走。</p><p>我目送这个人走开。她直接横穿马路，和不远处另一个人说了句话，然后走向了下一个目标。我等了个红灯跟到马路对面，那里是查理检查站博物馆的纪念品店。在我成功走进去之前，又有两个人跑来问我要捐款。我把背包束带拉紧，一路装傻，总算冲出了包围圈。</p><p>纪念品商店的橱窗一尘不染，里面人不多，自然也不会有爱心人士跟进来。我先拿了一张宣传单，然后走到橱窗边上，假装在看窗边那一排劣质的纪念品：柏林墙的残片。东西应该不假，但上面的颜料一看就是新刷上去的；制作的工人很有可能不会用热熔胶胶枪，底座上有一团刺眼的热熔胶暴露在外面。我拿起一块残片，一遍端详一遍瞟向外面，街道上的情景让人想到夏天隔着纱窗向外看的模样：一群白蚁铺天盖地在飞，在纠缠着路人。</p><p>我拿出手机，拨通了报警电话。</p><h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这并不是这个故事的结尾，因为接电话的警察不会说英语，而我只会用德语说「我不会说德语」。等我和他的拉锯战以我失去耐心并挂断电话而结束的时候，我发现那群人早就不见了。</p><p>怎么说呢？这就是结尾了。也许我下次遇到她们，接电话的警察会是个懂英语的人。但既然这群人还在外面游荡，大家在柏林的时候就还是保持警惕吧。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;一&quot;&gt;&lt;a href=&quot;#一&quot; class=&quot;headerlink&quot; title=&quot;一&quot;&gt;&lt;/a&gt;一&lt;/h2&gt;&lt;p&gt;和朋友走到勃兰登堡门广场的时候，我忍不住回头又看了一眼背后的建筑。顶层的雕像覆盖着发白的铜绿，令人无法不厌倦这个潮湿的冬天。&lt;/p&gt;
-&lt;p&gt;回过神的
-      
-    
-    </summary>
-    
-    
-    
-      <category term="旅行" scheme="https://enoch2090.github.io/tags/%E6%97%85%E8%A1%8C/"/>
     
   </entry>
   
