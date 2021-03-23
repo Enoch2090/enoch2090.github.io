@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang=zh>
 <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="实验室之前用的模型是基于Darknet的YOLO。这两天需要试一些其它模型，所以我准备给标注文件做个格式转换。网上找了半天都找不到个给人用的YOLO转COCO脚本，遂自己写了一个。分享一下，大家可能用得上。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="实验室之前用的模型是基于Darknet的YOLO。这两天需要试一些其它模型，所以我准备给标注文件做个格式转换。网上找了半天都找不到个给人用的YOLO转COCO脚本，遂自己写了一个。分享一下，大家可能用得上。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525">
 <meta property="og:type" content="article">
 <meta property="og:title" content="把YOLO标注文件转换为COCO格式">
 <meta property="og:url" content="https://enoch2090.github.io/2021/01/06/tech/%E6%8A%8AYOLO%E6%A0%87%E6%B3%A8%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BACOCO%E6%A0%BC%E5%BC%8F/index.html">
@@ -20,42 +20,49 @@
 <meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary">
     
-    
+      
         
           
               <link rel="shortcut icon" href="/images/favicon.ico">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-          
-        
-    
-    <!-- title -->
-    <title>把YOLO标注文件转换为COCO格式</title>
-    <!-- styles -->
-    
+              
+                
+                  
+                    
+                        <link rel="icon" type="image/png" href="/images/favicon-192x192.png"
+                          sizes="192x192">
+                        
+                          
+                            
+                              
+                                  <link rel="apple-touch-icon" sizes="180x180"
+                                    href="/images/apple-touch-icon.png">
+                                  
+                                    
+                                      
+                                        <!-- title -->
+                                        <title>
+                                          把YOLO标注文件转换为COCO格式
+                                        </title>
+                                        <!-- styles -->
+                                        
 <link rel="stylesheet" href="/css/style.css">
 
-    <!-- persian styles -->
-    
-      
+                                          <!-- persian styles -->
+                                          
+                                            
 <link rel="stylesheet" href="/css/rtl.css">
 
-    
-    <!-- rss -->
-    
-    
-      <link rel="alternate" href="/atom.xml" title="Enoch2090" type="application/atom+xml" />
-    
+                                              
+                                                <!-- rss -->
+                                                
+                                                      
+                                                        <link rel="alternate" href="/atom.xml"
+                                                          title="Enoch2090" type="application/atom+xml" />
+                                                        
+                                                          <link
+                                                            href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"
+                                                            rel="stylesheet" type="text/css">
 <meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
-
 <body class="max-width mx-auto px3 rtl">    
       <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>

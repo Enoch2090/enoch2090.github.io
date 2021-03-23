@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang=zh>
 <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="最初实现这一功能仅仅是因为Telegram某个群里有人在要能抓图的Workflow。  由于之前没见到过这种Workflow，我就自己动手写了一个，在这个过程中也有了一些新的认识。执行原理很简单，通过Get Contents of Web Page动作抓取网页内容，返回格式为富文本，再使用Convert Image动作筛选出图片，输出一个由图片组成的列表，用Choose from List来选取">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="最初实现这一功能仅仅是因为Telegram某个群里有人在要能抓图的Workflow。  由于之前没见到过这种Workflow，我就自己动手写了一个，在这个过程中也有了一些新的认识。执行原理很简单，通过Get Contents of Web Page动作抓取网页内容，返回格式为富文本，再使用Convert Image动作筛选出图片，输出一个由图片组成的列表，用Choose from List来选取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Workflow实现简单的抓图功能">
 <meta property="og:url" content="https://enoch2090.github.io/2017/05/04/apps/%E4%BD%BF%E7%94%A8Workflow%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E6%8A%93%E5%9B%BE%E5%8A%9F%E8%83%BD/index.html">
@@ -22,42 +22,49 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://enoch2090.github.io/2017/05/04/apps/%E4%BD%BF%E7%94%A8Workflow%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E6%8A%93%E5%9B%BE%E5%8A%9F%E8%83%BD/IMG_4786.PNG">
     
-    
+      
         
           
               <link rel="shortcut icon" href="/images/favicon.ico">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-          
-        
-    
-    <!-- title -->
-    <title>使用Workflow实现简单的抓图功能</title>
-    <!-- styles -->
-    
+              
+                
+                  
+                    
+                        <link rel="icon" type="image/png" href="/images/favicon-192x192.png"
+                          sizes="192x192">
+                        
+                          
+                            
+                              
+                                  <link rel="apple-touch-icon" sizes="180x180"
+                                    href="/images/apple-touch-icon.png">
+                                  
+                                    
+                                      
+                                        <!-- title -->
+                                        <title>
+                                          使用Workflow实现简单的抓图功能
+                                        </title>
+                                        <!-- styles -->
+                                        
 <link rel="stylesheet" href="/css/style.css">
 
-    <!-- persian styles -->
-    
-      
+                                          <!-- persian styles -->
+                                          
+                                            
 <link rel="stylesheet" href="/css/rtl.css">
 
-    
-    <!-- rss -->
-    
-    
-      <link rel="alternate" href="/atom.xml" title="Enoch2090" type="application/atom+xml" />
-    
+                                              
+                                                <!-- rss -->
+                                                
+                                                      
+                                                        <link rel="alternate" href="/atom.xml"
+                                                          title="Enoch2090" type="application/atom+xml" />
+                                                        
+                                                          <link
+                                                            href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"
+                                                            rel="stylesheet" type="text/css">
 <meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
-
 <body class="max-width mx-auto px3 rtl">    
       <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
