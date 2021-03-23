@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="实验室最近有个项目可能要用上一些强化学习和GNN相关的东西，只好疯狂看论文了。  DQN：Q-function（状态价值函数）  输入→状态，输出→动作空间的预期奖励   输入→状态、动作对，输出→这个动作的预期奖励     问题：只能应用于动作空间离散化的问题，否则Q函数计算量会极大。   DDPG提出的解决方案：  使用actor-critic双网络。算上训练过程，实际上共有四个网络： Act">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文笔记：DDPG算法结构">
+<meta property="og:url" content="https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="Enoch2090">
+<meta property="og:description" content="实验室最近有个项目可能要用上一些强化学习和GNN相关的东西，只好疯狂看论文了。  DQN：Q-function（状态价值函数）  输入→状态，输出→动作空间的预期奖励   输入→状态、动作对，输出→这个动作的预期奖励     问题：只能应用于动作空间离散化的问题，否则Q函数计算量会极大。   DDPG提出的解决方案：  使用actor-critic双网络。算上训练过程，实际上共有四个网络： Act">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/6.7.png">
+<meta property="article:published_time" content="2021-03-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-23T17:09:03.755Z">
+<meta property="article:author" content="Phillip Gu">
+<meta property="article:tag" content="ReinforcementLearning">
+<meta property="article:tag" content="DeepLearning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/6.7.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>论文笔记：DDPG算法结构</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Enoch2090" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 rtl">    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Links/">链接</a></li>
+         
+          <li><a href="https://projects.enoch2090.me" target="_blank" rel="noopener">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/03/17/culture/%E5%8C%97%E5%86%B0%E6%B4%8B%E4%B8%8A%E7%9A%84%E4%B8%80%E5%B9%B4/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&text=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&is_video=false&description=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=论文笔记：DDPG算法结构&body=Check out this article: https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&name=论文笔记：DDPG算法结构&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&t=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        论文笔记：DDPG算法结构
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Enoch2090</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-03-23T16:00:00.000Z" itemprop="datePublished">2021-03-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a>, <a class="tag-link" href="/tags/ReinforcementLearning/" rel="tag">ReinforcementLearning</a>
+    </div>
+
+
+    </div>
+    <!-- FIXME: -->
+    <!-- <script type="text/javascript" src="https://cdn1.foundertype.com/webfont/js/ftfont-init.js"></script> -->
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>实验室最近有个项目可能要用上一些强化学习和GNN相关的东西，只好疯狂看论文了。</p>
+<ul>
+<li><p>DQN：Q-function（状态价值函数）</p>
+<ul>
+<li>输入→状态，输出→动作空间的预期奖励</li>
+</ul>
+</li>
+<li><p>输入→状态、动作对，输出→这个动作的预期奖励</p>
+<p>  <img src="/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/6.7.png" alt="DDPG%20876965644c66460186bcc4f4b588f6db/6.7.png"></p>
+<ul>
+<li>问题：只能应用于动作空间离散化的问题，否则Q函数计算量会极大。</li>
+</ul>
+</li>
+<li><p>DDPG提出的解决方案：</p>
+<ul>
+<li>使用actor-critic双网络。算上训练过程，实际上共有四个网络：<ul>
+<li>Actor current network，负责策略网络参数$\theta$的更新，并且根据环境给出动作。</li>
+<li>Actor target network，参数$\theta^{ \prime }$定期从$\theta$复制。从replay buffer里采样的状态生成对应的动作。</li>
+<li>Critic current network，负责价值网络参数$w$的迭代更新，并且给出当前的$Q ( S , A , w )$。</li>
+<li>Critic target network，参数$w^{\prime}$定期从$w$复制，计算目标$Q ( S , A , w )$</li>
+<li>target-current的机制是为了防止参数爆炸，将两个网络固定作为目标进行训练，然后定期复制训练中网络的参数（但是DDPG中不是直接复制，是用软更新）到目标网络上。</li>
+</ul>
+</li>
+<li><p>损失函数：DDPG的策略是确定性的，所以不需要对动作空间作积分来取期望。对于Actor网络，原文定义的损失梯度是</p>
+<p>  $\left. \left. \left. \nabla <em> { \theta ^ { \mu } } \mu \right| </em> { s <em> { i } } \approx \frac { 1 } { N } \sum </em> { i } \nabla <em> { a } Q \left( s , a \mid w \right) \right| </em> { s = s <em> { i } , a = \mu \left( s </em> { i } \right) } \nabla <em> { \theta  } \mu \left( s \mid \theta  \right) \right| </em> { s _ { i } }(1)$</p>
+<p>  对于Critic网络，用的是均方差损失</p>
+<p>  $L = \frac { 1 } { N } \sum <em> { i } \left( y </em> { i } - Q \left( s <em> { i } , a </em> { i } \mid \theta ^ { Q } \right) ^ { 2 } \right)(2)$，其中</p>
+<p>  $y <em> { i } = r </em> { i } + \gamma Q ^ { \prime } \left( s <em> { i + 1 } , \mu ^ { \prime } \left( s </em> { i + 1 } \mid \theta ^ { \mu ^ { \prime } } \right) \mid \theta ^ { Q ^ { \prime } } \right)$</p>
+<p>  是用从replay buffer采样的一组$\left( s <em> { i } , a </em> { i } , r <em> { i } , s </em> { i + 1 } \right)$算出来的。</p>
+</li>
+</ul>
+</li>
+<li><p>DDPG使用的特殊机制</p>
+<ul>
+<li><strong>类似DQN的Replay Buffer机制</strong>：用一个队列作为缓存，设定固定大小，维护$\left( s <em> { t } , a </em> { t } , r <em> { t } , s </em> { t + 1 } \right)$。每次从这个队列里采样一个mini-batch进行训练。</li>
+<li><strong>Soft target update软更新</strong>：不直接把更新后的权重赋值到网络里，而是创建actor和critic的拷贝，用拷贝计算目标进行训练，训练后的权重用 $\theta ^ { \prime } \leftarrow \tau \theta + ( 1 - \tau )\theta^{ \prime }$ 的方法（$\tau \ll 1$）更新回去。</li>
+<li><strong>随机化探索策略</strong>：通过用$A = \pi _ { \theta } ( S ) + \mathcal { N }$取代原本的动作$A$。<ul>
+<li>原文中用奥恩斯坦-乌伦贝克过程过程生成噪声$\mathcal { N }$。OU过程在时序上具备很好的相关性，可以使agent很好的探索具备动量属性的环境，表达式为$d x <em> { t } = \theta \left( \mu - x </em> { t } \right) d t + \sigma d W$，其中$x<em>t$是我们使用的变量，$\mu$是这个变量的均值，$W$表示维纳过程（一维下的概率密度函数：$f </em> { W _ { t } } ( x ) = \frac { 1 } { \sqrt { 2 \pi t } } e ^ { - x ^ { 2 } / 2 t }$，数学期望为0，方差为t），$\sigma$是维纳过程（其实就是布朗运动）带来的噪声的权重。</li>
+<li>这个方法在惯性系统上（例如Pendulum）会提升探索效率，在我们之后对聚类做实现的时候不一定要用这个方法，因为聚类的更新不是典型的带惯性系统。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>完整的算法过程：</p>
+<p>  <strong>输入：</strong></p>
+<ul>
+<li>四个初始化的网络，分别使用参数$\theta,\;\theta^{\prime},\;w,\;w^{\prime}$</li>
+<li>衰减因子$\gamma$</li>
+<li>软更新系数$\tau$</li>
+<li>从Replay Buffer采样的批量$m$</li>
+<li>最大迭代次数$T$</li>
+<li>Episode的数量$M$</li>
+<li><p>两个网络的更新频率$f$</p>
+<p><strong>输出：</strong></p>
+</li>
+<li><p>训练完成的Actor和Critic网络，分别使用$\theta$和$w$。</p>
+<p><strong>过程：</strong></p>
+</li>
+</ul>
+<ol>
+<li>初始化四个网络和Replay Buffer $R$</li>
+<li>for i = 1, $M$ do<ol>
+<li>初始化一个随机过程$\mathcal{N}$，获取一个随机的初始状态$s_1$</li>
+<li>for t = 1, $T$ do<ol>
+<li>使用当前的Actor生成一个动作$a<em>t =\mu \left( s </em> { t } \mid \theta \ \right) + \mathcal { N } _ { t }$</li>
+<li>执行$a<em>t$，从环境获取$s</em>{t+1}$和$r<em>t$，将$\left( s </em> { t } , a <em> { t } , r </em> { t } , s _ { t + 1 } \right)$放入$R$</li>
+<li>从$R$里采样大小为$m$的minibatch，分别计算对应的$y_i$，然后用这些值去计算Loss(2)，更新Critic current</li>
+<li>用损失梯度(1)更新Actor current</li>
+<li>用软更新方法更新3和4中得到的参数到Actor target和Critic target中</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+
+  </div>
+  <!-- <script type="text/javascript">
+    var fontCfg = {
+      p: 'hgnyUwebf77VVZwY',
+      fonts: [
+        {
+          fontName: 'FZXSSJW',
+          selecters: [p, h1, h2, h3, h4]
+        }
+      ]
+    };
+    var myFont = new FTFont(fontCfg);
+  </script> -->
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Links/">链接</a></li>
+         
+          <li><a href="https://projects.enoch2090.me" target="_blank" rel="noopener">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&text=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&is_video=false&description=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=论文笔记：DDPG算法结构&body=Check out this article: https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&title=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&name=论文笔记：DDPG算法结构&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/&t=论文笔记：DDPG算法结构" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Phillip Gu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/Links/">链接</a></li>
+         
+          <li><a href="https://projects.enoch2090.me" target="_blank" rel="noopener">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'enoch2090';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

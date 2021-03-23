@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://enoch2090.github.io/"/>
-  <updated>2021-01-26T07:02:09.407Z</updated>
+  <updated>2021-03-23T17:09:03.755Z</updated>
   <id>https://enoch2090.github.io/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>论文笔记：DDPG算法结构</title>
+    <link href="https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/"/>
+    <id>https://enoch2090.github.io/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/</id>
+    <published>2021-03-23T16:00:00.000Z</published>
+    <updated>2021-03-23T17:09:03.755Z</updated>
+    
+    <content type="html"><![CDATA[<p>实验室最近有个项目可能要用上一些强化学习和GNN相关的东西，只好疯狂看论文了。</p><ul><li><p>DQN：Q-function（状态价值函数）</p><ul><li>输入→状态，输出→动作空间的预期奖励</li></ul></li><li><p>输入→状态、动作对，输出→这个动作的预期奖励</p><p>  <img src="/2021/03/24/notes/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9ADDPG%E7%AE%97%E6%B3%95%E7%BB%93%E6%9E%84/6.7.png" alt="DDPG%20876965644c66460186bcc4f4b588f6db/6.7.png"></p><ul><li>问题：只能应用于动作空间离散化的问题，否则Q函数计算量会极大。</li></ul></li><li><p>DDPG提出的解决方案：</p><ul><li>使用actor-critic双网络。算上训练过程，实际上共有四个网络：<ul><li>Actor current network，负责策略网络参数$\theta$的更新，并且根据环境给出动作。</li><li>Actor target network，参数$\theta^{ \prime }$定期从$\theta$复制。从replay buffer里采样的状态生成对应的动作。</li><li>Critic current network，负责价值网络参数$w$的迭代更新，并且给出当前的$Q ( S , A , w )$。</li><li>Critic target network，参数$w^{\prime}$定期从$w$复制，计算目标$Q ( S , A , w )$</li><li>target-current的机制是为了防止参数爆炸，将两个网络固定作为目标进行训练，然后定期复制训练中网络的参数（但是DDPG中不是直接复制，是用软更新）到目标网络上。</li></ul></li><li><p>损失函数：DDPG的策略是确定性的，所以不需要对动作空间作积分来取期望。对于Actor网络，原文定义的损失梯度是</p><p>  $\left. \left. \left. \nabla <em> { \theta ^ { \mu } } \mu \right| </em> { s <em> { i } } \approx \frac { 1 } { N } \sum </em> { i } \nabla <em> { a } Q \left( s , a \mid w \right) \right| </em> { s = s <em> { i } , a = \mu \left( s </em> { i } \right) } \nabla <em> { \theta  } \mu \left( s \mid \theta  \right) \right| </em> { s _ { i } }(1)$</p><p>  对于Critic网络，用的是均方差损失</p><p>  $L = \frac { 1 } { N } \sum <em> { i } \left( y </em> { i } - Q \left( s <em> { i } , a </em> { i } \mid \theta ^ { Q } \right) ^ { 2 } \right)(2)$，其中</p><p>  $y <em> { i } = r </em> { i } + \gamma Q ^ { \prime } \left( s <em> { i + 1 } , \mu ^ { \prime } \left( s </em> { i + 1 } \mid \theta ^ { \mu ^ { \prime } } \right) \mid \theta ^ { Q ^ { \prime } } \right)$</p><p>  是用从replay buffer采样的一组$\left( s <em> { i } , a </em> { i } , r <em> { i } , s </em> { i + 1 } \right)$算出来的。</p></li></ul></li><li><p>DDPG使用的特殊机制</p><ul><li><strong>类似DQN的Replay Buffer机制</strong>：用一个队列作为缓存，设定固定大小，维护$\left( s <em> { t } , a </em> { t } , r <em> { t } , s </em> { t + 1 } \right)$。每次从这个队列里采样一个mini-batch进行训练。</li><li><strong>Soft target update软更新</strong>：不直接把更新后的权重赋值到网络里，而是创建actor和critic的拷贝，用拷贝计算目标进行训练，训练后的权重用 $\theta ^ { \prime } \leftarrow \tau \theta + ( 1 - \tau )\theta^{ \prime }$ 的方法（$\tau \ll 1$）更新回去。</li><li><strong>随机化探索策略</strong>：通过用$A = \pi _ { \theta } ( S ) + \mathcal { N }$取代原本的动作$A$。<ul><li>原文中用奥恩斯坦-乌伦贝克过程过程生成噪声$\mathcal { N }$。OU过程在时序上具备很好的相关性，可以使agent很好的探索具备动量属性的环境，表达式为$d x <em> { t } = \theta \left( \mu - x </em> { t } \right) d t + \sigma d W$，其中$x<em>t$是我们使用的变量，$\mu$是这个变量的均值，$W$表示维纳过程（一维下的概率密度函数：$f </em> { W _ { t } } ( x ) = \frac { 1 } { \sqrt { 2 \pi t } } e ^ { - x ^ { 2 } / 2 t }$，数学期望为0，方差为t），$\sigma$是维纳过程（其实就是布朗运动）带来的噪声的权重。</li><li>这个方法在惯性系统上（例如Pendulum）会提升探索效率，在我们之后对聚类做实现的时候不一定要用这个方法，因为聚类的更新不是典型的带惯性系统。</li></ul></li></ul></li><li><p>完整的算法过程：</p><p>  <strong>输入：</strong></p><ul><li>四个初始化的网络，分别使用参数$\theta,\;\theta^{\prime},\;w,\;w^{\prime}$</li><li>衰减因子$\gamma$</li><li>软更新系数$\tau$</li><li>从Replay Buffer采样的批量$m$</li><li>最大迭代次数$T$</li><li>Episode的数量$M$</li><li><p>两个网络的更新频率$f$</p><p><strong>输出：</strong></p></li><li><p>训练完成的Actor和Critic网络，分别使用$\theta$和$w$。</p><p><strong>过程：</strong></p></li></ul><ol><li>初始化四个网络和Replay Buffer $R$</li><li>for i = 1, $M$ do<ol><li>初始化一个随机过程$\mathcal{N}$，获取一个随机的初始状态$s_1$</li><li>for t = 1, $T$ do<ol><li>使用当前的Actor生成一个动作$a<em>t =\mu \left( s </em> { t } \mid \theta \ \right) + \mathcal { N } _ { t }$</li><li>执行$a<em>t$，从环境获取$s</em>{t+1}$和$r<em>t$，将$\left( s </em> { t } , a <em> { t } , r </em> { t } , s _ { t + 1 } \right)$放入$R$</li><li>从$R$里采样大小为$m$的minibatch，分别计算对应的$y_i$，然后用这些值去计算Loss(2)，更新Critic current</li><li>用损失梯度(1)更新Actor current</li><li>用软更新方法更新3和4中得到的参数到Actor target和Critic target中</li></ol></li></ol></li></ol></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;实验室最近有个项目可能要用上一些强化学习和GNN相关的东西，只好疯狂看论文了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;DQN：Q-function（状态价值函数）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入→状态，输出→动作空间的预期奖励&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;输入
+      
+    
+    </summary>
+    
+    
+    
+      <category term="ReinforcementLearning" scheme="https://enoch2090.github.io/tags/ReinforcementLearning/"/>
+    
+      <category term="DeepLearning" scheme="https://enoch2090.github.io/tags/DeepLearning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>北冰洋上的一年</title>
+    <link href="https://enoch2090.github.io/2021/03/17/culture/%E5%8C%97%E5%86%B0%E6%B4%8B%E4%B8%8A%E7%9A%84%E4%B8%80%E5%B9%B4/"/>
+    <id>https://enoch2090.github.io/2021/03/17/culture/%E5%8C%97%E5%86%B0%E6%B4%8B%E4%B8%8A%E7%9A%84%E4%B8%80%E5%B9%B4/</id>
+    <published>2021-03-16T16:00:00.000Z</published>
+    <updated>2021-03-17T14:29:26.266Z</updated>
+    
+    <content type="html"><![CDATA[<p> <style><br>    p{padding:0px; margin:0px;display: inline;}</style></p><p>「需要知道的是，被套上总有个开口。」<br>被子因此都有极性，<br>床靠船舱的一侧更为安全——<br>向右侧睡，背对墙壁。你<br>好好想想，该怎样去超越一块<br>床板：</p><p style="color:#115599">去承载血与肉以外的幻想，在空无的下坠中提供唯一的缓冲。让梦境切割极光、浮冰与海洋，在它与现实的交界提供如一的虚假。</p><p>站起来。抵抗你<br>软弱蜷曲的肢体，船既不容移动，<br>也不能沉没。凝固的恐惧穿透木板，刺破<br>棉布的魂灵。你终将理解，<br>为什么这样的冬天无法逃离静止：</p><p style="color:#115599">被凝聚态的熵裹挟，在每年第一缕晨光边境徘徊。应该让所有探路者都看看那块铭牌，我们的船并非核动力。冰脊早已碎裂发绿，沉默的龙骨重见天日。</p><p>躺回去吧，梦醒时分<br>被子的极性或许调换</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt; &lt;style&gt;&lt;br&gt;    p{padding:0px; margin:0px;display: inline;}
+&lt;/style&gt;&lt;/p&gt;
+&lt;p&gt;「需要知道的是，被套上总有个开口。」&lt;br&gt;
+被子因此都有极性，&lt;br&gt;
+床靠船舱的一侧更为安全——&lt;br&gt;
+向右侧睡，背
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Poems" scheme="https://enoch2090.github.io/tags/Poems/"/>
+    
+  </entry>
   
   <entry>
     <title>修改服务器的Message of The Day</title>
@@ -459,65 +521,6 @@
     
     
       <category term="Drafts" scheme="https://enoch2090.github.io/tags/Drafts/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>柏林生存指南</title>
-    <link href="https://enoch2090.github.io/2020/03/12/culture/%E6%9F%8F%E6%9E%97%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/"/>
-    <id>https://enoch2090.github.io/2020/03/12/culture/%E6%9F%8F%E6%9E%97%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/</id>
-    <published>2020-03-11T16:00:00.000Z</published>
-    <updated>2020-03-13T13:56:55.665Z</updated>
-    
-    <content type="html"><![CDATA[<p>今年一月，我是在柏林度过的。去年在蒙特利尔待了一个月，我写了《蒙特利尔冬季生存指南》。那篇东西夹带私货挺多，其实已经谈不上什么「指南」了。今年我把《指南》和乱七八糟的私货给分开了——我另写了两篇《柏林故事》，而这篇文章，尽量只提供必要的信息。</p><h2 id="一-交通系统"><a href="#一-交通系统" class="headerlink" title="一 | 交通系统"></a>一 | 交通系统</h2><h3 id="公共交通"><a href="#公共交通" class="headerlink" title="公共交通"></a>公共交通</h3><p>柏林的交通系统很发达，基本上没有公共交通 + 10 分钟以内的步行到不了的地方。但与此同时，这也意味着这是一个很复杂的交通系统。简单来说，柏林以及其市区外围，被分为三个区域：A，B 和 C 区。</p><p><img src="/2020/03/12/culture/%E6%9F%8F%E6%9E%97%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/map.png" alt="柏林交通图"></p><p>如图所示，A，B 区属于市中心区域，而 C 区则主要是郊区。在购买交通票时，你要注意购买的票要和你的目的地相符。如果你持有 AB 票又需要去 C 区，你也可以选择购买专门的 Extension 票。通常来说，AB 票就能通行市中心的大部分区域了。</p><p>买好票以后你就可以在对应区域内搭乘包括地铁、公交、城市有轨电车在内的多种交通工具。首先要做的是在上车的站验票，验票机长这样：</p><p><img src="/2020/03/12/culture/%E6%9F%8F%E6%9E%97%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/ticketschalter-an-einem.jpg" alt="Ticketschalter"></p><p>临走前忘记拍了，图源：<a href="https://www.faz.net/aktuell/politik/inland/debatte-ums-schwarzfahren-es-geht-viel-zu-leicht-15884465.html" target="_blank" rel="noopener">faz.net</a>。</p><p>把票从正面插进去，听到咔嚓一声再拿出来就行了。验完票要记得把票收好，有时会有检票员上车检票，如果拿不出票是会被罚款 60 欧的。</p><p>柏林主要有以下几种可以选择的公共交通工具：</p><ul><li><strong>公交 BUS</strong>，短途旅行的最佳工具。其中 <strong>X9</strong> 线路直通 TXL 机场、Zoologischer Garten 等交通要站。</li><li><strong>地铁 U</strong>，连接市郊。</li><li><strong>轻轨 S</strong>，班次多，速度较快，去 <strong>SXF</strong> 机场的选择之一。</li><li><strong>短途火车 R</strong>，班次少，但速度很快。停的站点少，适合作中长途旅行，可以快速到波茨坦等周边地区。</li><li><strong>有轨电车 Tram</strong>，城区内的短途旅行。</li></ul><p>要注意的是，柏林的所有交通工具都是有班次时间的，建议使用谷歌地图或下载官方的 App：<a href="https://apps.apple.com/cn/app/bvg-fahrinfo-plus-berlin/id284971745" target="_blank" rel="noopener">FahrInfo</a> 查看，提前规划好时间<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。尤其是要乘坐 RE7、RB14 等 R 系列的短途火车的时候，由于其半小时只有一班，务必要规划好旅途。</p><p>最后还有一点要注意：柏林的地铁、轻轨等，很多是<strong>不会自动开门的</strong>，需要你在门上的按钮按一下才会开门。</p><h3 id="共享交通"><a href="#共享交通" class="headerlink" title="共享交通"></a>共享交通</h3><p>柏林街头的共享交通也相当发达，包括摩拜国际和多种电动踏板车。如果有条件，建议还是用摩拜国际，不过 iOS 用户可能要注册一个德区账号来下载摩拜国际的 APP。至于本地的多种电动踏板车，我个人不推荐。原因是：</p><ul><li>首先这些滑板车价格极高，以 Lime 为例，启动需要 0.5 欧，之后是 0.4 欧/分钟，算下来相当不划算。</li><li>其次，德国虽有专门划分自行车道，但那些车道多是砖铺的，滑板车没有减震颠簸得很厉害；剩下的地方要么在马路上和车子抢路走，要么就是走更加颠簸的人行道，体验极差。</li></ul><p>综合来说，使用共享交通真的没有多大必要。我个人感觉柏林的交通系统规划得不错<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，所有地方都能靠这个系统直达，或者是以少于 1.5 km 的步行抵达。</p><h2 id="二-日常生活"><a href="#二-日常生活" class="headerlink" title="二 | 日常生活"></a>二 | 日常生活</h2><p>这部分内容比较杂，因此直接按点列举。</p><ul><li><p><strong>超市：</strong>柏林最常见的超市是 REWE，超市里的东西都很便宜，几乎能让你感受不到欧洲的物价。</p></li><li><p><strong>空瓶回收：</strong>买水的时候要注意，在德国买水时售价里往往是包含瓶子的价格的。带着空瓶到超市找回收机，可以获得瓶子的退款。有时退款是以小票形式发放的，消费时出示发放的小票可抵钱。</p><p>​    <img src="/2020/03/12/culture/%E6%9F%8F%E6%9E%97%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/IMG_4270.JPG" alt="空瓶回收机"></p></li><li><p><strong>周日：</strong>欧洲很多地方周日都有商店、餐厅等提早关门情况，到了周末要早做准备。一般商业区这种情况会好一些。</p></li><li><p><strong>小费：</strong>德国的餐厅一般是不直接小费的，惯常的做法是：结账时直按整数给，找零就不要了。当然不给也没有什么大问题。</p></li><li><p><strong>红绿灯：</strong>柏林的红绿灯有个毛病：绿灯红得特别快，中间几乎没有缓冲。这种时候如果一只脚已经踏在路上了，不用犹豫赶紧过去即可。如果不放心，那就看本地人怎么走。跟着走几回就明白了。</p></li><li><p><strong>车让人：</strong>欧洲的通用规矩是车必须让人。在柏林，如果要过马路时有车驶近（当然，是你没闯红灯的情况下），直接走即可。这种时候停下来让车，车也是绝对不会先过的，低头走快些才算是方便司机。</p></li><li><p><strong>捐款：</strong>在柏林的很多景点，你也许会碰上叫你给聋哑人捐款的人。我在 <a href="https://enoch2090.me/2020/01/28/文化/捐款%20%7C%20柏林故事/" target="_blank" rel="noopener">捐款 | 柏林故事</a> 里写了与这群人遭遇的故事——遇上他们，千万不要理睬。管好自己的东西，快步走开。</p></li></ul><h2 id="三-地点"><a href="#三-地点" class="headerlink" title="三 | 地点"></a>三 | 地点</h2><p>最后，分享一些我在德国去过的地点。你可以点击<a href="https://collections.apple.com/collection?_col=Cgbmn4%2FmnpcSYBohUGFzY2Fsc3RyYcOfZSAxMDU4NyDmn4%2Fmnpcg5b635Zu9IhIJ4nX9gt1CSkAR0LUvoBemKkAqJ0hhbGxlcnN0cmHDn2UgMjgsIDEwNTg3IEJlcmxpbiwgR2VybWFueRINCK5NELicnMfs48OgbRIOCK5NEOfmq4Sp8sS12QESDgiuTRDwp6yJl7zj4ZwBEg0Irk0Q85bCvpHvvt5NEg0Irk0Q%2FMCUjoLYu7pbEg0Irk0Qn5TKqtGgkb5bEg4Irk0Qt%2FKQrfL7gq6ZARINCK5NEN7BnIjd8IeecRINCK5NEP%2F2kP%2Bqsf%2FgDhIOCK5NEKLd2JTRnr2MrgESDQiuTRDv5N3W8e2C9GASDgiuTRDM8qDTqbz%2Bu8kBEg0Irk0Qs%2Fu0kuzlsdpxEg0Irk0Qqsnd8fuY6vdkEg4Irk0Qwry2i%2BT6jN6JARIOCK5NEPaU1NPS48KipwESDgiuTRDm482Ojdno9dgBEg4Irk0Q3OGGvKayvLW5ARINCK5NEMGakZqnjpqePRINCK5NENKrqfO1hdHnaRIOCK5NEMDq0Yf7zbj3twESDgiuTRDs8YnjsM2N5IABEg0Irk0Qx4POzf7ote9PEg4Irk0QzoyX37GHqLfMARIOCK5NEO63zejBgfDzqQESDQiuTRDuyNzStpmVt20SDQiuTRDDqbPN8uqh2FkSDgiuTRDf6p6zjZ3N%2F7UBEg4Irk0Qm%2BSb3djCwaXwARJTGiJXaWxoZWxtc3RyLiA5MSAxMDExNyBCZXJsaW4g5b635Zu9IhIJKPIk6ZpBSkAR%2BvIC7KPDKkAqGVN0ZWVsIFZpbnRhZ2UgQmlrZXMgQ2Fmw6kSThomTWllcmVuZG9yZmZwbGF0eiAyIDEwNTg5IEJlcmxpbiDlvrflm70iEgn%2F95YoMUNKQBEbTQ2415sqQCoQQ2Fmw6kgRnJpZWRyaWNocxINCK5NEJWeuaCnndbTBxJYGiRUaG9tYXNzdHJhw59lIDUzIDEyMDUzIOafj%2BaelyDlvrflm70iEglNv0S8dTxKQBEYC0Pk9N0qQCocQ2F0cyBjYWZlIC0gVGhvbWFzc3RyYcOfZSA1MxJYGipJbHNlbmJ1cmdlciBTdHJhw59lIDE1IDEwNTg5IOafj%2BaelyDlvrflm70iEgnDRIMUPENKQBGTNlX3yJ4qQCoWSWxzZW5idXJnZXIgU3RyYcOfZSAxNRJaGitNYXJ0aW4tTHV0aGVyLVN0cmHDn2UgMSAxMDc3NyDmn4%2Fmnpcg5b635Zu9IhIJL4fddwxASkARgr%2BpWbGxKkAqF01hcnRpbi1MdXRoZXItU3RyYcOfZSAxEg0Irk0QkaCE6OvHpq90Eg0Irk0Qz4G%2B%2BuChpPpREg4Irk0QoIzAl%2B%2Bd47HqARJIGiVHb3R6a293c2t5c3RyLiAxMSAxMDU1NSBCZXJsaW4g5b635Zu9IhIJDzaGzTxDSkARkC0%2B4eOoKkAqC0ZyZWRkeSBMZWNrEkUaIkxlaWJuaXpzdHIuIDIwIDEwNjI1IEJlcmxpbiDlvrflm70iEgn3Bl%2BYTEFKQBGMhLacS6EqQCoLRWNvIEV4cHJlc3MSQhofS2FudHN0cmHDn2UgMTA2Mjcg5p%2BP5p6XIOW%2Bt%2BWbvSISCUN6abfcQEpAESdn1QammypAKgtLYW50c3RyYcOfZRJcGixLYWlzZXItRnJpZWRyaWNoLVN0cmHDn2UgMTA1ODUg5p%2BP5p6XIOW%2Bt%2BWbvSISCSMg1yP7QUpAEUbOXrn9mSpAKhhLYWlzZXItRnJpZWRyaWNoLVN0cmHDn2USDgiuTRDO%2BP%2BUvoPJv5UB" target="_blank" rel="noopener">这个链接</a>查看。</p><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>柏林的冬天不算很冷，但也不暖和。某种意义上，这里的冬天和这座城市的居民有些像。Berliners 都是些表面上非常冷淡的人，不像 Montrealer 那样热情好客。不过和他们相处久了，你会发现，他们对待熟人很友好；而且他们的内心，也不像表面上那么冰冷。</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">值得一提的是，这个 APP 在奥地利也能用。</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">或者说，也许是柏林地方太小。</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;今年一月，我是在柏林度过的。去年在蒙特利尔待了一个月，我写了《蒙特利尔冬季生存指南》。那篇东西夹带私货挺多，其实已经谈不上什么「指南」了。今年我把《指南》和乱七八糟的私货给分开了——我另写了两篇《柏林故事》，而这篇文章，尽量只提供必要的信息。&lt;/p&gt;
-&lt;h2 id=&quot;一-交
-      
-    
-    </summary>
-    
-    
-    
-      <category term="指南" scheme="https://enoch2090.github.io/tags/%E6%8C%87%E5%8D%97/"/>
-    
-      <category term="旅行" scheme="https://enoch2090.github.io/tags/%E6%97%85%E8%A1%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在 macOS 上使用 Vivado</title>
-    <link href="https://enoch2090.github.io/2020/02/25/tech/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/"/>
-    <id>https://enoch2090.github.io/2020/02/25/tech/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/</id>
-    <published>2020-02-24T16:00:00.000Z</published>
-    <updated>2020-02-26T15:17:18.309Z</updated>
-    
-    <content type="html"><![CDATA[<p>当然，macOS 用不了 Vivado，你需要先安装一个虚拟机。这一点是逃不开的，因为 Vivado 在 macOS 上实在没有特别合适的替代品。</p><hr><p>我推荐使用 Parallel Desktop，它自带的「融合模式（Coherence Mode）」可以让虚拟机的界面直接和 macOS 融为一体：</p><p><img src="/2020/02/25/tech/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E8%9E%8D%E5%90%88%E6%A8%A1%E5%BC%8F.png" alt="融合模式"></p><p>这时，你就可以把 Vivado 作为一个 macOS 应用打开，像使用一个正常应用一样用 Vivado。</p><p>为了获得更原生的体验，我们还需要摆脱 Vivado 自带的那个极度难用的编辑器。推荐使用 VS Code 代替，配置方法如下。</p><p>首先，我们要让 Vivado 能自动调用 VS Code。这个步骤跨了一个系统：在 Windows 虚拟机里运行的 Vivado，调起安装在 macOS 里的 VS Code，并把文件路径传过去。但其实配置方法很简单。还是 Parallel Desktop 的自带功能：它可以把 macOS 上的应用映射到 Windows，并在 Windows 系统里提供指向 .exe 可执行文件的快捷方式。运行这个快捷方式，会在 macOS 打开对应的应用。</p><p>因此我们要做的是：找到 VS Code 的快捷方式指向的可执行文件路径，把这个路径提供给 Vivado。具体操作是：</p><ol><li>打开小娜（或者 Everything），搜索 VS Code。右键搜索结果 - 打开文件所在路径，找到 VS Code 在 Windows 上的快捷方式。</li><li>右键 - 属性，复制下这个快捷方式指向的路径。<img src="/2020/02/25/tech/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E5%BA%94%E7%94%A8%E6%98%A0%E5%B0%84.png" alt="应用映射"></li></ol><ol><li>打开 Vivado。找到 Settings - Text Editor，改成 <code>Custom</code>。填入刚才复制的路径，再加上 <code>[filename] -[linenumber]</code>即可，注意空格。<img src="/2020/02/25/tech/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/Vivado%E8%AE%BE%E7%BD%AE.png" alt="Vivado设置"></li><li>保存。现在在 Vivado 里双击某个 <code>.v</code> 文件的时候，应该会在 macOS 中调起 VS Code 来打开。</li></ol><p>这一步完成以后，我们还需要稍微配置一下 VS Code。通常来说用 VS Code 作为 Vivado 的编辑器，都是设置 Vivado 自带的 xvlog 作为 lint 工具的。但我们这里跨了一个系统，这一步实在是做不到了。解决办法是：另外安装 Verilator 作为 lint 工具。<a href="https://www.veripool.org/" target="_blank" rel="noopener">Verilator</a> 是一个命令行的 Verilog 编译器，软件本身只有十来兆，使用 HomeBrew 就能安装。原则上，代码检查工具基本上都能给你正确的结果。不过我并不保证 Verilator 对于有些代码的检查一定能过 Vivado 的编译器，具体情况还得看具体板子决定。</p><p>打开命令行键入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install verilator</span><br></pre></td></tr></table></figure><p>完成后记得检查一下。键入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">verilator --version</span><br></pre></td></tr></table></figure><p><img src="/2020/02/25/tech/%E5%9C%A8%20macOS%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20Vivado/%E5%AE%89%E8%A3%85%20Verilator.png" alt="安装 Verilator"></p><p>提示 Verilator 的版本就表示没有问题了。安装好 Verilator，我们再打开 VS Code，依次搜索安装以下三个插件：<code>Verilog HDL/SystemVerilog</code>、<code>SystemVerilog</code>、<code>SystemVerilog - Language Support</code>。记得到设置里，分别设置它们的代码检查工具为 Verilator。</p><p>重启 VS Code，现在你可以愉快地在 macOS 上使用 Vivado了。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;当然，macOS 用不了 Vivado，你需要先安装一个虚拟机。这一点是逃不开的，因为 Vivado 在 macOS 上实在没有特别合适的替代品。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;我推荐使用 Parallel Desktop，它自带的「融合模式（Coherence Mode）」可以
-      
-    
-    </summary>
-    
-    
-    
-      <category term="macOS" scheme="https://enoch2090.github.io/tags/macOS/"/>
-    
-      <category term="Vivado" scheme="https://enoch2090.github.io/tags/Vivado/"/>
-    
-      <category term="Verilog" scheme="https://enoch2090.github.io/tags/Verilog/"/>
-    
-      <category term="FPGA" scheme="https://enoch2090.github.io/tags/FPGA/"/>
     
   </entry>
   
