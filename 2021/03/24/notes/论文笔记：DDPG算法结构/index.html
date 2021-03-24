@@ -14,7 +14,7 @@
 <meta property="og:description" content="实验室最近有个项目可能要用上一些强化学习和GNN相关的东西，只好疯狂看论文了。 这篇文章是DeepMind开发的面向连续控制的off policy算法，算是deterministic policy，据说效果不错。 论文地址：Continuous control with deep reinforcement learning   DQN：Q-function（状态价值函数）  输入→状态，输出→动">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-24T03:01:33.564Z">
+<meta property="article:modified_time" content="2021-03-24T03:03:45.178Z">
 <meta property="article:author" content="Phillip Gu">
 <meta property="article:tag" content="ReinforcementLearning">
 <meta property="article:tag" content="DeepLearning">
@@ -216,7 +216,7 @@
 -221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
 s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
 s-65,47,-65,47z M834 80H400000v40H845z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.12715500000000002em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5379999999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9869199999999998em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913142857142857em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord mtight">/</span><span class="mord mtight">2</span><span class="mord mathdefault mtight">t</span></span></span></span></span></span></span></span></span></span></span></span>，数学期望为0，方差为t），<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">σ</span></span></span></span>是维纳过程（其实就是布朗运动）带来的噪声的权重。</li>
-<li>这个方法在惯性系统上（例如Pendulum）会提升探索效率，在我们之后对聚类做实现的时候不一定要用这个方法，因为聚类的更新不是典型的带惯性系统。</li>
+<li>这个方法在惯性系统上（例如Pendulum）会提升探索效率，但是在其他情况下做实现的时候不一定要用这个方法。</li>
 </ul>
 </li>
 </ul>
